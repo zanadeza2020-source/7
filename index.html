@@ -2,8 +2,8 @@
 <html lang="ar" dir="rtl">
 <head>
     <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no, viewport-fit=cover">
-    <title>تشريح • التطبيق التعليمي</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=5.0, user-scalable=yes">
+    <title>تشريح • الأطلس التعليمي</title>
     
     <!-- Font Awesome 6 -->
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
@@ -87,6 +87,11 @@
             background: #1d363b;
             border-color: #3d6f6f;
             color: #d0ece5;
+        }
+
+        body.dark-mode .martyr-section {
+            background: #0e3f48;
+            border-color: #3d9b9b;
         }
 
         /* ===== كلاس hidden ===== */
@@ -174,6 +179,73 @@
             -webkit-overflow-scrolling: touch;
         }
 
+        /* ===== قسم الإهداء ===== */
+        .martyr-section {
+            background: linear-gradient(145deg, #16636f, #1a7a88);
+            border-radius: 30px;
+            padding: 25px 20px;
+            margin-bottom: 20px;
+            text-align: center;
+            color: white;
+            border: 2px solid #ffdb9c;
+            box-shadow: 0 10px 25px rgba(22,99,111,0.3);
+            position: relative;
+            overflow: hidden;
+        }
+
+        .martyr-section::before {
+            content: '';
+            position: absolute;
+            top: -50%;
+            left: -50%;
+            width: 200%;
+            height: 200%;
+            background: radial-gradient(circle, rgba(255,255,255,0.1) 0%, transparent 70%);
+            animation: rotate 20s linear infinite;
+        }
+
+        @keyframes rotate {
+            from { transform: rotate(0deg); }
+            to { transform: rotate(360deg); }
+        }
+
+        .martyr-title {
+            font-size: 20px;
+            font-weight: 700;
+            margin-bottom: 10px;
+            position: relative;
+        }
+
+        .martyr-name {
+            font-size: 28px;
+            font-weight: 900;
+            margin-bottom: 15px;
+            color: #ffdb9c;
+            text-shadow: 0 2px 5px rgba(0,0,0,0.2);
+            position: relative;
+        }
+
+        .martyr-dua {
+            font-size: 16px;
+            line-height: 1.8;
+            position: relative;
+            background: rgba(0,0,0,0.2);
+            padding: 15px;
+            border-radius: 25px;
+            backdrop-filter: blur(5px);
+        }
+
+        .martyr-dua i {
+            color: #ffdb9c;
+            margin: 0 5px;
+        }
+
+        .martyr-dua span {
+            display: block;
+            margin-top: 10px;
+            font-size: 24px;
+        }
+
         /* ===== التبويبات العلوية ===== */
         .tabs-container {
             display: flex;
@@ -206,6 +278,34 @@
             color: white;
         }
 
+        /* ===== شريط البحث ===== */
+        .search-box {
+            background: white;
+            border-radius: 40px;
+            padding: 4px 18px;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            margin-bottom: 20px;
+            border: 2px solid #16636f;
+            box-shadow: 0 4px 12px rgba(22,99,111,0.1);
+        }
+
+        .search-box i {
+            color: #16636f;
+            font-size: 16px;
+        }
+
+        .search-box input {
+            flex: 1;
+            border: none;
+            outline: none;
+            padding: 12px 0;
+            font-size: 15px;
+            font-family: 'Tajawal', sans-serif;
+            background: transparent;
+        }
+
         /* ===== بطاقات المحتوى ===== */
         .card {
             background: white;
@@ -230,33 +330,6 @@
             display: flex;
             align-items: center;
             gap: 8px;
-        }
-
-        /* ===== شريط البحث ===== */
-        .search-box {
-            background: white;
-            border-radius: 40px;
-            padding: 4px 18px;
-            display: flex;
-            align-items: center;
-            gap: 10px;
-            margin-bottom: 16px;
-            border: 2px solid #16636f;
-        }
-
-        .search-box i {
-            color: #16636f;
-            font-size: 16px;
-        }
-
-        .search-box input {
-            flex: 1;
-            border: none;
-            outline: none;
-            padding: 10px 0;
-            font-size: 14px;
-            font-family: 'Tajawal', sans-serif;
-            background: transparent;
         }
 
         /* ===== شبكة الأيقونات ===== */
@@ -322,6 +395,7 @@
             position: relative;
             margin-bottom: 16px;
             touch-action: none;
+            cursor: zoom-in;
         }
 
         #mainImage {
@@ -332,6 +406,7 @@
             display: block;
             transition: transform 0.2s ease-out;
             transform-origin: center center;
+            will-change: transform;
         }
 
         .touch-overlay {
@@ -347,47 +422,51 @@
 
         .zoom-controls {
             position: absolute;
-            bottom: 10px;
+            bottom: 15px;
             left: 50%;
             transform: translateX(-50%);
             background: rgba(0,0,0,0.7);
             backdrop-filter: blur(8px);
-            padding: 4px 12px;
+            padding: 6px 16px;
             border-radius: 40px;
             display: flex;
-            gap: 8px;
+            gap: 12px;
             z-index: 20;
+            border: 1px solid #ffdb9c;
         }
 
         .zoom-btn {
             background: transparent;
             border: none;
             color: white;
-            width: 32px;
-            height: 32px;
+            width: 36px;
+            height: 36px;
             border-radius: 30px;
-            font-size: 14px;
+            font-size: 16px;
             cursor: pointer;
             display: flex;
             align-items: center;
             justify-content: center;
+            transition: 0.2s;
         }
 
         .zoom-btn:active {
             background: #16636f;
+            transform: scale(0.9);
         }
 
         .zoom-indicator {
             position: absolute;
-            top: 8px;
-            right: 8px;
-            background: rgba(0,0,0,0.4);
+            top: 12px;
+            right: 12px;
+            background: rgba(0,0,0,0.6);
             backdrop-filter: blur(4px);
             color: white;
-            padding: 2px 10px;
+            padding: 4px 12px;
             border-radius: 30px;
-            font-size: 11px;
+            font-size: 12px;
             z-index: 15;
+            border: 1px solid rgba(255,255,255,0.2);
         }
 
         /* ===== شروحات الصور ===== */
@@ -985,7 +1064,7 @@ Positive feedback: amplifies change → completion`
             let currentIndex = 0;
             let scale = 1;
             let minScale = 0.8;
-            let maxScale = 3.5;
+            let maxScale = 4;
             let panX = 0;
             let panY = 0;
             let isPanning = false;
@@ -1049,7 +1128,7 @@ Positive feedback: amplifies change → completion`
                 },
                 
                 showToast: function(message) {
-                    alert(message); // نسخة بسيطة
+                    alert(message);
                 }
             };
 
@@ -1103,29 +1182,34 @@ Positive feedback: amplifies change → completion`
                 }
             }
 
-            // ===== الصفحة الرئيسية =====
+            // ===== الصفحة الرئيسية مع الإهداء والبحث في الأعلى =====
             function renderHome() {
                 const studied = studiedImages.filter(v => v).length;
                 const studiedPercent = Math.round((studied / imageFiles.length) * 100);
                 
                 return `
-                    <div class="card">
-                        <div class="card-header">
-                            <h2><i class="fas fa-graduation-cap"></i> مرحباً بك</h2>
+                    <!-- قسم الإهداء في الأعلى -->
+                    <div class="martyr-section">
+                        <div class="martyr-title">إهداء لروح الشهيد الطاهرة</div>
+                        <div class="martyr-name">ياسر عطيه المصري (ابو مصعب)</div>
+                        <div class="martyr-dua">
+                            <i class="fas fa-quote-right"></i>
+                            نسأل الله أن يتقبله في الشهداء، وأن يرفع درجته في عليين، 
+                            وأن يجعل هذا العمل صدقة جارية له إلى يوم الدين 
+                            <i class="fas fa-quote-left"></i>
+                            <span>🤲</span>
                         </div>
-                        <div class="explanation-box text-center">
-                            <p>تطبيق تعليمي متكامل لدراسة علم التشريح</p>
-                            <p style="margin-top: 8px; color: #16636f;">📚 ${imageFiles.length} صور تشريحية مع شروحات</p>
-                        </div>
+                    </div>
+
+                    <!-- شريط البحث تحت الإهداء مباشرة -->
+                    <div class="search-box">
+                        <i class="fas fa-search"></i>
+                        <input type="text" id="searchInput" placeholder="ابحث عن مصطلح في الشروحات...">
                     </div>
 
                     <div class="card">
                         <div class="card-header">
-                            <h2><i class="fas fa-search"></i> بحث في الشروحات</h2>
-                        </div>
-                        <div class="search-box">
-                            <i class="fas fa-search"></i>
-                            <input type="text" id="searchInput" placeholder="ابحث عن مصطلح...">
+                            <h2><i class="fas fa-images"></i> الصور التشريحية</h2>
                         </div>
                         
                         <div class="icon-grid" id="homeIconGrid">
@@ -1165,7 +1249,7 @@ Positive feedback: amplifies change → completion`
                 `;
             }
 
-            // ===== صفحة الصور =====
+            // ===== صفحة الصور مع تحسين التكبير والتحريك =====
             function renderImages() {
                 return `
                     <div class="card">
@@ -1339,7 +1423,7 @@ Positive feedback: amplifies change → completion`
                 `;
             }
 
-            // ===== تهيئة عناصر الصورة =====
+            // ===== تهيئة عناصر الصورة للتكبير والتحريك =====
             function initImageElements() {
                 const touchOverlay = document.getElementById('touchOverlay');
                 if (!touchOverlay) return;
@@ -1353,7 +1437,7 @@ Positive feedback: amplifies change → completion`
                 
                 touchOverlay._listeners = [];
 
-                // دوال اللمس
+                // دوال اللمس للتكبير والتحريك
                 const touchStart = (e) => {
                     e.preventDefault();
                     const touches = e.touches;
@@ -1381,9 +1465,11 @@ Positive feedback: amplifies change → completion`
                         panX = touches[0].clientX - lastPanX;
                         panY = touches[0].clientY - lastPanY;
                         
-                        const maxPan = 100 * (scale - 1);
-                        panX = Math.min(maxPan, Math.max(-maxPan, panX));
-                        panY = Math.min(maxPan, Math.max(-maxPan, panY));
+                        // تحديد حدود التحريك بناءً على مستوى التكبير
+                        const maxPanX = (window.innerWidth * (scale - 1)) / 4;
+                        const maxPanY = (300 * (scale - 1)) / 2;
+                        panX = Math.min(maxPanX, Math.max(-maxPanX, panX));
+                        panY = Math.min(maxPanY, Math.max(-maxPanY, panY));
                         
                         updateImageTransform();
                     } else if (touches.length === 2 && initialDistance > 0) {
@@ -1419,6 +1505,7 @@ Positive feedback: amplifies change → completion`
                     
                     if (touches.length < 2) initialDistance = 0;
                     
+                    // النقرة المزدوجة للتكبير
                     const currentTime = new Date().getTime();
                     if (currentTime - lastTap < 300) {
                         if (scale > 1.5) {
@@ -1426,7 +1513,7 @@ Positive feedback: amplifies change → completion`
                             panX = 0;
                             panY = 0;
                         } else {
-                            scale = 2.2;
+                            scale = 2.5;
                         }
                         updateImageTransform();
                     }
@@ -1486,6 +1573,11 @@ Positive feedback: amplifies change → completion`
                             btn.classList.remove('favorite-active');
                         }
                         updateStats();
+                        
+                        // تحديث الأيقونات في الصفحة الرئيسية إذا كانت مفتوحة
+                        if (currentTab === 'home') {
+                            renderContent('home');
+                        }
                     }
                     
                     // زر التحميل
@@ -1546,7 +1638,11 @@ Positive feedback: amplifies change → completion`
                         const query = e.target.value.toLowerCase();
                         document.querySelectorAll('.icon-item').forEach((item, i) => {
                             const explanation = explanations[i].toLowerCase();
-                            item.style.display = (explanation.includes(query) || query === '') ? 'flex' : 'none';
+                            if (explanation.includes(query) || query === '') {
+                                item.style.display = 'flex';
+                            } else {
+                                item.style.display = 'none';
+                            }
                         });
                     }
                 });
@@ -1629,7 +1725,7 @@ Positive feedback: amplifies change → completion`
                     });
                 });
 
-                // دعم أزرار لوحة المفاتيح
+                // دعم أزرار لوحة المفاتيح للتنقل بين الصور
                 window.addEventListener('keydown', (e) => {
                     if (currentTab === 'images') {
                         if (e.key === 'ArrowLeft') {
@@ -1654,7 +1750,7 @@ Positive feedback: amplifies change → completion`
                     cacheImages();
                 }
 
-                // عرض المحتوى الأولي
+                // عرض المحتوى الأولي (الصفحة الرئيسية مع الإهداء)
                 renderContent('home');
 
                 // حفظ الجلسة كل 5 ثواني
