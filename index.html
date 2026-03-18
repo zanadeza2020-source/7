@@ -2,382 +2,716 @@
 <html lang="ar" dir="rtl">
 <head>
     <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>التشريح - بدون إنترنت</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=5.0, user-scalable=yes">
+    <title>تشريح • الأطلس التفاعلي الفاخر</title>
+    
+    <!-- Font Awesome 6 (أيقونات احترافية) -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+    
+    <!-- Google Fonts - خطوط عربية فاخرة -->
+    <link href="https://fonts.googleapis.com/css2?family=Cairo:wght@300;400;600;700;900&family=Tajawal:wght@300;400;500;700;900&display=swap" rel="stylesheet">
+    
     <style>
-        /* ألوان مريحة للطلاب */
+        /* متغيرات الألوان الفاخرة */
+        :root {
+            --primary: #1a5f6b;
+            --primary-dark: #0e404a;
+            --primary-light: #4d9fab;
+            --secondary: #f8e3b4;
+            --accent: #c7a86b;
+            --bg-gradient: linear-gradient(145deg, #f8fafc 0%, #eef3f7 100%);
+            --glass-bg: rgba(255, 255, 255, 0.75);
+            --glass-border: rgba(255, 255, 255, 0.5);
+            --shadow-sm: 0 10px 30px -10px rgba(0, 50, 60, 0.15);
+            --shadow-md: 0 20px 40px -12px rgba(0, 60, 70, 0.25);
+            --shadow-lg: 0 30px 60px -15px rgba(0, 50, 60, 0.3);
+            --card-radius: 40px;
+            --icon-radius: 30px;
+        }
+
+        /* reset متطور */
         * {
             margin: 0;
             padding: 0;
             box-sizing: border-box;
-            font-family: system-ui, -apple-system, sans-serif;
+            -webkit-tap-highlight-color: transparent;
         }
 
         body {
-            background: #f0f5f7;
-            color: #1d4a55;
-            padding: 15px;
+            font-family: 'Tajawal', 'Cairo', sans-serif;
+            background: var(--bg-gradient);
+            color: #1d4045;
             min-height: 100vh;
+            padding: 16px;
+            position: relative;
+            overflow-x: hidden;
+        }
+
+        /* خلفية متحركة خفيفة */
+        body::before {
+            content: '';
+            position: fixed;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background: radial-gradient(circle at 20% 30%, rgba(70, 160, 170, 0.03) 0%, transparent 30%),
+                        radial-gradient(circle at 80% 70%, rgba(200, 170, 100, 0.03) 0%, transparent 40%);
+            pointer-events: none;
+            z-index: -1;
         }
 
         .container {
-            max-width: 1400px;
+            max-width: 1600px;
             margin: 0 auto;
+            position: relative;
         }
 
-        /* رأس الموقع */
-        .header {
-            background: #0d4f5c;
-            color: white;
+        /* ===== الهيدر الفاخر ===== */
+        .luxury-header {
+            background: rgba(26, 95, 107, 0.9);
+            backdrop-filter: blur(15px);
+            -webkit-backdrop-filter: blur(15px);
+            border: 1px solid rgba(255, 255, 255, 0.25);
+            border-radius: 70px;
             padding: 20px 30px;
-            border-radius: 50px;
             margin-bottom: 25px;
             display: flex;
             justify-content: space-between;
             align-items: center;
             flex-wrap: wrap;
-            gap: 15px;
-            box-shadow: 0 10px 25px rgba(5, 60, 70, 0.4);
-            border: 1px solid #57b8b0;
+            gap: 20px;
+            box-shadow: var(--shadow-lg);
+            position: relative;
+            overflow: hidden;
         }
 
-        .logo {
+        .luxury-header::before {
+            content: '';
+            position: absolute;
+            top: -50%;
+            left: -50%;
+            width: 200%;
+            height: 200%;
+            background: radial-gradient(circle at 30% 30%, rgba(255,255,255,0.2), transparent 60%);
+            animation: rotate 20s linear infinite;
+            pointer-events: none;
+        }
+
+        @keyframes rotate {
+            from { transform: rotate(0deg); }
+            to { transform: rotate(360deg); }
+        }
+
+        .logo-area {
             display: flex;
             align-items: center;
-            gap: 15px;
+            gap: 20px;
+            position: relative;
+            z-index: 2;
         }
 
-        .logo h1 {
-            font-size: 28px;
-            font-weight: 600;
+        .logo-icon {
+            width: 70px;
+            height: 70px;
+            background: linear-gradient(145deg, #f9d56e, #e6b84c);
+            border-radius: 30px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 40px;
+            color: #0e404a;
+            box-shadow: 0 15px 25px rgba(0,0,0,0.2);
+            transform: rotate(5deg);
+            transition: 0.3s;
         }
 
-        .logo p {
+        .logo-icon:hover {
+            transform: rotate(0deg) scale(1.05);
+        }
+
+        .logo-text h1 {
+            font-size: 32px;
+            font-weight: 900;
+            background: linear-gradient(135deg, #fff, #ffeac2);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            line-height: 1.2;
+        }
+
+        .logo-text p {
+            color: rgba(255, 255, 255, 0.9);
             font-size: 15px;
-            opacity: 0.9;
+            display: flex;
+            align-items: center;
+            gap: 8px;
         }
 
-        /* مؤشر التخزين الدائم */
-        .storage-badge {
-            background: #207a88;
+        .offline-badge {
+            background: rgba(0, 0, 0, 0.3);
+            backdrop-filter: blur(10px);
             padding: 12px 25px;
             border-radius: 60px;
             display: flex;
             align-items: center;
             gap: 12px;
-            border: 2px solid #9de0d8;
-            font-weight: 500;
+            border: 1px solid rgba(255, 215, 140, 0.5);
+            font-size: 16px;
+            color: white;
+            z-index: 2;
         }
 
-        /* شريط التحميل */
-        .progress-section {
-            background: white;
-            border-radius: 60px;
-            padding: 15px 25px;
-            margin: 20px 0;
-            box-shadow: 0 5px 15px rgba(0,40,45,0.1);
+        .offline-badge i {
+            font-size: 22px;
+            color: #ffd78c;
         }
 
-        .progress-bar {
+        /* ===== شريط التحميل المتحرك ===== */
+        .storage-progress {
+            background: var(--glass-bg);
+            backdrop-filter: blur(12px);
+            border: 1px solid var(--glass-border);
+            border-radius: 100px;
+            padding: 20px 30px;
+            margin-bottom: 30px;
+            display: flex;
+            align-items: center;
+            flex-wrap: wrap;
+            gap: 20px;
+            box-shadow: var(--shadow-md);
+        }
+
+        .progress-icon {
+            width: 60px;
+            height: 60px;
+            background: linear-gradient(145deg, #1a5f6b, #0e404a);
+            border-radius: 30px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 28px;
+            color: #ffd966;
+            animation: pulse 2s infinite;
+        }
+
+        @keyframes pulse {
+            0% { box-shadow: 0 0 0 0 rgba(26, 95, 107, 0.5); }
+            70% { box-shadow: 0 0 0 15px rgba(26, 95, 107, 0); }
+            100% { box-shadow: 0 0 0 0 rgba(26, 95, 107, 0); }
+        }
+
+        .progress-info {
+            flex: 1;
+        }
+
+        .progress-header {
+            display: flex;
+            justify-content: space-between;
+            margin-bottom: 10px;
+            font-weight: 600;
+            color: #0e404a;
+        }
+
+        .progress-bar-bg {
             height: 16px;
-            background: #e1f0ec;
+            background: rgba(0,0,0,0.1);
             border-radius: 40px;
             overflow: hidden;
-            margin: 12px 0;
+            position: relative;
         }
 
         .progress-fill {
             height: 100%;
-            background: #0d4f5c;
+            background: linear-gradient(90deg, #1a5f6b, #4d9fab, #ffd966);
             width: 0%;
-            transition: width 0.4s;
+            transition: width 0.5s cubic-bezier(0.4, 0, 0.2, 1);
             border-radius: 40px;
+            position: relative;
+            overflow: hidden;
         }
 
-        .status-text {
-            display: flex;
-            align-items: center;
-            gap: 10px;
-            color: #1c656e;
-            font-size: 16px;
+        .progress-fill::after {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background: linear-gradient(90deg, transparent, rgba(255,255,255,0.3), transparent);
+            animation: shimmer 2s infinite;
         }
 
-        /* شبكة الصور */
-        .image-grid {
+        @keyframes shimmer {
+            0% { transform: translateX(-100%); }
+            100% { transform: translateX(100%); }
+        }
+
+        /* ===== شبكة الأيقونات الفاخرة ===== */
+        .icon-grid {
             display: flex;
             flex-wrap: wrap;
             justify-content: center;
-            gap: 10px;
-            margin: 25px 0;
+            gap: 15px;
+            margin: 30px 0;
+            perspective: 1000px;
         }
 
-        .image-btn {
-            width: 85px;
-            height: 95px;
+        .icon-card {
+            width: 110px;
+            height: 120px;
             background: white;
-            border-radius: 30px;
+            border-radius: 40px;
             display: flex;
             flex-direction: column;
             align-items: center;
             justify-content: center;
-            gap: 8px;
+            gap: 10px;
             cursor: pointer;
-            box-shadow: 0 8px 18px rgba(0,45,50,0.1);
+            box-shadow: var(--shadow-sm);
             border: 3px solid transparent;
-            transition: 0.2s;
-            font-weight: 600;
-            color: #0d4f5c;
+            transition: all 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+            position: relative;
+            overflow: hidden;
         }
 
-        .image-btn.active {
-            border-color: #0d4f5c;
-            background: #daf2ed;
-            transform: scale(0.98);
+        .icon-card::before {
+            content: '';
+            position: absolute;
+            top: -2px;
+            left: -2px;
+            right: -2px;
+            bottom: -2px;
+            background: linear-gradient(145deg, #1a5f6b, #c7a86b);
+            border-radius: 42px;
+            opacity: 0;
+            transition: 0.3s;
+            z-index: -1;
         }
 
-        .image-btn span {
-            font-size: 28px;
+        .icon-card:hover {
+            transform: translateY(-15px) rotate(2deg);
+            border-color: #1a5f6b;
         }
 
-        /* منطقة العرض */
-        .main-area {
-            background: white;
-            border-radius: 50px;
+        .icon-card.active {
+            border-color: #c7a86b;
+            background: linear-gradient(145deg, #fefcf5, #fff);
+            box-shadow: 0 25px 35px -12px rgba(26, 95, 107, 0.4);
+        }
+
+        .icon-card.active::before {
+            opacity: 0.3;
+        }
+
+        .icon-card i {
+            font-size: 48px;
+            color: #1a5f6b;
+            filter: drop-shadow(0 5px 8px rgba(0,0,0,0.1));
+        }
+
+        .icon-card span {
+            font-weight: 800;
+            font-size: 18px;
+            background: #eef7f5;
+            padding: 5px 18px;
+            border-radius: 60px;
+            color: #0e404a;
+        }
+
+        /* ===== منطقة العرض الرئيسية ===== */
+        .showcase {
+            background: var(--glass-bg);
+            backdrop-filter: blur(20px);
+            border: 2px solid var(--glass-border);
+            border-radius: 70px;
             padding: 25px;
-            box-shadow: 0 20px 35px rgba(0,55,60,0.15);
-            border: 1px solid #bbe6df;
+            box-shadow: var(--shadow-lg);
         }
 
-        .split-panel {
+        .split-layout {
             display: grid;
-            grid-template-columns: 1.3fr 1fr;
+            grid-template-columns: 1.4fr 1fr;
             gap: 25px;
         }
 
-        /* الصورة */
-        .image-frame {
-            background: #10353b;
-            border-radius: 45px;
+        /* ===== حاوية الصورة الفاخرة مع تحكم باللمس ===== */
+        .image-masterpiece {
+            background: #0f333b;
+            border-radius: 60px;
             overflow: hidden;
-            aspect-ratio: 4/3;
-            border: 5px solid #bde8e0;
+            border: 6px solid #dfeae7;
+            box-shadow: 0 30px 40px -15px #08262b;
             position: relative;
+            touch-action: none;
+            user-select: none;
         }
 
-        #displayImage {
+        #pinchZoomImage {
             width: 100%;
             height: 100%;
-            object-fit: contain;
-            background: #10353b;
             display: block;
+            object-fit: contain;
+            background: #0f333b;
+            cursor: grab;
+            transition: transform 0.1s ease;
+            will-change: transform;
+            touch-action: none;
+            pointer-events: none; /* الصورة لا تتعامل مع اللمس مباشرة */
         }
 
-        .zoom-controls {
+        /* طبقة اللمس للتكبير والتنقل */
+        .touch-layer {
             position: absolute;
-            bottom: 15px;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            z-index: 20;
+            background: transparent;
+            touch-action: none;
+        }
+
+        /* أزرار التحكم الأنيقة */
+        .image-controls-glass {
+            position: absolute;
+            bottom: 20px;
             left: 50%;
             transform: translateX(-50%);
-            background: rgba(0,0,0,0.7);
-            backdrop-filter: blur(5px);
-            padding: 8px 18px;
-            border-radius: 60px;
+            background: rgba(0, 0, 0, 0.6);
+            backdrop-filter: blur(20px);
+            border: 1px solid rgba(255, 255, 255, 0.3);
+            padding: 8px 20px;
+            border-radius: 80px;
             display: flex;
-            gap: 12px;
-            border: 1px solid #7fc9c0;
+            gap: 15px;
+            z-index: 30;
+            box-shadow: 0 15px 35px rgba(0,0,0,0.3);
         }
 
-        .zoom-btn {
+        .glass-btn {
             background: transparent;
             border: none;
             color: white;
-            font-size: 20px;
-            width: 40px;
-            height: 40px;
+            width: 48px;
+            height: 48px;
             border-radius: 40px;
-            cursor: pointer;
             display: flex;
             align-items: center;
             justify-content: center;
-            font-weight: bold;
+            font-size: 22px;
+            cursor: pointer;
+            transition: 0.2s;
+            border: 1px solid rgba(255,255,255,0.2);
         }
 
-        .zoom-btn:hover {
-            background: rgba(255,255,255,0.2);
+        .glass-btn:hover {
+            background: rgba(255, 255, 255, 0.15);
+            transform: scale(1.1);
         }
 
-        /* بطاقة النص */
-        .info-panel {
-            background: #f3fcf9;
-            border-radius: 45px;
-            padding: 25px;
-            border: 1px solid #bae1d9;
+        .glass-btn:active {
+            background: #1a5f6b;
+        }
+
+        /* مؤشر مستوى التكبير */
+        .zoom-level {
+            position: absolute;
+            top: 20px;
+            right: 20px;
+            background: rgba(0,0,0,0.5);
+            backdrop-filter: blur(5px);
+            color: white;
+            padding: 5px 15px;
+            border-radius: 40px;
+            font-size: 14px;
+            z-index: 25;
+            border: 1px solid rgba(255,255,255,0.2);
+        }
+
+        /* ===== بطاقة المعلومات الفاخرة ===== */
+        .info-palace {
+            background: rgba(255, 255, 255, 0.9);
+            backdrop-filter: blur(15px);
+            border-radius: 60px;
+            padding: 30px;
+            border: 2px solid rgba(255, 255, 255, 0.7);
+            box-shadow: 0 20px 35px rgba(0, 50, 60, 0.15);
         }
 
         .info-header {
             display: flex;
             justify-content: space-between;
             align-items: center;
-            margin-bottom: 20px;
+            margin-bottom: 25px;
             flex-wrap: wrap;
-            gap: 12px;
+            gap: 15px;
         }
 
         .info-header h2 {
-            color: #0d4f5c;
-            font-size: 24px;
-        }
-
-        .filename {
-            background: #0d4f5c;
-            color: white;
-            padding: 8px 25px;
-            border-radius: 60px;
-            font-weight: 600;
-            font-size: 16px;
-        }
-
-        .notes-box {
-            background: white;
-            border-radius: 35px;
-            padding: 22px;
-            max-height: 300px;
-            overflow-y: auto;
-            line-height: 1.8;
-            border: 1px solid #cbede4;
-            white-space: pre-line;
-            font-size: 15px;
-        }
-
-        /* أزرار التحميل */
-        .action-buttons {
+            font-size: 28px;
+            color: #0e404a;
             display: flex;
+            align-items: center;
             gap: 12px;
-            margin-top: 20px;
+            font-weight: 800;
+        }
+
+        .info-header h2 i {
+            color: #c7a86b;
+        }
+
+        .filename-badge {
+            background: linear-gradient(145deg, #1a5f6b, #0e404a);
+            color: white;
+            padding: 10px 30px;
+            border-radius: 60px;
+            font-weight: 700;
+            font-size: 18px;
+            box-shadow: 0 8px 15px rgba(0,0,0,0.1);
+            border: 1px solid #ffd966;
+        }
+
+        /* النص مع scroll أنيق */
+        .notes-elegant {
+            background: #fafffe;
+            border-radius: 50px;
+            padding: 25px;
+            max-height: 320px;
+            overflow-y: auto;
+            line-height: 1.9;
+            font-size: 16px;
+            color: #1a4f55;
+            border: 2px solid #d1ede5;
+            box-shadow: inset 0 5px 15px rgba(0,80,70,0.05);
+            white-space: pre-line;
+            scrollbar-width: thin;
+            scrollbar-color: #1a5f6b #d1ede5;
+        }
+
+        .notes-elegant::-webkit-scrollbar {
+            width: 8px;
+        }
+
+        .notes-elegant::-webkit-scrollbar-track {
+            background: #d1ede5;
+            border-radius: 10px;
+        }
+
+        .notes-elegant::-webkit-scrollbar-thumb {
+            background: #1a5f6b;
+            border-radius: 10px;
+        }
+
+        /* أزرار الإجراءات الفاخرة */
+        .action-row {
+            display: flex;
+            gap: 15px;
+            margin-top: 25px;
             flex-wrap: wrap;
         }
 
-        .action-btn {
+        .action-premium {
             flex: 1;
+            min-width: 130px;
             background: white;
-            border: 2px solid #0d4f5c;
-            padding: 12px 10px;
+            border: 2px solid #1a5f6b;
+            padding: 15px 10px;
             border-radius: 50px;
-            font-weight: 600;
-            color: #0d4f5c;
+            font-weight: 700;
+            color: #1a5f6b;
             cursor: pointer;
             display: flex;
             align-items: center;
             justify-content: center;
-            gap: 8px;
-            min-width: 110px;
-            transition: 0.2s;
+            gap: 12px;
+            font-size: 16px;
+            transition: 0.3s;
+            position: relative;
+            overflow: hidden;
         }
 
-        .action-btn:hover {
-            background: #0d4f5c;
+        .action-premium::before {
+            content: '';
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            width: 0;
+            height: 0;
+            border-radius: 50%;
+            background: rgba(26, 95, 107, 0.1);
+            transition: 0.5s;
+            transform: translate(-50%, -50%);
+            z-index: 0;
+        }
+
+        .action-premium:hover::before {
+            width: 300px;
+            height: 300px;
+        }
+
+        .action-premium i, .action-premium span {
+            position: relative;
+            z-index: 2;
+        }
+
+        .action-premium:hover {
+            background: #1a5f6b;
             color: white;
+            border-color: #c7a86b;
         }
 
-        /* رسائل الخطأ */
-        .error-message {
-            background: #ffebe6;
-            border: 2px solid #d14c4c;
+        /* رسالة الخطأ */
+        .error-luxury {
+            background: #ffebe3;
+            border: 2px solid #c94a4a;
             color: #a13737;
-            padding: 15px 25px;
+            padding: 18px 30px;
             border-radius: 60px;
             margin: 20px 0 0;
             display: none;
             align-items: center;
-            gap: 12px;
+            gap: 15px;
             font-weight: 600;
+            font-size: 16px;
         }
 
         /* تذييل */
-        .footer {
-            margin-top: 30px;
+        .footer-luxury {
+            margin-top: 35px;
             text-align: center;
+            padding: 20px;
             color: #578e94;
-            padding: 10px;
+            font-size: 15px;
+            background: rgba(255,255,255,0.3);
+            backdrop-filter: blur(5px);
+            border-radius: 60px;
+            border: 1px solid rgba(255,255,255,0.5);
         }
 
-        @media (max-width: 900px) {
-            .split-panel {
+        /* تحسينات للجوال */
+        @media (max-width: 1000px) {
+            .split-layout {
                 grid-template-columns: 1fr;
             }
-            .header {
+            .luxury-header {
                 flex-direction: column;
                 text-align: center;
+            }
+            .logo-area {
+                flex-direction: column;
+            }
+        }
+
+        @media (max-width: 600px) {
+            .icon-card {
+                width: 85px;
+                height: 100px;
+            }
+            .icon-card i {
+                font-size: 38px;
+            }
+            .action-row {
+                flex-direction: column;
             }
         }
     </style>
 </head>
 <body>
     <div class="container">
-        <!-- الهيدر -->
-        <div class="header">
-            <div class="logo">
-                <div>
-                    <h1>📚 أطلس التشريح</h1>
-                    <p>للطلاب - تخزين دائم بدون إنترنت</p>
+        <!-- هيدر فاخر -->
+        <div class="luxury-header">
+            <div class="logo-area">
+                <div class="logo-icon">
+                    <i class="fas fa-brain"></i>
+                </div>
+                <div class="logo-text">
+                    <h1>الأطلس التشريحي</h1>
+                    <p><i class="fas fa-gem"></i> تجربة فاخرة للطلاب</p>
                 </div>
             </div>
-            <div class="storage-badge" id="storageStatus">
-                <span>💾</span>
-                <span id="statusText">جاري التثبيت...</span>
+            <div class="offline-badge" id="offlineBadge">
+                <i class="fas fa-cloud-moon" id="statusIcon"></i>
+                <span id="statusText">جاري التحميل...</span>
             </div>
         </div>
 
-        <!-- شريط التقدم -->
-        <div class="progress-section" id="progressSection">
-            <div class="status-text">
-                <span id="statusIcon">🔄</span>
-                <span id="statusMessage">يتم تحميل الموارد وتخزينها...</span>
+        <!-- شريط التخزين المتطور -->
+        <div class="storage-progress">
+            <div class="progress-icon">
+                <i class="fas fa-database"></i>
             </div>
-            <div class="progress-bar">
-                <div class="progress-fill" id="progressFill"></div>
-            </div>
-            <div style="display: flex; justify-content: space-between; color: #0d4f5c;">
-                <span id="loadedCount">0</span>
-                <span>/</span>
-                <span id="totalCount">9</span>
-                <span style="margin-right: auto;">صورة</span>
+            <div class="progress-info">
+                <div class="progress-header">
+                    <span><i class="fas fa-layer-group"></i> تخزين الصور</span>
+                    <span id="progressPercent">0%</span>
+                </div>
+                <div class="progress-bar-bg">
+                    <div class="progress-fill" id="progressFill"></div>
+                </div>
+                <div style="display: flex; justify-content: space-between; margin-top: 8px;">
+                    <span id="loadedCount">0</span>
+                    <span>/</span>
+                    <span id="totalCount">9</span>
+                    <span>صورة مخزنة محلياً</span>
+                </div>
             </div>
         </div>
 
-        <!-- أيقونات الصور -->
-        <div class="image-grid" id="imageGrid"></div>
+        <!-- شبكة الأيقونات الفاخرة -->
+        <div class="icon-grid" id="iconGrid"></div>
 
         <!-- العرض الرئيسي -->
-        <div class="main-area">
-            <div class="split-panel">
-                <!-- الصورة -->
-                <div class="image-frame">
-                    <img id="displayImage" src="" alt="صورة تشريحية">
-                    <div class="zoom-controls">
-                        <button class="zoom-btn" id="zoomIn">+</button>
-                        <button class="zoom-btn" id="zoomOut">−</button>
-                        <button class="zoom-btn" id="zoomReset">↺</button>
+        <div class="showcase">
+            <div class="split-layout">
+                <!-- حاوية الصورة مع خاصية اللمس المتطور -->
+                <div class="image-masterpiece" id="imageContainer">
+                    <img id="pinchZoomImage" src="" alt="صورة تشريحية">
+                    <div class="touch-layer" id="touchLayer"></div>
+                    
+                    <!-- مؤشر التكبير -->
+                    <div class="zoom-level" id="zoomIndicator">
+                        <i class="fas fa-search-plus"></i> <span id="zoomValue">1.0x</span>
+                    </div>
+
+                    <!-- أزرار التحكم -->
+                    <div class="image-controls-glass">
+                        <button class="glass-btn" id="zoomOutBtn"><i class="fas fa-minus"></i></button>
+                        <button class="glass-btn" id="zoomResetBtn"><i class="fas fa-undo-alt"></i></button>
+                        <button class="glass-btn" id="zoomInBtn"><i class="fas fa-plus"></i></button>
+                        <button class="glass-btn" id="fullscreenBtn"><i class="fas fa-expand"></i></button>
                     </div>
                 </div>
 
-                <!-- النص -->
-                <div class="info-panel">
+                <!-- بطاقة المعلومات -->
+                <div class="info-palace">
                     <div class="info-header">
-                        <h2>📝 شرح الصورة</h2>
-                        <span class="filename" id="filename">1.jpg</span>
+                        <h2>
+                            <i class="fas fa-pen-fancy"></i>
+                            شرح الصورة
+                        </h2>
+                        <span class="filename-badge" id="filename">1.jpg</span>
                     </div>
-                    <div class="notes-box" id="notesContent">
-                        جاري التحميل من التخزين الدائم...
+                    <div class="notes-elegant" id="notesContent">
+                        جاري تحميل النص من التخزين الدائم...
                     </div>
-                    <div class="action-buttons">
-                        <button class="action-btn" id="downloadImage">
-                            <span>📷</span> تحميل الصورة
+
+                    <!-- أزرار الإجراءات -->
+                    <div class="action-row">
+                        <button class="action-premium" id="downloadImageBtn">
+                            <i class="fas fa-download"></i>
+                            <span>الصورة</span>
                         </button>
-                        <button class="action-btn" id="downloadText">
-                            <span>📄</span> تحميل النص
+                        <button class="action-premium" id="downloadTextBtn">
+                            <i class="fas fa-file-alt"></i>
+                            <span>النص</span>
                         </button>
-                        <button class="action-btn" id="copyLink">
-                            <span>🔗</span> نسخ الرابط
+                        <button class="action-premium" id="copyLinkBtn">
+                            <i class="fas fa-link"></i>
+                            <span>الرابط</span>
+                        </button>
+                        <button class="action-premium" id="shareBtn">
+                            <i class="fas fa-share-alt"></i>
+                            <span>مشاركة</span>
                         </button>
                     </div>
                 </div>
@@ -385,394 +719,519 @@
         </div>
 
         <!-- رسالة الخطأ -->
-        <div class="error-message" id="errorMsg">
-            <span>⚠️</span>
+        <div class="error-luxury" id="errorMsg">
+            <i class="fas fa-exclamation-triangle"></i>
             <span id="errorText"></span>
         </div>
 
         <!-- تذييل -->
-        <div class="footer">
-            <p id="footerText">⚡ يعمل بدون إنترنت بعد التحميل الأول</p>
+        <div class="footer-luxury">
+            <i class="fas fa-check-circle" style="color: #1a5f6b;"></i>
+            <span id="footerText">⚡ تجربة فاخرة - يعمل بدون إنترنت بعد التحميل</span>
         </div>
     </div>
 
-    <!-- Service Worker للتخزين الدائم -->
     <script>
-        // تسجيل Service Worker
-        if ('serviceWorker' in navigator) {
-            navigator.serviceWorker.register('sw.js')
-                .then(reg => console.log('✓ Service Worker مسجل'))
-                .catch(err => console.log('✗ Service Worker فشل:', err));
-        }
-
-        // البيانات النصية للصور (مخزنة محلياً)
-        const notesData = [
-            `# CHAPTER ONE: INTRODUCTION TO HUMAN ANATOMY AND PHYSIOLOGY
+        (function() {
+            // ========== البيانات ==========
+            const notesData = [
+                `# CHAPTER ONE: INTRODUCTION TO HUMAN ANATOMY AND PHYSIOLOGY
 
 ## Anatomy | علم التشريح
-Anatomy is the study of body structure.
+Anatomy is the study of the structure of the body and its parts.
 
 ## Physiology | علم وظائف الأعضاء
-Physiology is the study of body function.
+Physiology is the study of how the body functions.
 
 ### Tissues | الأنسجة
-- Epithelial tissue / نسيج طلائي
-- Connective tissue / نسيج ضام
-- Muscle tissue / نسيج عضلي
-- Nerve tissue / نسيج عصبي`,
+• Epithelial tissue / نسيج طلائي
+• Connective tissue / نسيج ضام
+• Muscle tissue / نسيج عضلي
+• Nerve tissue / نسيج عصبي
 
-            `# ANATOMICAL DIRECTIONAL TERMS
+### Levels of Organization
+1. Chemical level (atoms, molecules)
+2. Cellular level (cells)
+3. Tissue level (tissues)
+4. Organ level (organs)
+5. System level (organ systems)
+6. Organism level (human body)`,
+
+                `# ANATOMICAL DIRECTIONAL TERMS
 
 ## Superior (cranial) | علوي
-The head is superior to the neck.
+Toward the head end. The head is superior to the neck.
 
 ## Inferior (caudal) | سفلي
-The stomach is inferior to the heart.
+Away from head. The stomach is inferior to the heart.
 
 ## Anterior (ventral) | أمامي
-The chest is anterior to the spine.
+Toward front. The chest is anterior to the spine.
 
 ## Posterior (dorsal) | خلفي
-The spine is posterior to the heart.
+Toward back. The spine is posterior to the heart.
 
 ## Medial | إنسي
-The nose is medial to the eyes.
+Toward midline. The nose is medial to the eyes.
 
 ## Lateral | وحشي
-The ears are lateral to the head.`,
+Away from midline. The ears are lateral to the head.
 
-            `# BODY REGIONS | مناطق الجسم
+## Proximal | دان
+Closer to attachment. The elbow is proximal to the wrist.
+
+## Distal | قاصي
+Farther from attachment. The fingers are distal to the wrist.`,
+
+                `# BODY REGIONS | مناطق الجسم
 
 ## Head and Neck | الرأس والرقبة
-- Cranial / قحفي
-- Facial / وجهي
-- Cervical / عنقي
+• Cranial / قحفي (skull)
+• Facial / وجهي (face)
+• Cervical / عنقي (neck)
 
 ## Trunk | الجذع
-- Thoracic / صدري
-- Abdominal / بطني
-- Pelvic / حوضي
+• Thoracic / صدري (chest)
+• Abdominal / بطني (abdomen)
+• Pelvic / حوضي (pelvis)
+• Dorsal / ظهري (back)
 
 ## Upper Limb | الطرف العلوي
-- Shoulder / كتف
-- Arm / عضد
-- Forearm / ساعد
+• Shoulder / كتف
+• Arm / عضد
+• Forearm / ساعد
+• Hand / يد
 
 ## Lower Limb | الطرف السفلي
-- Thigh / فخذ
-- Leg / ساق
-- Foot / قدم`,
+• Thigh / فخذ
+• Leg / ساق
+• Foot / قدم`,
 
-            `# LEVELS OF ORGANIZATION
+                `# LEVELS OF ORGANIZATION
 
 ## 1. Chemical Level
-Atoms → Molecules (H₂O, DNA)
+Atoms → Molecules (H₂O, DNA, proteins)
 
 ## 2. Cellular Level
-Cells (muscle cells, nerve cells)
+Cells are the basic unit of life
+• Muscle cells
+• Nerve cells
+• Epithelial cells
 
 ## 3. Tissue Level
-Tissues (epithelial, connective)
+Groups of similar cells
+• Epithelial tissue
+• Connective tissue
+• Muscle tissue
+• Nervous tissue
 
 ## 4. Organ Level
-Organs (heart, liver, brain)
+Different tissues work together
+• Heart
+• Liver
+• Brain
 
 ## 5. System Level
-Systems (respiratory, digestive)
+Organs work together
+• Cardiovascular system
+• Respiratory system
 
 ## 6. Organism Level
-The whole human body`,
+All systems working together`,
 
-            `# ABDOMINAL REGIONS
+                `# ABDOMINAL REGIONS | المناطق البطنية
 
-## Nine Regions | 9 مناطق
-- Right hypochondriac
-- Epigastric
-- Left hypochondriac
-- Right lumbar
-- Umbilical
-- Left lumbar
-- Right iliac
-- Hypogastric
-- Left iliac
+## Nine Regions | تسع مناطق
+1. Right hypochondriac / تحت الضلع الأيمن
+2. Epigastric / فوق المعدة
+3. Left hypochondriac / تحت الضلع الأيسر
+4. Right lumbar / قطني أيمن
+5. Umbilical / سري
+6. Left lumbar / قطني أيسر
+7. Right iliac / حرقفي أيمن
+8. Hypogastric / فوق العانة
+9. Left iliac / حرقفي أيسر
 
-## Four Quadrants | 4 أرباع
-- Right Upper Quadrant
-- Left Upper Quadrant
-- Right Lower Quadrant
-- Left Lower Quadrant`,
+## Four Quadrants | أربعة أرباع
+• Right Upper Quadrant (RUQ)
+• Left Upper Quadrant (LUQ)
+• Right Lower Quadrant (RLQ)
+• Left Lower Quadrant (LLQ)
 
-            `# BODY CAVITIES
+## Body Planes | مستويات الجسم
+• Sagittal / سهمي
+• Frontal / إكليلي
+• Transverse / مستعرض`,
+
+                `# BODY CAVITIES | تجاويف الجسم
 
 ## Dorsal Cavity | التجويف الخلفي
-- Cranial cavity (brain)
-- Spinal cavity (spinal cord)
+• Cranial cavity / تجويف قحفي (brain)
+• Vertebral canal / قناة فقرية (spinal cord)
 
 ## Ventral Cavity | التجويف الأمامي
-- Thoracic cavity (heart, lungs)
-- Abdominal cavity (digestive organs)
-- Pelvic cavity (bladder, reproductive)
+• Thoracic cavity / تجويف صدري
+  - Pleural cavities (lungs)
+  - Pericardial cavity (heart)
+  - Mediastinum / المنصف
+
+• Abdominopelvic cavity / تجويف بطني حوضي
+  - Abdominal cavity (digestive organs)
+  - Pelvic cavity (bladder, reproductive)
 
 ## Diaphragm | الحجاب الحاجز
 Separates thoracic and abdominal cavities`,
 
-            `# HOMEOSTASIS
+                `# HOMEOSTASIS | الاتزان الداخلي
 
-## Definition
-Maintenance of stable internal environment
+## Definition | تعريف
+Maintenance of a stable internal environment
 
-## Components
-- Receptor: detects change
-- Control center: processes information
-- Effector: responds to change
+## Components | مكونات
+1. Receptor / مستقبل - detects change
+2. Control center / مركز تحكم - processes information
+3. Effector / منفذ - responds to change
 
-## Negative Feedback
+## Negative Feedback | التغذية الراجعة السلبية
 Returns body to normal state
-Example: Body temperature regulation
+• Body temperature regulation
+• Blood glucose regulation
+• Blood pressure regulation
 
-## Positive Feedback
-Amplifies change
-Example: Childbirth contractions`,
+## Positive Feedback | التغذية الراجعة الإيجابية
+Amplifies change (less common)
+• Childbirth contractions
+• Blood clotting
+• Fever`,
 
-            `# NEGATIVE FEEDBACK EXAMPLES
+                `# NEGATIVE FEEDBACK EXAMPLES
 
 ## Blood Glucose Regulation
-High glucose → Insulin released → Glucose decreases
-Low glucose → Glucagon released → Glucose increases
+High glucose ↑
+→ Pancreas releases insulin
+→ Cells take up glucose
+→ Liver stores glycogen
+→ Glucose decreases ↓
 
-## Body Temperature
-Hot → Sweating → Cooling
-Cold → Shivering → Warming
+Low glucose ↓
+→ Pancreas releases glucagon
+→ Liver breaks down glycogen
+→ Glucose increases ↑
 
-## Blood Pressure
-High pressure → Heart rate slows
-Low pressure → Heart rate increases`,
+## Body Temperature Regulation
+Hot ↑
+→ Sweating
+→ Blood vessels dilate
+→ Heat loss → cooling ↓
 
-            `# REVIEW - Anatomical Position
+Cold ↓
+→ Shivering
+→ Blood vessels constrict
+→ Heat production → warming ↑`,
+
+                `# REVIEW - Anatomical Position
 
 ## Standard Position
-- Standing upright
-- Face forward
-- Arms at sides
-- Palms forward
+• Standing upright
+• Face forward
+• Arms at sides
+• Palms forward
+• Feet together
 
 ## Directional Terms Summary
-Superior/Inferior: above/below
-Anterior/Posterior: front/back
-Medial/Lateral: toward midline/away
-Proximal/Distal: closer/farther
-Superficial/Deep: surface/internal`
-        ];
+Superior / Inferior : above / below
+Anterior / Posterior : front / back
+Medial / Lateral : toward midline / away
+Proximal / Distal : closer / farther
+Superficial / Deep : surface / internal
 
-        // أسماء الصور
-        const imageFiles = [
-            '1.jpg', '2.jpg', '3.jpg', '4.jpg', '5.jpg',
-            '6.jpg', '7.jpg', '8.jpg', '9.jpg'
-        ];
+## Body Sections
+Sagittal : left and right
+Frontal : front and back
+Transverse : upper and lower`
+            ];
 
-        // متغيرات الحالة
-        let currentIndex = 0;
-        let zoom = 1;
-        let loadedImages = 0;
-        const totalImages = imageFiles.length;
+            const imageFiles = [
+                '1.jpg', '2.jpg', '3.jpg', '4.jpg', '5.jpg',
+                '6.jpg', '7.jpg', '8.jpg', '9.jpg'
+            ];
 
-        // عناصر DOM
-        const imageGrid = document.getElementById('imageGrid');
-        const displayImage = document.getElementById('displayImage');
-        const filename = document.getElementById('filename');
-        const notesContent = document.getElementById('notesContent');
-        const progressFill = document.getElementById('progressFill');
-        const loadedCountSpan = document.getElementById('loadedCount');
-        const statusMessage = document.getElementById('statusMessage');
-        const statusIcon = document.getElementById('statusIcon');
-        const storageStatus = document.getElementById('statusText');
-        const errorMsg = document.getElementById('errorMsg');
-        const errorText = document.getElementById('errorText');
+            // ========== متغيرات الحالة ==========
+            let currentIndex = 0;
+            let scale = 1;
+            let minScale = 0.5;
+            let maxScale = 4;
+            let initialDistance = 0;
+            let lastTouchEnd = 0;
+            let loadedImages = 0;
+            const totalImages = imageFiles.length;
 
-        // بناء أزرار الصور
-        function buildImageButtons() {
-            imageGrid.innerHTML = '';
-            for (let i = 0; i < imageFiles.length; i++) {
-                const btn = document.createElement('div');
-                btn.className = `image-btn ${i === 0 ? 'active' : ''}`;
-                btn.setAttribute('data-index', i);
-                btn.innerHTML = `<span>${i + 1}</span><small>صورة</small>`;
-                btn.onclick = () => changeImage(i);
-                imageGrid.appendChild(btn);
-            }
-        }
+            // عناصر DOM
+            const iconGrid = document.getElementById('iconGrid');
+            const pinchImage = document.getElementById('pinchZoomImage');
+            const filename = document.getElementById('filename');
+            const notes = document.getElementById('notesContent');
+            const touchLayer = document.getElementById('touchLayer');
+            const zoomValue = document.getElementById('zoomValue');
+            const progressFill = document.getElementById('progressFill');
+            const loadedCountSpan = document.getElementById('loadedCount');
+            const progressPercent = document.getElementById('progressPercent');
+            const statusText = document.getElementById('statusText');
+            const statusIcon = document.getElementById('statusIcon');
+            const footerText = document.getElementById('footerText');
+            const errorMsg = document.getElementById('errorMsg');
+            const errorText = document.getElementById('errorText');
 
-        // تغيير الصورة
-        function changeImage(index) {
-            if (index < 0 || index >= imageFiles.length) return;
-            
-            currentIndex = index;
-            
-            // محاولة تحميل الصورة من cache
-            if (navigator.onLine) {
-                displayImage.src = imageFiles[index];
-            } else {
-                // إذا كنا أوفلاین، نجرب من cache
-                displayImage.src = imageFiles[index];
-            }
-            
-            filename.innerText = imageFiles[index];
-            notesContent.innerText = notesData[index];
-            
-            // تحديث الأزرار
-            document.querySelectorAll('.image-btn').forEach((btn, i) => {
-                if (i === index) btn.classList.add('active');
-                else btn.classList.remove('active');
-            });
-            
-            // تحديث الرابط
-            window.location.hash = `img-${index + 1}`;
-            
-            // إعادة التكبير
-            zoom = 1;
-            displayImage.style.transform = `scale(${zoom})`;
-            
-            errorMsg.style.display = 'none';
-        }
-
-        // تحديث شريط التقدم
-        function updateProgress() {
-            loadedImages++;
-            const percent = (loadedImages / totalImages) * 100;
-            progressFill.style.width = percent + '%';
-            loadedCountSpan.innerText = loadedImages;
-            
-            if (loadedImages >= totalImages) {
-                statusMessage.innerText = '✓ جميع الصور مخزنة في التخزين الدائم';
-                statusIcon.innerText = '✅';
-                storageStatus.innerText = '✅ متاح بدون إنترنت';
-                document.getElementById('footerText').innerHTML = '✅ الموقع يعمل بدون إنترنت الآن - جميع الصور محفوظة';
-                
-                // تخزين النصوص في localStorage
-                localStorage.setItem('notes_data', JSON.stringify(notesData));
-                localStorage.setItem('images_ready', 'true');
-            }
-        }
-
-        // التحقق من الصور في cache
-        async function checkCachedImages() {
-            if ('caches' in window) {
-                const cache = await caches.open('anatomy-v1');
-                
+            // ========== بناء الأيقونات ==========
+            function buildIcons() {
+                iconGrid.innerHTML = '';
                 for (let i = 0; i < imageFiles.length; i++) {
-                    const response = await cache.match(imageFiles[i]);
-                    if (response) {
-                        updateProgress();
+                    const card = document.createElement('div');
+                    card.className = `icon-card ${i === 0 ? 'active' : ''}`;
+                    card.setAttribute('data-index', i);
+                    card.innerHTML = `
+                        <i class="fas fa-image"></i>
+                        <span>${i + 1}</span>
+                    `;
+                    card.onclick = () => changeImage(i);
+                    iconGrid.appendChild(card);
+                }
+            }
+
+            // ========== تغيير الصورة ==========
+            function changeImage(index) {
+                if (index < 0 || index >= imageFiles.length) return;
+                
+                currentIndex = index;
+                pinchImage.src = imageFiles[index];
+                filename.innerText = imageFiles[index];
+                notes.innerText = notesData[index];
+                
+                // تحديث الأزرار
+                document.querySelectorAll('.icon-card').forEach((btn, i) => {
+                    if (i === index) btn.classList.add('active');
+                    else btn.classList.remove('active');
+                });
+                
+                // إعادة التكبير
+                scale = 1;
+                updateZoom();
+                
+                // تحديث الرابط
+                window.location.hash = `img-${index + 1}`;
+                
+                errorMsg.style.display = 'none';
+            }
+
+            // ========== تحديث التكبير ==========
+            function updateZoom() {
+                pinchImage.style.transform = `scale(${scale})`;
+                zoomValue.innerText = scale.toFixed(1) + 'x';
+            }
+
+            // ========== نظام اللمس المتطور ==========
+            touchLayer.addEventListener('touchstart', (e) => {
+                e.preventDefault();
+                const touches = e.touches;
+                
+                if (touches.length === 2) {
+                    // بداية اللمس المزدوج للتكبير
+                    const dx = touches[0].clientX - touches[1].clientX;
+                    const dy = touches[0].clientY - touches[1].clientY;
+                    initialDistance = Math.sqrt(dx * dx + dy * dy);
+                }
+            });
+
+            touchLayer.addEventListener('touchmove', (e) => {
+                e.preventDefault();
+                const touches = e.touches;
+                
+                if (touches.length === 2) {
+                    // تكبير باللمس المزدوج
+                    const dx = touches[0].clientX - touches[1].clientX;
+                    const dy = touches[0].clientY - touches[1].clientY;
+                    const currentDistance = Math.sqrt(dx * dx + dy * dy);
+                    
+                    if (initialDistance > 0) {
+                        const delta = currentDistance / initialDistance;
+                        scale = Math.min(maxScale, Math.max(minScale, scale * delta));
+                        updateZoom();
+                        initialDistance = currentDistance;
+                    }
+                }
+            });
+
+            touchLayer.addEventListener('touchend', (e) => {
+                const touches = e.touches;
+                if (touches.length < 2) {
+                    initialDistance = 0;
+                }
+                
+                // كشف النقرة المزدوجة
+                const currentTime = new Date().getTime();
+                if (currentTime - lastTouchEnd < 300) {
+                    // نقرة مزدوجة - تكبير سريع
+                    if (scale > 1.5) {
+                        scale = 1;
                     } else {
-                        // إذا الصورة مش في cache، نحملها
-                        fetch(imageFiles[i])
-                            .then(() => updateProgress())
-                            .catch(() => {
-                                loadedImages++;
-                                updateProgress();
-                            });
+                        scale = 2.5;
+                    }
+                    updateZoom();
+                }
+                lastTouchEnd = currentTime;
+            });
+
+            // منع القوائم المنبثقة
+            touchLayer.addEventListener('contextmenu', (e) => e.preventDefault());
+
+            // ========== أزرار التحكم ==========
+            document.getElementById('zoomInBtn').onclick = () => {
+                scale = Math.min(maxScale, scale + 0.3);
+                updateZoom();
+            };
+
+            document.getElementById('zoomOutBtn').onclick = () => {
+                scale = Math.max(minScale, scale - 0.3);
+                updateZoom();
+            };
+
+            document.getElementById('zoomResetBtn').onclick = () => {
+                scale = 1;
+                updateZoom();
+            };
+
+            document.getElementById('fullscreenBtn').onclick = () => {
+                const container = document.getElementById('imageContainer');
+                if (container.requestFullscreen) {
+                    container.requestFullscreen();
+                }
+            };
+
+            // ========== أزرار الإجراءات ==========
+            document.getElementById('downloadImageBtn').onclick = () => {
+                const link = document.createElement('a');
+                link.href = imageFiles[currentIndex];
+                link.download = imageFiles[currentIndex];
+                link.click();
+            };
+
+            document.getElementById('downloadTextBtn').onclick = () => {
+                const text = notesData[currentIndex];
+                const blob = new Blob([text], { type: 'text/plain' });
+                const link = document.createElement('a');
+                link.href = URL.createObjectURL(blob);
+                link.download = `notes_${currentIndex + 1}.txt`;
+                link.click();
+            };
+
+            document.getElementById('copyLinkBtn').onclick = () => {
+                const url = window.location.href.split('#')[0] + `#img-${currentIndex + 1}`;
+                navigator.clipboard.writeText(url).then(() => {
+                    alert('✅ تم نسخ الرابط');
+                });
+            };
+
+            document.getElementById('shareBtn').onclick = () => {
+                if (navigator.share) {
+                    navigator.share({
+                        title: `صورة ${imageFiles[currentIndex]}`,
+                        text: notesData[currentIndex].substring(0, 100) + '...',
+                        url: window.location.href
+                    });
+                }
+            };
+
+            // ========== تحديث شريط التقدم ==========
+            function updateProgress() {
+                loadedImages++;
+                const percent = (loadedImages / totalImages) * 100;
+                progressFill.style.width = percent + '%';
+                loadedCountSpan.innerText = loadedImages;
+                progressPercent.innerText = Math.round(percent) + '%';
+                
+                if (loadedImages >= totalImages) {
+                    statusText.innerText = 'متاح بدون إنترنت';
+                    statusIcon.className = 'fas fa-cloud-check';
+                    footerText.innerHTML = '<i class="fas fa-crown" style="color: #c7a86b;"></i> جميع الصور مخزنة - الموقع يعمل بدون إنترنت';
+                }
+            }
+
+            // ========== التحقق من الصور في Cache ==========
+            async function checkCachedImages() {
+                if ('caches' in window) {
+                    const cache = await caches.open('anatomy-v1');
+                    
+                    for (let i = 0; i < imageFiles.length; i++) {
+                        const response = await cache.match(imageFiles[i]);
+                        if (response) {
+                            updateProgress();
+                        } else {
+                            // محاولة تحميل الصورة
+                            fetch(imageFiles[i])
+                                .then(() => updateProgress())
+                                .catch(() => {
+                                    loadedImages++;
+                                    updateProgress();
+                                });
+                        }
                     }
                 }
             }
-        }
 
-        // معالجة أخطاء الصورة
-        displayImage.onerror = function() {
-            if (!navigator.onLine) {
-                errorText.innerText = '⚠️ أنت بدون إنترنت والصورة غير مخزنة محلياً';
-                errorMsg.style.display = 'flex';
-            }
-        };
+            // ========== معالجة أخطاء الصورة ==========
+            pinchImage.onerror = function() {
+                if (!navigator.onLine) {
+                    errorText.innerText = '⚠️ الصورة غير متوفرة بدون إنترنت - يرجى الاتصال بالإنترنت لتحميلها مرة واحدة';
+                    errorMsg.style.display = 'flex';
+                }
+            };
 
-        displayImage.onload = function() {
-            errorMsg.style.display = 'none';
-        };
+            pinchImage.onload = function() {
+                errorMsg.style.display = 'none';
+            };
 
-        // أزرار التحكم
-        document.getElementById('zoomIn').onclick = () => {
-            zoom = Math.min(zoom + 0.2, 3);
-            displayImage.style.transform = `scale(${zoom})`;
-        };
-
-        document.getElementById('zoomOut').onclick = () => {
-            zoom = Math.max(zoom - 0.2, 0.5);
-            displayImage.style.transform = `scale(${zoom})`;
-        };
-
-        document.getElementById('zoomReset').onclick = () => {
-            zoom = 1;
-            displayImage.style.transform = `scale(${zoom})`;
-        };
-
-        // تحميل الصورة
-        document.getElementById('downloadImage').onclick = () => {
-            const link = document.createElement('a');
-            link.href = imageFiles[currentIndex];
-            link.download = imageFiles[currentIndex];
-            link.click();
-        };
-
-        // تحميل النص
-        document.getElementById('downloadText').onclick = () => {
-            const text = notesData[currentIndex];
-            const blob = new Blob([text], { type: 'text/plain' });
-            const link = document.createElement('a');
-            link.href = URL.createObjectURL(blob);
-            link.download = `notes_${currentIndex + 1}.txt`;
-            link.click();
-        };
-
-        // نسخ الرابط
-        document.getElementById('copyLink').onclick = () => {
-            const url = window.location.href.split('#')[0] + `#img-${currentIndex + 1}`;
-            navigator.clipboard.writeText(url).then(() => {
-                alert('✅ تم نسخ الرابط');
-            });
-        };
-
-        // معالجة الرابط
-        function handleHash() {
-            const hash = window.location.hash;
-            if (hash && hash.startsWith('#img-')) {
-                const num = parseInt(hash.replace('#img-', ''));
-                if (num >= 1 && num <= imageFiles.length) {
-                    changeImage(num - 1);
+            // ========== معالجة الرابط ==========
+            function handleHash() {
+                const hash = window.location.hash;
+                if (hash && hash.startsWith('#img-')) {
+                    const num = parseInt(hash.replace('#img-', ''));
+                    if (num >= 1 && num <= imageFiles.length) {
+                        changeImage(num - 1);
+                    }
                 }
             }
-        }
 
-        // حفظ الجلسة
-        function saveSession() {
-            localStorage.setItem('last_image', currentIndex);
-        }
-
-        // بدء التطبيق
-        function init() {
-            buildImageButtons();
-            handleHash();
-            
-            // استعادة آخر صورة
-            const lastImage = localStorage.getItem('last_image');
-            if (lastImage && !window.location.hash) {
-                changeImage(parseInt(lastImage));
+            // ========== بدء التطبيق ==========
+            function init() {
+                buildIcons();
+                handleHash();
+                
+                // استعادة آخر صورة
+                const lastImage = localStorage.getItem('last_image');
+                if (lastImage && !window.location.hash) {
+                    changeImage(parseInt(lastImage));
+                }
+                
+                // التحقق من التخزين
+                if (localStorage.getItem('images_ready') === 'true') {
+                    progressFill.style.width = '100%';
+                    loadedCountSpan.innerText = totalImages;
+                    progressPercent.innerText = '100%';
+                    statusText.innerText = 'متاح بدون إنترنت';
+                    statusIcon.className = 'fas fa-cloud-check';
+                }
+                
+                // بدء تحميل الصور
+                checkCachedImages();
+                
+                // حفظ الجلسة
+                setInterval(() => {
+                    localStorage.setItem('last_image', currentIndex);
+                }, 5000);
             }
-            
-            // التحقق من التخزين
-            if (localStorage.getItem('images_ready') === 'true') {
-                statusMessage.innerText = '✓ الموارد متاحة محلياً';
-                storageStatus.innerText = '✅ متاح بدون إنترنت';
-                progressFill.style.width = '100%';
-                loadedCountSpan.innerText = totalImages;
-            }
-            
-            // بدء تحميل الصور للتخزين
-            checkCachedImages();
-            
-            // حفظ الجلسة كل 5 ثواني
-            setInterval(saveSession, 5000);
-        }
 
-        init();
+            init();
+        })();
     </script>
 </body>
 </html>
