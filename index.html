@@ -2,8 +2,13 @@
 <html lang="ar" dir="rtl">
 <head>
     <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=5.0, user-scalable=yes">
-    <title>تشريح • منصة التعلم التفاعلية</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+    <title>تشريح • التطبيق التعليمي المتكامل</title>
+    
+    <!-- أيقونات الموقع للتثبيت -->
+    <link rel="apple-touch-icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'%3E%3Ccircle cx='50' cy='50' r='45' fill='%2316636f'/%3E%3Ctext x='50' y='70' font-size='60' text-anchor='middle' fill='white'%3E🫀%3C/text%3E%3C/svg%3E">
+    <link rel="icon" type="image/png" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'%3E%3Ccircle cx='50' cy='50' r='45' fill='%2316636f'/%3E%3Ctext x='50' y='70' font-size='60' text-anchor='middle' fill='white'%3E🫀%3C/text%3E%3C/svg%3E">
+    <meta name="theme-color" content="#16636f">
     
     <!-- Font Awesome 6 -->
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
@@ -25,7 +30,7 @@
             --card-bg: #ffffff;
             --shadow-sm: 0 4px 12px rgba(22,99,111,0.08);
             --shadow-md: 0 8px 20px rgba(22,99,111,0.12);
-            --border-radius: 28px;
+            --border-radius: 24px;
         }
 
         * {
@@ -36,7 +41,6 @@
         }
 
         html, body {
-            touch-action: manipulation;
             height: 100%;
             width: 100%;
             overflow: hidden;
@@ -62,14 +66,13 @@
             background: #1a2a30;
         }
 
-        body.dark-mode .card {
+        body.dark-mode .card,
+        body.dark-mode .search-box,
+        body.dark-mode .image-thumb,
+        body.dark-mode .quiz-container,
+        body.dark-mode .explanation-section {
             background: #1d363b;
             border-color: #3d6f6f;
-        }
-
-        body.dark-mode .search-box {
-            background: #1d3a3f;
-            border-color: #3d9b9b;
         }
 
         /* ===== حاوية التطبيق ===== */
@@ -78,68 +81,130 @@
             width: 100%;
             display: flex;
             flex-direction: column;
-            background: var(--card-bg);
+            background: var(--bg-light);
             position: relative;
             overflow: hidden;
+        }
+
+        /* ===== شريط التثبيت ===== */
+        .install-bar {
+            background: linear-gradient(145deg, var(--primary), var(--primary-dark));
+            color: white;
+            padding: 12px 20px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            font-size: 14px;
+            border-bottom: 2px solid var(--accent-light);
+        }
+
+        .install-info {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+
+        .install-info i {
+            font-size: 22px;
+            color: var(--accent-light);
+        }
+
+        .install-btn {
+            background: var(--accent);
+            border: none;
+            color: var(--primary-dark);
+            padding: 8px 20px;
+            border-radius: 40px;
+            font-weight: 700;
+            font-size: 14px;
+            cursor: pointer;
+            display: flex;
+            align-items: center;
+            gap: 8px;
         }
 
         /* ===== الشريط العلوي ===== */
         .top-nav {
             background: var(--primary);
             color: white;
-            padding: 10px 16px;
+            padding: 12px 16px;
             display: flex;
             justify-content: space-between;
             align-items: center;
             border-bottom: 2px solid var(--accent-light);
-            box-shadow: 0 2px 8px rgba(0,0,0,0.1);
         }
 
         .nav-left {
             display: flex;
             align-items: center;
-            gap: 8px;
-        }
-
-        .menu-icon {
-            font-size: 20px;
-            cursor: pointer;
-            padding: 4px;
+            gap: 10px;
         }
 
         .app-title {
-            font-size: 18px;
+            font-size: 20px;
             font-weight: 700;
         }
 
         .nav-right {
             display: flex;
             align-items: center;
-            gap: 8px;
+            gap: 10px;
         }
 
-        .status-badge {
+        .offline-badge {
             background: var(--primary-light);
-            padding: 4px 10px;
+            padding: 4px 12px;
             border-radius: 30px;
             font-size: 12px;
             display: flex;
             align-items: center;
-            gap: 4px;
+            gap: 5px;
         }
 
         .dark-mode-toggle {
-            background: transparent;
-            border: 1px solid rgba(255,255,255,0.3);
+            background: rgba(255,255,255,0.2);
+            border: none;
             color: white;
-            width: 32px;
-            height: 32px;
+            width: 36px;
+            height: 36px;
             border-radius: 50%;
             display: flex;
             align-items: center;
             justify-content: center;
             cursor: pointer;
+            font-size: 16px;
+        }
+
+        /* ===== التبويبات ===== */
+        .tabs-container {
+            display: flex;
+            gap: 8px;
+            padding: 12px 16px;
+            overflow-x: auto;
+            scrollbar-width: none;
+            background: var(--bg-light);
+        }
+
+        .tabs-container::-webkit-scrollbar {
+            display: none;
+        }
+
+        .tab {
+            background: var(--card-bg);
+            padding: 8px 20px;
+            border-radius: 40px;
+            font-weight: 600;
             font-size: 14px;
+            color: var(--primary);
+            border: 2px solid var(--primary);
+            cursor: pointer;
+            white-space: nowrap;
+            transition: 0.2s;
+        }
+
+        .tab.active {
+            background: var(--primary);
+            color: white;
         }
 
         /* ===== منطقة المحتوى ===== */
@@ -153,50 +218,35 @@
         }
 
         /* ===== قسم الإهداء ===== */
-        .dedication-section {
-            background: linear-gradient(145deg, var(--primary), var(--primary-light));
+        .dedication-card {
+            background: linear-gradient(145deg, var(--primary), var(--primary-dark));
             border-radius: 20px;
             padding: 15px;
             margin-bottom: 20px;
-            text-align: center;
             color: white;
+            text-align: center;
             border: 1px solid var(--accent-light);
-            box-shadow: var(--shadow-sm);
-        }
-
-        .dedication-title {
-            font-size: 16px;
-            font-weight: 600;
-            margin-bottom: 5px;
-            opacity: 0.9;
         }
 
         .dedication-name {
-            font-size: 20px;
-            font-weight: 800;
+            font-size: 18px;
+            font-weight: 700;
             color: var(--accent-light);
-            margin-bottom: 5px;
+            margin: 5px 0;
         }
 
         .dedication-dua {
             font-size: 13px;
-            line-height: 1.5;
             background: rgba(0,0,0,0.15);
-            padding: 10px;
+            padding: 8px;
             border-radius: 15px;
-        }
-
-        .dedication-dua i {
-            color: var(--accent-light);
-            font-size: 12px;
-            margin: 0 3px;
         }
 
         /* ===== بطاقة الترحيب ===== */
         .welcome-card {
-            background: linear-gradient(145deg, #f0f9fc, #e6f4f7);
+            background: var(--card-bg);
             border-radius: 20px;
-            padding: 18px;
+            padding: 20px;
             margin-bottom: 20px;
             text-align: center;
             border-right: 5px solid var(--primary);
@@ -204,97 +254,124 @@
         }
 
         .welcome-text {
-            font-size: 22px;
+            font-size: 24px;
             font-weight: 800;
             color: var(--primary);
-            margin-bottom: 5px;
         }
 
         .start-text {
             font-size: 18px;
-            font-weight: 700;
             color: var(--primary-dark);
-            background: rgba(255,255,255,0.7);
+            background: rgba(22,99,111,0.1);
             display: inline-block;
             padding: 5px 25px;
             border-radius: 40px;
-            margin-top: 5px;
+            margin-top: 8px;
         }
 
-        /* ===== التبويبات ===== */
-        .tabs-container {
-            display: flex;
-            gap: 6px;
-            margin-bottom: 16px;
-            overflow-x: auto;
-            padding: 4px 0;
-            scrollbar-width: none;
+        /* ===== شريط البحث المتطور ===== */
+        .search-container {
+            position: relative;
+            margin-bottom: 20px;
         }
 
-        .tabs-container::-webkit-scrollbar {
-            display: none;
-        }
-
-        .tab {
-            background: var(--card-bg);
-            padding: 6px 16px;
-            border-radius: 40px;
-            font-weight: 600;
-            font-size: 13px;
-            color: var(--primary);
-            border: 2px solid var(--primary);
-            cursor: pointer;
-            white-space: nowrap;
-            transition: 0.2s;
-        }
-
-        .tab.active {
-            background: var(--primary);
-            color: white;
-        }
-
-        /* ===== شريط البحث ===== */
         .search-box {
             background: var(--card-bg);
-            border-radius: 40px;
-            padding: 4px 16px;
+            border-radius: 50px;
+            padding: 5px 20px;
             display: flex;
             align-items: center;
-            gap: 8px;
-            margin-bottom: 16px;
+            gap: 10px;
             border: 2px solid var(--primary);
             box-shadow: var(--shadow-sm);
         }
 
         .search-box i {
             color: var(--primary);
-            font-size: 15px;
+            font-size: 16px;
         }
 
         .search-box input {
             flex: 1;
             border: none;
             outline: none;
-            padding: 10px 0;
-            font-size: 14px;
-            font-family: 'Tajawal', sans-serif;
+            padding: 12px 0;
+            font-size: 15px;
             background: transparent;
             color: var(--text-dark);
         }
 
+        .search-results {
+            position: absolute;
+            top: 100%;
+            left: 0;
+            right: 0;
+            background: var(--card-bg);
+            border-radius: 20px;
+            margin-top: 5px;
+            padding: 10px;
+            box-shadow: var(--shadow-md);
+            border: 2px solid var(--primary);
+            z-index: 100;
+            max-height: 300px;
+            overflow-y: auto;
+            display: none;
+        }
+
+        .search-results.active {
+            display: block;
+        }
+
+        .search-result-item {
+            padding: 12px 15px;
+            border-bottom: 1px solid rgba(22,99,111,0.1);
+            cursor: pointer;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+
+        .search-result-item:hover {
+            background: rgba(22,99,111,0.05);
+        }
+
+        .result-icon {
+            width: 40px;
+            height: 40px;
+            background: var(--primary);
+            border-radius: 12px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: white;
+            font-size: 20px;
+        }
+
+        .result-info {
+            flex: 1;
+        }
+
+        .result-title {
+            font-weight: 700;
+            color: var(--primary);
+        }
+
+        .result-match {
+            font-size: 12px;
+            color: var(--text-light);
+        }
+
         /* ===== شبكة الصور ===== */
         .images-grid {
-            display: flex;
-            flex-wrap: wrap;
-            gap: 10px;
-            justify-content: center;
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(100px, 1fr));
+            gap: 12px;
             margin: 20px 0;
         }
 
-        .image-thumb {
-            width: 85px;
+        .image-card {
             background: var(--card-bg);
-            border-radius: 18px;
+            border-radius: 16px;
             overflow: hidden;
             cursor: pointer;
             box-shadow: var(--shadow-sm);
@@ -302,25 +379,24 @@
             transition: 0.2s;
         }
 
-        .image-thumb.active {
+        .image-card:hover {
+            transform: translateY(-3px);
             border-color: var(--primary);
-            transform: scale(1.02);
         }
 
-        .thumb-img {
-            width: 100%;
-            height: 70px;
-            background: var(--primary-dark);
+        .image-icon {
+            height: 90px;
+            background: linear-gradient(145deg, var(--primary), var(--primary-dark));
             display: flex;
             align-items: center;
             justify-content: center;
+            font-size: 40px;
             color: white;
-            font-size: 28px;
         }
 
-        .thumb-number {
+        .image-label {
+            padding: 8px;
             text-align: center;
-            padding: 5px;
             font-weight: 700;
             color: var(--primary);
             background: rgba(22,99,111,0.05);
@@ -335,7 +411,6 @@
             border: 4px solid var(--accent-light);
             position: relative;
             margin-bottom: 15px;
-            touch-action: none;
         }
 
         #mainImage {
@@ -344,9 +419,8 @@
             object-fit: contain;
             background: var(--primary-dark);
             display: block;
-            transition: transform 0.2s ease-out;
+            transition: transform 0.2s;
             transform-origin: center center;
-            will-change: transform;
         }
 
         .touch-overlay {
@@ -357,109 +431,56 @@
             bottom: 0;
             z-index: 10;
             background: transparent;
-            touch-action: none;
         }
 
-        .zoom-indicator {
+        .zoom-level {
             position: absolute;
             top: 10px;
             right: 10px;
             background: rgba(0,0,0,0.6);
             color: white;
-            padding: 3px 10px;
+            padding: 4px 12px;
             border-radius: 30px;
             font-size: 12px;
             z-index: 15;
         }
 
-        /* ===== أزرار التحكم تحت الصورة ===== */
-        .image-controls {
+        /* ===== أزرار التحكم ===== */
+        .control-panel {
             display: flex;
             gap: 10px;
             justify-content: center;
-            margin: 10px 0 20px;
+            margin: 15px 0;
         }
 
-        .control-btn {
-            background: var(--primary);
-            border: none;
-            color: white;
-            width: 44px;
-            height: 44px;
+        .ctrl-btn {
+            width: 48px;
+            height: 48px;
             border-radius: 50%;
+            background: var(--primary);
+            color: white;
+            border: none;
             font-size: 18px;
             cursor: pointer;
             display: flex;
             align-items: center;
             justify-content: center;
             box-shadow: var(--shadow-md);
-            transition: 0.2s;
         }
 
-        .control-btn:active {
-            transform: scale(0.9);
-            background: var(--primary-dark);
-        }
-
-        .control-btn.reset {
+        .ctrl-btn.reset {
             background: var(--accent);
             color: var(--primary-dark);
         }
 
-        .fullscreen-btn {
+        .ctrl-btn.fullscreen {
             background: var(--primary-light);
         }
 
-        /* ===== شرح الصورة ===== */
-        .explanation-section {
-            background: var(--card-bg);
-            border-radius: 22px;
-            padding: 18px;
-            margin: 15px 0;
-            border: 1px solid #c0e6dd;
-        }
-
-        .section-title {
-            font-size: 18px;
-            font-weight: 700;
-            color: var(--primary);
-            margin-bottom: 15px;
-            display: flex;
-            align-items: center;
-            gap: 8px;
-        }
-
-        .explanation-content {
-            line-height: 1.8;
-            font-size: 14px;
-            white-space: pre-line;
-        }
-
-        .explanation-content h2 {
-            font-size: 18px;
-            color: var(--primary);
-            margin: 15px 0 8px;
-        }
-
-        .explanation-content h3 {
-            font-size: 16px;
-            color: var(--primary-light);
-            margin: 12px 0 6px;
-        }
-
-        .explanation-content ul {
-            padding-right: 20px;
-            margin: 8px 0;
-        }
-
-        .explanation-content li {
-            margin: 4px 0;
-        }
-
         /* ===== أزرار الإجراءات ===== */
-        .action-buttons {
+        .action-bar {
             display: flex;
-            gap: 8px;
+            gap: 10px;
             margin: 15px 0;
             flex-wrap: wrap;
         }
@@ -467,9 +488,9 @@
         .action-btn {
             flex: 1;
             min-width: 80px;
-            background: white;
-            border: 1.5px solid var(--primary);
-            padding: 10px 5px;
+            background: var(--card-bg);
+            border: 2px solid var(--primary);
+            padding: 12px;
             border-radius: 40px;
             font-weight: 600;
             color: var(--primary);
@@ -477,17 +498,11 @@
             display: flex;
             align-items: center;
             justify-content: center;
-            gap: 5px;
-            font-size: 13px;
-            transition: 0.2s;
+            gap: 8px;
+            font-size: 14px;
         }
 
-        .action-btn:active {
-            background: var(--primary);
-            color: white;
-        }
-
-        .action-btn.favorite-active {
+        .action-btn.favorite {
             background: #ff6b6b;
             border-color: #ff3b3b;
             color: white;
@@ -503,11 +518,11 @@
         .nav-btn {
             flex: 1;
             background: var(--primary);
-            border: none;
             color: white;
-            padding: 12px;
+            border: none;
+            padding: 14px;
             border-radius: 40px;
-            font-weight: 600;
+            font-weight: 700;
             cursor: pointer;
             display: flex;
             align-items: center;
@@ -520,16 +535,62 @@
             pointer-events: none;
         }
 
-        .nav-btn.secondary {
+        .nav-btn.next {
             background: var(--accent);
             color: var(--primary-dark);
         }
 
-        /* ===== بطاقة الاختبار (مودل ستايل) ===== */
+        /* ===== شرح الصورة ===== */
+        .explanation-section {
+            background: var(--card-bg);
+            border-radius: 22px;
+            padding: 20px;
+            margin: 20px 0;
+            border: 1px solid #c0e6dd;
+        }
+
+        .section-title {
+            font-size: 20px;
+            font-weight: 700;
+            color: var(--primary);
+            margin-bottom: 15px;
+            display: flex;
+            align-items: center;
+            gap: 8px;
+        }
+
+        .explanation-content {
+            line-height: 1.8;
+            font-size: 15px;
+            white-space: pre-line;
+        }
+
+        .explanation-content h2 {
+            font-size: 20px;
+            color: var(--primary);
+            margin: 20px 0 10px;
+        }
+
+        .explanation-content h3 {
+            font-size: 18px;
+            color: var(--primary-light);
+            margin: 15px 0 8px;
+        }
+
+        .explanation-content ul {
+            padding-right: 25px;
+            margin: 10px 0;
+        }
+
+        .explanation-content li {
+            margin: 5px 0;
+        }
+
+        /* ===== اختبارات مودل ===== */
         .quiz-container {
             background: var(--card-bg);
             border-radius: 22px;
-            padding: 18px;
+            padding: 20px;
             margin-bottom: 15px;
             border: 2px solid var(--primary);
         }
@@ -538,164 +599,37 @@
             display: flex;
             justify-content: space-between;
             align-items: center;
-            margin-bottom: 15px;
+            margin-bottom: 20px;
             padding-bottom: 10px;
             border-bottom: 2px dashed var(--accent-light);
         }
 
         .quiz-title {
-            font-size: 18px;
+            font-size: 20px;
             font-weight: 700;
             color: var(--primary);
         }
 
-        .quiz-score {
+        .quiz-score-badge {
             background: var(--primary);
             color: white;
-            padding: 5px 15px;
-            border-radius: 40px;
-            font-weight: 600;
-            font-size: 14px;
-        }
-
-        .quiz-question {
-            font-size: 16px;
-            font-weight: 700;
-            margin-bottom: 15px;
-            padding: 10px;
-            background: rgba(22,99,111,0.05);
-            border-radius: 15px;
-        }
-
-        .quiz-options {
-            display: flex;
-            flex-direction: column;
-            gap: 10px;
-            margin-bottom: 15px;
-        }
-
-        .quiz-option {
-            background: #f0f7fa;
-            padding: 14px 18px;
-            border-radius: 18px;
-            cursor: pointer;
-            border: 2px solid transparent;
-            transition: 0.2s;
-            font-weight: 500;
-            position: relative;
-        }
-
-        .quiz-option:hover {
-            border-color: var(--primary);
-            background: #e1f0ec;
-        }
-
-        .quiz-option.correct {
-            background: #4caf50;
-            color: white;
-            border-color: #2e7d32;
-        }
-
-        .quiz-option.correct::after {
-            content: '✓';
-            position: absolute;
-            left: 15px;
-            top: 50%;
-            transform: translateY(-50%);
-            font-size: 18px;
-            font-weight: 700;
-        }
-
-        .quiz-option.wrong {
-            background: #ff6b6b;
-            color: white;
-            border-color: #d32f2f;
-        }
-
-        .quiz-option.wrong::after {
-            content: '✗';
-            position: absolute;
-            left: 15px;
-            top: 50%;
-            transform: translateY(-50%);
-            font-size: 18px;
-            font-weight: 700;
-        }
-
-        .quiz-feedback {
-            margin: 15px 0 10px;
-            padding: 12px;
-            border-radius: 15px;
-            background: #f0f7fa;
-            font-size: 14px;
-        }
-
-        .quiz-explanation {
-            font-size: 14px;
-            color: var(--primary-dark);
-            margin-top: 8px;
-            padding-top: 8px;
-            border-top: 1px solid #c0e6dd;
-        }
-
-        .quiz-reset {
-            background: var(--primary);
-            color: white;
-            border: none;
-            padding: 14px;
+            padding: 6px 18px;
             border-radius: 40px;
             font-weight: 700;
-            cursor: pointer;
-            width: 100%;
-            margin-top: 15px;
-            font-size: 15px;
         }
 
-        /* ===== بطاقة الإحصائيات ===== */
-        .stats-grid {
-            display: grid;
-            grid-template-columns: repeat(3, 1fr);
-            gap: 10px;
+        .quiz-progress {
             margin-bottom: 20px;
         }
 
-        .stat-card {
-            background: var(--card-bg);
-            border-radius: 18px;
-            padding: 15px;
-            text-align: center;
-            box-shadow: var(--shadow-sm);
-            border: 1px solid #c0e6dd;
-        }
-
-        .stat-number {
-            font-size: 24px;
-            font-weight: 800;
-            color: var(--primary);
-        }
-
-        .stat-label {
-            font-size: 12px;
-            color: var(--text-light);
-            margin-top: 4px;
-        }
-
-        .progress-card {
-            background: var(--card-bg);
-            border-radius: 18px;
-            padding: 15px;
-            margin-bottom: 10px;
-        }
-
-        .progress-label {
+        .progress-text {
             display: flex;
             justify-content: space-between;
             margin-bottom: 5px;
-            font-size: 13px;
         }
 
         .progress-bar {
-            height: 8px;
+            height: 10px;
             background: #e1f0ec;
             border-radius: 20px;
             overflow: hidden;
@@ -708,15 +642,112 @@
             transition: width 0.3s;
         }
 
+        .quiz-question {
+            font-size: 17px;
+            font-weight: 700;
+            margin: 20px 0 15px;
+            padding: 15px;
+            background: rgba(22,99,111,0.05);
+            border-radius: 15px;
+        }
+
+        .quiz-options {
+            display: flex;
+            flex-direction: column;
+            gap: 10px;
+        }
+
+        .quiz-option {
+            background: #f0f7fa;
+            padding: 15px 20px;
+            border-radius: 18px;
+            cursor: pointer;
+            border: 2px solid transparent;
+            transition: 0.2s;
+            font-weight: 500;
+        }
+
+        .quiz-option.correct {
+            background: #4caf50;
+            color: white;
+            border-color: #2e7d32;
+        }
+
+        .quiz-option.wrong {
+            background: #ff6b6b;
+            color: white;
+            border-color: #d32f2f;
+        }
+
+        .quiz-feedback {
+            margin: 15px 0;
+            padding: 15px;
+            border-radius: 15px;
+            background: #f0f7fa;
+        }
+
+        .quiz-explanation {
+            margin-top: 10px;
+            padding-top: 10px;
+            border-top: 1px solid #c0e6dd;
+            color: var(--primary-dark);
+        }
+
+        .quiz-reset-btn {
+            background: var(--primary);
+            color: white;
+            border: none;
+            padding: 16px;
+            border-radius: 40px;
+            font-weight: 700;
+            font-size: 16px;
+            cursor: pointer;
+            width: 100%;
+            margin-top: 20px;
+        }
+
+        /* ===== الإحصائيات ===== */
+        .stats-grid {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 12px;
+            margin-bottom: 20px;
+        }
+
+        .stat-card {
+            background: var(--card-bg);
+            border-radius: 18px;
+            padding: 15px;
+            text-align: center;
+            border: 1px solid #c0e6dd;
+        }
+
+        .stat-number {
+            font-size: 28px;
+            font-weight: 800;
+            color: var(--primary);
+        }
+
+        .stat-label {
+            font-size: 13px;
+            color: var(--text-light);
+        }
+
+        .progress-card {
+            background: var(--card-bg);
+            border-radius: 18px;
+            padding: 15px;
+            margin-bottom: 10px;
+        }
+
         /* ===== الشريط السفلي ===== */
         .bottom-nav {
             background: var(--primary);
             display: flex;
             justify-content: space-around;
             align-items: center;
-            padding: 6px 8px;
+            padding: 8px 12px;
             border-top: 2px solid var(--accent-light);
-            color: white;
         }
 
         .nav-item {
@@ -725,18 +756,17 @@
             align-items: center;
             gap: 2px;
             cursor: pointer;
-            padding: 5px 12px;
+            padding: 5px 15px;
             border-radius: 30px;
-            transition: 0.2s;
             color: #b0d8d8;
         }
 
         .nav-item i {
-            font-size: 20px;
+            font-size: 22px;
         }
 
         .nav-item span {
-            font-size: 11px;
+            font-size: 12px;
             font-weight: 600;
         }
 
@@ -745,28 +775,55 @@
             background: rgba(255,255,255,0.1);
         }
 
-        /* ===== كلاس hidden ===== */
-        .hidden {
-            display: none !important;
+        /* ===== زر التثبيت ===== */
+        .pwa-install-btn {
+            position: fixed;
+            bottom: 80px;
+            right: 15px;
+            background: var(--primary);
+            color: white;
+            border: none;
+            width: 56px;
+            height: 56px;
+            border-radius: 50%;
+            font-size: 24px;
+            cursor: pointer;
+            box-shadow: var(--shadow-md);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            z-index: 1000;
+            border: 2px solid var(--accent-light);
         }
     </style>
 </head>
 <body>
     <div class="app-container">
+        <!-- شريط التثبيت العلوي -->
+        <div class="install-bar" id="installBar" style="display: none;">
+            <div class="install-info">
+                <i class="fas fa-download"></i>
+                <span>ثبّت التطبيق على جهازك</span>
+            </div>
+            <button class="install-btn" id="installButton">
+                <i class="fas fa-arrow-down"></i> تثبيت
+            </button>
+        </div>
+
         <!-- الشريط العلوي -->
         <div class="top-nav">
             <div class="nav-left">
-                <i class="fas fa-bars menu-icon"></i>
+                <i class="fas fa-heartbeat" style="font-size: 24px; color: var(--accent-light);"></i>
                 <span class="app-title">تشريح</span>
             </div>
             <div class="nav-right">
-                <div class="status-badge" id="offlineStatus">
-                    <i class="fas fa-cloud" id="statusIcon"></i>
-                    <span id="statusText">جاهز</span>
+                <div class="offline-badge">
+                    <i class="fas fa-cloud-check" id="statusIcon"></i>
+                    <span id="statusText">متاح</span>
                 </div>
-                <div class="dark-mode-toggle" id="darkModeToggle">
+                <button class="dark-mode-toggle" id="darkModeToggle">
                     <i class="fas fa-moon"></i>
-                </div>
+                </button>
             </div>
         </div>
 
@@ -774,7 +831,7 @@
         <div class="tabs-container" id="topTabs">
             <div class="tab active" data-tab="home">الرئيسية</div>
             <div class="tab" data-tab="images">الصور</div>
-            <div class="tab" data-tab="quizzes">اختبارات مودل</div>
+            <div class="tab" data-tab="quizzes">الاختبارات</div>
             <div class="tab" data-tab="stats">إحصائيات</div>
             <div class="tab" data-tab="favorites">المفضلة</div>
         </div>
@@ -792,374 +849,394 @@
         </div>
     </div>
 
+    <!-- زر التثبيت العائم -->
+    <button class="pwa-install-btn" id="pwaInstallBtn" style="display: none;">
+        <i class="fas fa-download"></i>
+    </button>
+
     <script>
         (function() {
-            // ===== بيانات الصور والشروحات الكاملة =====
+            // ===== الشروحات الكاملة للصور التسعة =====
             const imageFiles = [
                 '1.jpg', '2.jpg', '3.jpg', '4.jpg', '5.jpg',
                 '6.jpg', '7.jpg', '8.jpg', '9.jpg'
             ];
 
-            // الشروحات المفصلة الكاملة
+            // شرح الصورة 1: مقدمة في التشريح
+            const explanation1 = `# الفصل الأول: مقدمة في تشريح ووظائف الأعضاء البشري
+
+## 1. علم التشريح (Anatomy)
+هو العلم الذي يدرس بنية الجسم والعلاقات بين أجزائه المختلفة.
+
+### أنواع التشريح:
+• التشريح العياني (Gross anatomy): دراسة التراكيب التي يمكن رؤيتها بالعين المجردة
+• التشريح المجهري (Microscopic anatomy): دراسة التراكيب الدقيقة تحت المجهر
+
+## 2. علم وظائف الأعضاء (Physiology)
+هو العلم الذي يدرس كيفية عمل أجزاء الجسم ووظائفها الحيوية.
+
+## 3. الأنسجة (Tissues)
+النسيج هو مجموعة من الخلايا المتشابهة التي تعمل معاً:
+
+• النسيج الطلائي (Epithelial tissue): يغطي أسطح الجسم ويبطن التجاويف
+• النسيج الضام (Connective tissue): يدعم ويربط أجزاء الجسم
+• النسيج العضلي (Muscle tissue): مسؤول عن الحركة
+• النسيج العصبي (Nerve tissue): ينقل الإشارات العصبية
+
+## 4. مستويات التنظيم الهيكلي
+1. المستوى الكيميائي: الذرات → الجزيئات (H₂O, CO₂)
+2. المستوى الخلوي: الخلايا (نواة - ميتوكوندريا)
+3. المستوى النسيجي: الأنسجة
+4. المستوى العضوي: الأعضاء (القلب، المعدة)
+5. مستوى الجهاز: الأجهزة (الجهاز التنفسي)
+6. مستوى الكائن الحي: الإنسان ككل`;
+
+            // شرح الصورة 2: المصطلحات الاتجاهية
+            const explanation2 = `# المصطلحات الاتجاهية في التشريح
+
+## أولاً: المصطلحات الأساسية
+
+### 1. العلوي والسفلي
+• العلوي (Superior): نحو الرأس - مثال: الرأس علوي بالنسبة للبطن
+• السفلي (Inferior): بعيداً عن الرأس - مثال: السرة سفلية بالنسبة للذقن
+
+### 2. الأمامي والخلفي
+• الأمامي (Anterior): نحو الأمام - مثال: عظمة القص أمامية للعمود الفقري
+• الخلفي (Posterior): نحو الخلف - مثال: القلب خلفي لعظمة القص
+
+### 3. الإنسي والوحشي
+• الإنسي (Medial): نحو خط منتصف الجسم - مثال: القلب إنسي للذراع
+• الوحشي (Lateral): بعيداً عن خط المنتصف - مثال: الذراعان وحشيان للصدر
+
+### 4. الداني والقاصي
+• الداني (Proximal): أقرب لنقطة الارتباط - مثال: الكوع داني للمعصم
+• القاصي (Distal): أبعد عن نقطة الارتباط - مثال: الركبة قاصية للفخذ
+
+### 5. السطحي والعميق
+• السطحي (Superficial): نحو سطح الجسم - مثال: الجلد سطحي للعضلات
+• العميق (Deep): بعيداً عن السطح - مثال: العظام عميقة للجلد
+
+## الوضعية التشريحية (Anatomical Position)
+الوضعية القياسية: الوقوف منتصباً، الوجه للأمام، راحة اليد للأمام`;
+
+            // شرح الصورة 3: مناطق الجسم
+            const explanation3 = `# مناطق الجسم
+
+## أولاً: الرأس (Head)
+• المنطقة القحفية (Cranial): الجمجمة
+• المنطقة الوجهية (Facial): الوجه
+
+## ثانياً: الرقبة (Neck)
+المنطقة العنقية (Cervical): تدعم الرأس وتسمح بحركته
+
+## ثالثاً: الجذع (Trunk)
+• المنطقة الصدرية (Thoracic): الصدر
+• المنطقة البطنية (Abdominal): البطن
+• المنطقة الحوضية (Pelvic): الحوض
+• المنطقة الفقارية (Vertebral): طول الظهر
+
+## رابعاً: الطرف العلوي (Upper Limb)
+• الكتف (Shoulder)
+• العضد (Arm)
+• الساعد (Forearm)
+• اليد (Hand)
+
+## خامساً: الطرف السفلي (Lower Limb)
+• الفخذ (Thigh)
+• الساق (Leg)
+• القدم (Foot)`;
+
+            // شرح الصورة 4: مستويات التنظيم
+            const explanation4 = `# مستويات التنظيم في جسم الإنسان
+
+## المستوى 1: المستوى الكيميائي
+الذرات تتحد لتكون جزيئات:
+• الماء H₂O
+• ثاني أكسيد الكربون CO₂
+• الأكسجين O₂
+• الجلوكوز C₆H₁₂O₆
+
+## المستوى 2: المستوى الخلوي
+الخلية هي وحدة الحياة الأساسية:
+• النواة (Nucleus): تحتوي على المادة الوراثية DNA
+• الميتوكوندريا (Mitochondria): تنتج الطاقة ATP
+• الغشاء الخلوي (Cell membrane): يتحكم بالدخول والخروج
+
+## المستوى 3: المستوى النسيجي
+أربعة أنواع رئيسية من الأنسجة:
+1. النسيج الطلائي (Epithelial)
+2. النسيج الضام (Connective)
+3. النسيج العضلي (Muscle)
+4. النسيج العصبي (Nervous)
+
+## المستوى 4: المستوى العضوي
+أعضاء تتكون من عدة أنسجة:
+• القلب (Heart)
+• الكبد (Liver)
+• المعدة (Stomach)
+
+## المستوى 5: مستوى الجهاز
+أعضاء تعمل معاً:
+• الجهاز القلبي الوعائي
+• الجهاز التنفسي
+• الجهاز الهضمي
+
+## المستوى 6: مستوى الكائن الحي
+جميع الأجهزة تعمل معاً`;
+
+            // شرح الصورة 5: مناطق البطن
+            const explanation5 = `# مناطق البطن ومستويات الجسم
+
+## أولاً: المناطق البطنية التسع
+1. منطقة تحت الضلع الأيمن (Right hypochondriac)
+2. منطقة فوق المعدة (Epigastric)
+3. منطقة تحت الضلع الأيسر (Left hypochondriac)
+4. المنطقة القطنية اليمنى (Right lumbar)
+5. منطقة السرة (Umbilical)
+6. المنطقة القطنية اليسرى (Left lumbar)
+7. المنطقة الحرقفية اليمنى (Right iliac)
+8. منطقة فوق العانة (Hypogastric)
+9. المنطقة الحرقفية اليسرى (Left iliac)
+
+## ثانياً: الأرباع البطنية الأربعة
+• الربع العلوي الأيمن (RUQ): الكبد، المرارة
+• الربع العلوي الأيسر (LUQ): المعدة، الطحال
+• الربع السفلي الأيمن (RLQ): الزائدة الدودية
+• الربع السفلي الأيسر (LLQ): الأمعاء
+
+## ثالثاً: مستويات الجسم
+• المستوى السهمي (Sagittal): يقسم الجسم إلى يمين ويسار
+• المستوى الإكليلي (Frontal): يقسم إلى أمام وخلف
+• المستوى المستعرض (Transverse): يقسم إلى علوي وسفلي`;
+
+            // شرح الصورة 6: تجاويف الجسم
+            const explanation6 = `# تجاويف الجسم والاتزان الداخلي
+
+## أولاً: التجويف الصدري (Thoracic Cavity)
+يحتوي على القلب والرئتين:
+• المنصف (Mediastinum): يحتوي على القلب والقصبة الهوائية
+• التجويف الجنبي (Pleural cavity): يحيط بالرئتين
+• التجويف التاموري (Pericardial cavity): يحيط بالقلب
+
+## ثانياً: التجويف البطني الحوضي (Abdominopelvic Cavity)
+• التجويف البطني (Abdominal): المعدة، الكبد، الأمعاء
+• التجويف الحوضي (Pelvic): المثانة، الأعضاء التناسلية
+
+## ثالثاً: الاتزان الداخلي (Homeostasis)
+هو قدرة الجسم على الحفاظ على بيئة داخلية مستقرة.
+
+### مكونات نظام الاتزان:
+1. المستقبل (Receptor): يكتشف التغيير
+2. مركز التحكم (Control Center): يعالج المعلومات
+3. المنفذ (Effector): يستجيب للتغيير`;
+
+            // شرح الصورة 7: هرمية التجاويف
+            const explanation7 = `# هرمية تجاويف الجسم
+
+## أولاً: التجويف الظهراني (Dorsal Cavity)
+• التجويف القحفي (Cranial): يحتوي على الدماغ
+• القناة الفقرية (Vertebral): تحتوي على النخاع الشوكي
+
+## ثانياً: التجويف البطني (Ventral Cavity)
+
+### أ. التجويف الصدري (Thoracic):
+• تجاويف جنبية: حول الرئتين
+• تجويف تاموري: حول القلب
+• المنصف: بين الرئتين
+
+### ب. التجويف البطني الحوضي (Abdominopelvic):
+• التجويف البطني: أعضاء الجهاز الهضمي
+• التجويف الحوضي: المثانة والأعضاء التناسلية
+
+## الحجاب الحاجز (Diaphragm)
+يفصل بين التجويف الصدري والبطن
+
+## جدول ملخص التجاويف
+| التجويف | المحتويات |
+|---------|------------|
+| قحفي | الدماغ |
+| فقري | النخاع الشوكي |
+| صدري | القلب والرئتين |
+| بطني | أعضاء هضمية |
+| حوضي | مثانة وأعضاء تناسلية |`;
+
+            // شرح الصورة 8: التغذية الراجعة السلبية
+            const explanation8 = `# التغذية الراجعة السلبية
+
+## تعريف
+آلية تعاكس التغيير في الجسم لتعيده إلى وضعه الطبيعي.
+
+## أولاً: تنظيم سكر الدم
+
+### عند ارتفاع السكر:
+1. خلايا بيتا في البنكرياس تفرز الأنسولين
+2. الأنسولين يحفز الخلايا لامتصاص السكر
+3. الكبد يخزن السكر الزائد كجليكوجين
+4. ينخفض مستوى السكر في الدم
+
+### عند انخفاض السكر:
+1. خلايا ألفا في البنكرياس تفرز الجلوكاجون
+2. الجلوكاجون يحفز الكبد لتحويل الجليكوجين إلى سكر
+3. يرتفع مستوى السكر في الدم
+
+## ثانياً: تنظيم درجة حرارة الجسم
+
+### عند ارتفاع الحرارة:
+• التعرق (Sweating)
+• توسع الأوعية الدموية
+• فقدان الحرارة
+
+### عند انخفاض الحرارة:
+• الارتجاف (Shivering)
+• انقباض الأوعية الدموية
+• إنتاج الحرارة`;
+
+            // شرح الصورة 9: التغذية الراجعة الإيجابية
+            const explanation9 = `# التغذية الراجعة الإيجابية
+
+## تعريف
+آلية تضخم التغيير في الجسم لإتمام عملية معينة.
+
+## مثال: الولادة (Childbirth)
+
+### مراحل العملية:
+1. رأس الجنين يضغط على عنق الرحم
+2. نبضات عصبية ترسل إلى الدماغ
+3. الدماغ يحفز الغدة النخامية
+4. الغدة النخامية تفرز هرمون الأوكسيتوسين
+5. الأوكسيتوسين يحفز انقباضات الرحم
+6. الانقباضات تدفع الجنين بقوة أكبر
+7. تستمر الدورة حتى الولادة
+
+## أمثلة أخرى:
+• تجلط الدم (Blood clotting)
+• الحمى (Fever)
+• الانقباضات أثناء الولادة
+
+## مقارنة بين النوعين:
+
+| التغذية الراجعة السلبية | التغذية الراجعة الإيجابية |
+|-------------------------|---------------------------|
+| تعاكس التغيير | تضخم التغيير |
+| تحافظ على الاتزان | تؤدي إلى إتمام عملية |
+| مثال: تنظيم الحرارة | مثال: الولادة |`;
+
             const explanations = [
-                `# CHAPTER ONE: INTRODUCTION TO HUMAN ANATOMY AND PHYSIOLOGY
-الفصل الأول: مقدمة في تشريح ووظائف الأعضاء البشري
-
-## Anatomy | علم التشريح
-Anatomy is the study of body structure. يركز هذا العلم على دراسة بنية الجسم والعلاقات بين أجزائه المختلفة.
-
-## Physiology | علم وظائف الأعضاء
-Physiology is the study of body function. يركز على دراسة كيفية عمل أجزاء الجسم.
-
-## The study of anatomy | دراسة التشريح
-• Gross anatomy (التشريح العياني): دراسة تراكيب الجسم بالعين المجردة
-• Microscopic anatomy (التشريح المجهري): دراسة التراكيب الدقيقة
-
-## TISSUE | الأنسجة
-• Epithelial tissue / نسيج طلائي: يغطي أسطح الجسم
-• Connective tissue / نسيج ضام: يدعم ويربط الأجزاء
-• Muscle tissue / نسيج عضلي: مسؤول عن الحركة
-• Nerve tissue / نسيج عصبي: ينقل الإشارات
-
-## LEVEL OF STRUCTURAL ORGANIZATION | مستويات التنظيم
-1. Chemical level: Atoms → Molecules (H₂O, CO₂)
-2. Cellular level: Cells (Nucleus, Mitochondria)
-3. Tissue level: Tissues
-4. Organ level: Organs (Stomach, Heart)
-5. System level: Systems (Respiratory System)
-6. Organism level: Human body`,
-
-                `# ANATOMICAL DIRECTIONAL TERMS | المصطلحات الاتجاهية
-
-## Superior (cranial) | العلوي (القحفي)
-Toward the head end. مثال: الرأس علوي بالنسبة للبطن
-
-## Inferior (caudal) | السفلي (الذيلي)
-Away from the head. مثال: السرة سفلية بالنسبة للذقن
-
-## Anterior (ventral) | الأمامي (البطني)
-Toward the front. مثال: عظمة القص أمامية للعمود الفقري
-
-## Posterior (dorsal) | الخلفي (الظهري)
-Toward the back. مثال: القلب خلفي لعظمة القص
-
-## Medial | الإنسي
-Toward the midline. مثال: القلب إنسي للذراع
-
-## Lateral | الوحشي
-Away from the midline. مثال: الذراعان وحشيان للصدر
-
-## Proximal | الداني
-Closer to attachment. مثال: الكوع داني للمعصم
-
-## Distal | القاصي
-Farther from attachment. مثال: الركبة قاصية للفخذ
-
-## Superficial | السطحي
-Toward the surface. مثال: الجلد سطحي للعضلات
-
-## Deep | العميق
-Away from the surface. مثال: العظام عميقة للجلد`,
-
-                `# BODY REGIONS | مناطق الجسم
-
-## Head | الرأس
-• Cranial region (المنطقة القحفية): الجمجمة
-• Facial region (المنطقة الوجهية): الوجه
-
-## Neck | الرقبة
-Cervical region (المنطقة العنقية)
-
-## Trunk | الجذع
-• Thoracic region (الصدر)
-• Abdominal region (البطن)
-• Pelvic region (الحوض)
-• Vertebral region (الظهر)
-
-## Upper Limb | الطرف العلوي
-• Shoulder (كتف)
-• Arm (عضد)
-• Forearm (ساعد)
-• Hand (يد)
-
-## Lower Limb | الطرف السفلي
-• Thigh (فخذ)
-• Leg (ساق)
-• Foot (قدم)`,
-
-                `# LEVELS OF ORGANIZATION | مستويات التنظيم
-
-## 1. Chemical level | المستوى الكيميائي
-Atoms combine to form molecules. تتحد الذرات لتكوين الجزيئات.
-مثال: H₂O, CO₂, O₂, Glucose
-
-## 2. Cellular level | المستوى الخلوي
-Cells are the basic unit of life. الخلايا هي الوحدة الأساسية للحياة.
-• Nucleus (نواة): تحتوي على DNA
-• Mitochondria (ميتوكوندريا): تنتج الطاقة
-• Cell membrane (غشاء خلوي): يتحكم بالدخول والخروج
-
-## 3. Tissue level | المستوى النسيجي
-Groups of similar cells. مجموعات من الخلايا المتشابهة.
-• Epithelial tissue (طلائي)
-• Connective tissue (ضام)
-• Muscle tissue (عضلي)
-• Nervous tissue (عصبي)
-
-## 4. Organ level | المستوى العضوي
-Different tissues work together. أنسجة مختلفة تعمل معاً.
-مثال: Heart (قلب), Liver (كبد), Stomach (معدة)
-
-## 5. System level | مستوى الجهاز
-Organs work together. أعضاء تعمل معاً.
-مثال: Cardiovascular system (جهاز دوري), Respiratory system (جهاز تنفسي)
-
-## 6. Organism level | مستوى الكائن الحي
-All systems working together. جميع الأجهزة تعمل معاً.`,
-
-                `# ABDOMINAL REGIONS | المناطق البطنية
-
-## Nine Regions | تسع مناطق
-1. Right hypochondriac (تحت الضلع الأيمن)
-2. Epigastric (فوق المعدة)
-3. Left hypochondriac (تحت الضلع الأيسر)
-4. Right lumbar (قطني أيمن)
-5. Umbilical (سري)
-6. Left lumbar (قطني أيسر)
-7. Right iliac (حرقفي أيمن)
-8. Hypogastric (فوق العانة)
-9. Left iliac (حرقفي أيسر)
-
-## Four Quadrants | أربعة أرباع
-• Right Upper Quadrant (RUQ): الكبد، المرارة
-• Left Upper Quadrant (LUQ): المعدة، الطحال
-• Right Lower Quadrant (RLQ): الزائدة الدودية
-• Left Lower Quadrant (LLQ): الأمعاء
-
-## Body Planes | مستويات الجسم
-• Sagittal plane (سهمي): يقسم الجسم إلى يمين ويسار
-• Frontal plane (إكليلي): يقسم إلى أمام وخلف
-• Transverse plane (مستعرض): يقسم إلى علوي وسفلي`,
-
-                `# BODY CAVITIES | تجاويف الجسم
-
-## Thoracic Cavity | التجويف الصدري
-Contains heart and lungs. يحتوي على القلب والرئتين
-• Mediastinum (المنصف): contains heart, trachea, esophagus
-• Pleural cavities (تجاويف جنبية): surround lungs
-• Pericardial cavity (تجويف تاموري): surrounds heart
-
-## Abdominopelvic Cavity | التجويف البطني الحوضي
-• Abdominal cavity (بطني): stomach, liver, intestines
-• Pelvic cavity (حوضي): bladder, reproductive organs
-
-## HOMEOSTASIS | الاتزان الداخلي
-Stability of internal environment. استقرار البيئة الداخلية للجسم
-
-## Components | مكونات
-• Receptor (مستقبل): detects change
-• Control center (مركز تحكم): processes information
-• Effector (منفذ): responds to change`,
-
-                `# BODY CAVITIES HIERARCHY | هرمية التجاويف
-
-## Dorsal Cavity | التجويف الظهراني
-• Cranial cavity (قحفي): brain
-• Vertebral canal (فقري): spinal cord
-
-## Ventral Cavity | التجويف البطني
-• Thoracic cavity (صدري): heart and lungs
-  - Pleural cavities (جنبية): surround lungs
-  - Pericardial cavity (تاموري): surrounds heart
-  - Mediastinum (المنصف): between lungs
-• Abdominopelvic cavity (بطني حوضي)
-  - Abdominal (بطني): digestive organs
-  - Pelvic (حوضي): bladder, reproductive organs
-
-## Diaphragm | الحجاب الحاجز
-Separates thoracic and abdominal cavities. يفصل بين التجويف الصدري والبطن
-
-## Table Summary | جدول ملخص
-| Cavity | Contents |
-|--------|----------|
-| Cranial | Brain |
-| Vertebral | Spinal cord |
-| Thoracic | Heart, lungs |
-| Abdominal | Digestive organs |
-| Pelvic | Bladder, reproductive |`,
-
-                `# NEGATIVE FEEDBACK | التغذية الراجعة السلبية
-
-## Definition | تعريف
-A mechanism that reverses a change in the body. آلية تعكس التغيير في الجسم
-
-## Blood Glucose Regulation | تنظيم سكر الدم
-
-High glucose (ارتفاع السكر):
-• Beta cells release insulin (خلايا بيتا تفرز أنسولين)
-• Cells take up glucose (الخلايا تمتص السكر)
-• Liver stores glycogen (الكبد يخزن جليكوجين)
-• Glucose decreases (ينخفض السكر)
-
-Low glucose (انخفاض السكر):
-• Alpha cells release glucagon (خلايا ألفا تفرز جلوكاجون)
-• Liver breaks down glycogen (الكبد يكسر الجليكوجين)
-• Glucose increases (يرتفع السكر)
-
-## Body Temperature Regulation | تنظيم درجة الحرارة
-
-High temperature (ارتفاع الحرارة):
-• Sweating (تعرق)
-• Blood vessels dilate (توسع أوعية)
-• Heat loss (فقدان حرارة)
-• Temperature decreases (تنخفض الحرارة)
-
-Low temperature (انخفاض الحرارة):
-• Shivering (ارتجاف)
-• Blood vessels constrict (تضيق أوعية)
-• Heat production (إنتاج حرارة)
-• Temperature increases (ترتفع الحرارة)`,
-
-                `# POSITIVE FEEDBACK | التغذية الراجعة الإيجابية
-
-## Definition | تعريف
-A mechanism that amplifies a change in the body. آلية تضخم التغيير في الجسم
-
-## Childbirth Example | مثال الولادة
-1. Baby's head pushes against cervix
-   (رأس الجنين يضغط على عنق الرحم)
-2. Nerve impulses sent to brain
-   (نبضات عصبية ترسل للدماغ)
-3. Brain stimulates pituitary to release oxytocin
-   (الدماغ يحفز الغدة النخامية لإفراز الأوكسيتوسين)
-4. Oxytocin stimulates uterine contractions
-   (الأوكسيتوسين يحفز انقباضات الرحم)
-5. Baby pushed further against cervix
-   (يدفع الجنين بقوة أكبر)
-6. Cycle continues until birth
-   (تستمر الدورة حتى الولادة)
-
-## Other Examples | أمثلة أخرى
-• Blood clotting (تجلط الدم)
-• Fever (الحمى)
-• Labor contractions (انقباضات الولادة)
-
-## Comparison | مقارنة
-Negative feedback: reverses change → stability (استقرار)
-Positive feedback: amplifies change → completion (إتمام)`
+                explanation1, explanation2, explanation3, explanation4, explanation5,
+                explanation6, explanation7, explanation8, explanation9
             ];
 
-            // أسئلة الاختبارات (مودل ستايل)
+            // أسئلة الاختبارات (10 أسئلة)
             const quizQuestions = [
                 {
-                    question: "What does the term 'Medial' mean in anatomy?",
+                    question: "ما هو المصطلح الذي يعني 'نحو خط منتصف الجسم'؟",
                     options: [
-                        'Toward the midline of the body',
-                        'Away from the midline of the body',
-                        'Toward the head end',
-                        'Toward the back of the body'
-                    ],
-                    correct: 0,
-                    explanation: "Medial means toward the midline of the body. For example, the heart is medial to the arms."
-                },
-                {
-                    question: "Which body cavity contains the heart and lungs?",
-                    options: [
-                        'Cranial cavity',
-                        'Thoracic cavity',
-                        'Abdominal cavity',
-                        'Pelvic cavity'
+                        'الوحشي (Lateral)',
+                        'الإنسي (Medial)',
+                        'القاصي (Distal)',
+                        'السطحي (Superficial)'
                     ],
                     correct: 1,
-                    explanation: "The thoracic cavity contains the heart and lungs. It is protected by the rib cage and sternum."
+                    explanation: "الإنسي (Medial) يعني نحو خط منتصف الجسم. مثال: القلب إنسي بالنسبة للذراع."
                 },
                 {
-                    question: "What is the study of tissues called?",
+                    question: "أي من التجاويف التالية يحتوي على القلب والرئتين؟",
                     options: [
-                        'Anatomy',
-                        'Physiology',
-                        'Histology',
-                        'Cytology'
+                        'التجويف القحفي',
+                        'التجويف الصدري',
+                        'التجويف البطني',
+                        'التجويف الحوضي'
+                    ],
+                    correct: 1,
+                    explanation: "التجويف الصدري (Thoracic cavity) يحتوي على القلب والرئتين."
+                },
+                {
+                    question: "ما هو علم الأنسجة؟",
+                    options: [
+                        'دراسة الأعضاء',
+                        'دراسة الخلايا',
+                        'دراسة الأنسجة',
+                        'دراسة الأجهزة'
                     ],
                     correct: 2,
-                    explanation: "Histology is the study of tissues. It examines the structure and function of tissues at the microscopic level."
+                    explanation: "علم الأنسجة (Histology) هو دراسة الأنسجة تحت المجهر."
                 },
                 {
-                    question: "Which term means 'toward the front of the body'?",
+                    question: "أي من التالي يعني 'نحو الأمام'؟",
                     options: [
-                        'Posterior',
-                        'Dorsal',
-                        'Anterior',
-                        'Superior'
+                        'خلفي (Posterior)',
+                        'أمامي (Anterior)',
+                        'علوي (Superior)',
+                        'سفلي (Inferior)'
+                    ],
+                    correct: 1,
+                    explanation: "الأمامي (Anterior) يعني نحو الأمام. مثال: عظمة القص أمامية للعمود الفقري."
+                },
+                {
+                    question: "ما هي الوحدة الأساسية للحياة؟",
+                    options: [
+                        'الذرة',
+                        'الجزيء',
+                        'الخلية',
+                        'النسيج'
                     ],
                     correct: 2,
-                    explanation: "Anterior (or ventral) means toward the front of the body. For example, the breastbone is anterior to the spine."
+                    explanation: "الخلية (Cell) هي الوحدة الأساسية للحياة."
                 },
                 {
-                    question: "What is the basic unit of life?",
+                    question: "أي نوع من الأنسجة يغطي أسطح الجسم؟",
                     options: [
-                        'Atom',
-                        'Molecule',
-                        'Cell',
-                        'Tissue'
-                    ],
-                    correct: 2,
-                    explanation: "The cell is the basic unit of life. All living organisms are composed of cells."
-                },
-                {
-                    question: "Which type of tissue covers body surfaces and lines cavities?",
-                    options: [
-                        'Muscle tissue',
-                        'Nerve tissue',
-                        'Connective tissue',
-                        'Epithelial tissue'
+                        'العضلي',
+                        'العصبي',
+                        'الضام',
+                        'الطلائي'
                     ],
                     correct: 3,
-                    explanation: "Epithelial tissue covers body surfaces, lines cavities, and forms glands. It provides protection and regulates absorption and secretion."
+                    explanation: "النسيج الطلائي (Epithelial tissue) يغطي أسطح الجسم ويبطن التجاويف."
                 },
                 {
-                    question: "What is homeostasis?",
+                    question: "ما هو الاتزان الداخلي (Homeostasis)؟",
                     options: [
-                        'The study of body structure',
-                        'The study of body function',
-                        'Maintenance of stable internal environment',
-                        'The process of cell division'
+                        'دراسة بنية الجسم',
+                        'دراسة وظائف الجسم',
+                        'الحفاظ على بيئة داخلية مستقرة',
+                        'عملية انقسام الخلايا'
                     ],
                     correct: 2,
-                    explanation: "Homeostasis is the maintenance of a stable internal environment. It involves regulatory mechanisms that keep conditions within normal ranges."
+                    explanation: "الاتزان الداخلي هو قدرة الجسم على الحفاظ على بيئة داخلية مستقرة."
                 },
                 {
-                    question: "Which plane divides the body into superior and inferior parts?",
+                    question: "أي مستوى يقسم الجسم إلى علوي وسفلي؟",
                     options: [
-                        'Sagittal plane',
-                        'Frontal plane',
-                        'Transverse plane',
-                        'Oblique plane'
+                        'المستوى السهمي',
+                        'المستوى الإكليلي',
+                        'المستوى المستعرض',
+                        'المستوى المائل'
                     ],
                     correct: 2,
-                    explanation: "The transverse (horizontal) plane divides the body into superior (upper) and inferior (lower) parts."
+                    explanation: "المستوى المستعرض (Transverse) يقسم الجسم إلى علوي وسفلي."
                 },
                 {
-                    question: "What does 'Proximal' mean?",
+                    question: "ماذا يعني مصطلح 'داني (Proximal)'؟",
                     options: [
-                        'Closer to the point of attachment',
-                        'Farther from the point of attachment',
-                        'Toward the midline',
-                        'Away from the midline'
+                        'أقرب لنقطة الارتباط',
+                        'أبعد عن نقطة الارتباط',
+                        'نحو خط المنتصف',
+                        'بعيداً عن خط المنتصف'
                     ],
                     correct: 0,
-                    explanation: "Proximal means closer to the point of attachment. For example, the elbow is proximal to the wrist."
+                    explanation: "الداني يعني أقرب لنقطة الارتباط. مثال: الكوع داني بالنسبة للمعصم."
                 },
                 {
-                    question: "Which system is responsible for gas exchange?",
+                    question: "أي جهاز مسؤول عن تبادل الغازات؟",
                     options: [
-                        'Cardiovascular system',
-                        'Respiratory system',
-                        'Digestive system',
-                        'Nervous system'
+                        'الجهاز الدوراني',
+                        'الجهاز التنفسي',
+                        'الجهاز الهضمي',
+                        'الجهاز العصبي'
                     ],
                     correct: 1,
-                    explanation: "The respiratory system is responsible for gas exchange. It brings oxygen into the body and removes carbon dioxide."
+                    explanation: "الجهاز التنفسي (Respiratory system) مسؤول عن تبادل الأكسجين وثاني أكسيد الكربون."
                 }
             ];
 
@@ -1211,6 +1288,7 @@ Positive feedback: amplifies change → completion (إتمام)`
             let quizAnswers = new Array(quizQuestions.length).fill(null);
             let darkMode = false;
             let currentTab = 'home';
+            let deferredPrompt = null;
 
             // تحميل بيانات الجلسة
             const sessionData = loadSessionData();
@@ -1229,6 +1307,40 @@ Positive feedback: amplifies change → completion (إتمام)`
             const topTabs = document.querySelectorAll('.tab');
             const darkModeToggle = document.getElementById('darkModeToggle');
             const statusText = document.getElementById('statusText');
+            const installBar = document.getElementById('installBar');
+            const pwaInstallBtn = document.getElementById('pwaInstallBtn');
+            const installButton = document.getElementById('installButton');
+
+            // ===== PWA Installation =====
+            window.addEventListener('beforeinstallprompt', (e) => {
+                e.preventDefault();
+                deferredPrompt = e;
+                installBar.style.display = 'flex';
+                pwaInstallBtn.style.display = 'flex';
+            });
+
+            function installApp() {
+                if (deferredPrompt) {
+                    deferredPrompt.prompt();
+                    deferredPrompt.userChoice.then((choiceResult) => {
+                        if (choiceResult.outcome === 'accepted') {
+                            installBar.style.display = 'none';
+                            pwaInstallBtn.style.display = 'none';
+                        }
+                        deferredPrompt = null;
+                    });
+                }
+            }
+
+            installButton.addEventListener('click', installApp);
+            pwaInstallBtn.addEventListener('click', installApp);
+
+            // ===== Service Worker Registration =====
+            if ('serviceWorker' in navigator) {
+                window.addEventListener('load', () => {
+                    navigator.serviceWorker.register('sw.js').catch(err => {});
+                });
+            }
 
             // ===== دوال عامة =====
             window.App = {
@@ -1237,11 +1349,7 @@ Positive feedback: amplifies change → completion (إتمام)`
                     currentIndex = index;
                     studiedImages[index] = true;
                     updateStats();
-                    if (currentTab === 'images' || currentTab === 'favorites') {
-                        renderContent(currentTab);
-                    } else {
-                        renderContent('images');
-                    }
+                    renderContent('images');
                 },
                 
                 resetQuiz: function() {
@@ -1259,6 +1367,25 @@ Positive feedback: amplifies change → completion (إتمام)`
                     
                     updateStats();
                     renderContent('quizzes');
+                },
+                
+                search: function(query) {
+                    const results = [];
+                    if (!query) return results;
+                    
+                    const lowerQuery = query.toLowerCase();
+                    
+                    explanations.forEach((exp, i) => {
+                        if (exp.toLowerCase().includes(lowerQuery)) {
+                            results.push({
+                                index: i,
+                                title: `صورة ${i + 1}`,
+                                match: exp.substring(0, 100) + '...'
+                            });
+                        }
+                    });
+                    
+                    return results;
                 }
             };
 
@@ -1305,7 +1432,7 @@ Positive feedback: amplifies change → completion (إتمام)`
                 }
             }
 
-            // ===== الصفحة الرئيسية =====
+            // ===== الصفحة الرئيسية مع البحث المتطور =====
             function renderHome() {
                 const studied = studiedImages.filter(v => v).length;
                 const correctAnswers = quizScores.filter(s => s === true).length;
@@ -1313,9 +1440,8 @@ Positive feedback: amplifies change → completion (إتمام)`
                 const scorePercent = Math.round((correctAnswers / totalQuestions) * 100) || 0;
                 
                 return `
-                    <!-- قسم الإهداء -->
-                    <div class="dedication-section">
-                        <div class="dedication-title">إهداء</div>
+                    <div class="dedication-card">
+                        <div style="font-size: 20px;">🕊️</div>
                         <div class="dedication-name">ياسر عطيه المصري (ابو مصعب)</div>
                         <div class="dedication-dua">
                             <i class="fas fa-quote-right"></i>
@@ -1324,29 +1450,28 @@ Positive feedback: amplifies change → completion (إتمام)`
                         </div>
                     </div>
 
-                    <!-- بطاقة الترحيب -->
                     <div class="welcome-card">
                         <div class="welcome-text">أهلاً بك</div>
-                        <div class="start-text">ابدأ الدراسة</div>
+                        <div class="start-text">ابدأ رحلة التعلم</div>
                     </div>
 
-                    <!-- البحث -->
-                    <div class="search-box">
-                        <i class="fas fa-search"></i>
-                        <input type="text" id="searchInput" placeholder="ابحث في الشروحات...">
+                    <div class="search-container">
+                        <div class="search-box">
+                            <i class="fas fa-search"></i>
+                            <input type="text" id="searchInput" placeholder="ابحث عن أي مصطلح..." autocomplete="off">
+                        </div>
+                        <div class="search-results" id="searchResults"></div>
                     </div>
 
-                    <!-- شبكة الصور -->
                     <div class="images-grid" id="homeImageGrid">
                         ${imageFiles.map((_, i) => `
-                            <div class="image-thumb ${favorites.includes(i) ? 'favorite' : ''}" onclick="App.changeImage(${i})">
-                                <div class="thumb-img">🫀</div>
-                                <div class="thumb-number">صورة ${i + 1}</div>
+                            <div class="image-card" onclick="App.changeImage(${i})">
+                                <div class="image-icon">🫀</div>
+                                <div class="image-label">صورة ${i + 1}</div>
                             </div>
                         `).join('')}
                     </div>
 
-                    <!-- إحصائيات سريعة -->
                     <div class="stats-grid">
                         <div class="stat-card">
                             <div class="stat-number">${studied}</div>
@@ -1370,20 +1495,18 @@ Positive feedback: amplifies change → completion (إتمام)`
                     <div class="image-container" id="imageContainer">
                         <img id="mainImage" src="${imageFiles[currentIndex]}" alt="صورة تشريحية">
                         <div class="touch-overlay" id="touchOverlay"></div>
-                        <div class="zoom-indicator" id="zoomLevel">1.0x</div>
+                        <div class="zoom-level" id="zoomLevel">1.0x</div>
                     </div>
 
-                    <!-- أزرار التحكم تحت الصورة -->
-                    <div class="image-controls">
-                        <button class="control-btn" id="zoomOut"><i class="fas fa-minus"></i></button>
-                        <button class="control-btn reset" id="zoomReset"><i class="fas fa-undo-alt"></i></button>
-                        <button class="control-btn" id="zoomIn"><i class="fas fa-plus"></i></button>
-                        <button class="control-btn fullscreen-btn" id="fullscreenBtn"><i class="fas fa-expand"></i></button>
+                    <div class="control-panel">
+                        <button class="ctrl-btn" id="zoomOut"><i class="fas fa-minus"></i></button>
+                        <button class="ctrl-btn reset" id="zoomReset"><i class="fas fa-undo-alt"></i></button>
+                        <button class="ctrl-btn" id="zoomIn"><i class="fas fa-plus"></i></button>
+                        <button class="ctrl-btn fullscreen" id="fullscreenBtn"><i class="fas fa-expand"></i></button>
                     </div>
 
-                    <!-- أزرار الإجراءات -->
-                    <div class="action-buttons">
-                        <button class="action-btn ${favorites.includes(currentIndex) ? 'favorite-active' : ''}" id="favoriteBtn">
+                    <div class="action-bar">
+                        <button class="action-btn ${favorites.includes(currentIndex) ? 'favorite' : ''}" id="favoriteBtn">
                             <i class="fas fa-heart"></i> مفضلة
                         </button>
                         <button class="action-btn" id="downloadBtn">
@@ -1394,20 +1517,18 @@ Positive feedback: amplifies change → completion (إتمام)`
                         </button>
                     </div>
 
-                    <!-- التنقل بين الصور -->
                     <div class="nav-buttons">
                         <button class="nav-btn" onclick="App.changeImage(${currentIndex - 1})" ${currentIndex === 0 ? 'disabled' : ''}>
                             <i class="fas fa-arrow-right"></i> السابقة
                         </button>
-                        <button class="nav-btn secondary" onclick="App.changeImage(${currentIndex + 1})" ${currentIndex === imageFiles.length - 1 ? 'disabled' : ''}>
+                        <button class="nav-btn next" onclick="App.changeImage(${currentIndex + 1})" ${currentIndex === imageFiles.length - 1 ? 'disabled' : ''}>
                             التالية <i class="fas fa-arrow-left"></i>
                         </button>
                     </div>
 
-                    <!-- شرح الصورة -->
                     <div class="explanation-section">
                         <div class="section-title">
-                            <i class="fas fa-pen"></i> شرح الصورة ${currentIndex + 1}
+                            <i class="fas fa-book-open"></i> شرح الصورة ${currentIndex + 1}
                         </div>
                         <div class="explanation-content">
                             ${explanations[currentIndex].replace(/\n/g, '<br>')}
@@ -1416,7 +1537,7 @@ Positive feedback: amplifies change → completion (إتمام)`
                 `;
             }
 
-            // ===== صفحة الاختبارات (مودل ستايل) =====
+            // ===== صفحة الاختبارات =====
             function renderQuizzes() {
                 const correctAnswers = quizScores.filter(s => s === true).length;
                 const totalQuestions = quizQuestions.length;
@@ -1425,12 +1546,12 @@ Positive feedback: amplifies change → completion (إتمام)`
                 let html = `
                     <div class="quiz-container">
                         <div class="quiz-header">
-                            <div class="quiz-title">اختبارات مودل</div>
-                            <div class="quiz-score">${scorePercent}%</div>
+                            <div class="quiz-title">📝 اختبارات مودل</div>
+                            <div class="quiz-score-badge">${scorePercent}%</div>
                         </div>
                         
-                        <div style="margin-bottom: 20px;">
-                            <div style="display: flex; justify-content: space-between; margin-bottom: 5px;">
+                        <div class="quiz-progress">
+                            <div class="progress-text">
                                 <span>تقدمك: ${correctAnswers}/${totalQuestions}</span>
                             </div>
                             <div class="progress-bar">
@@ -1472,16 +1593,20 @@ Positive feedback: amplifies change → completion (إتمام)`
                     if (answered) {
                         html += `
                             <div class="quiz-feedback">
-                                ${isCorrect ? '✅ إجابة صحيحة' : '❌ إجابة خاطئة'}
-                                <div class="quiz-explanation">${q.explanation}</div>
+                                <div style="font-weight: 700; margin-bottom: 5px;">
+                                    ${isCorrect ? '✅ إجابة صحيحة' : '❌ إجابة خاطئة'}
+                                </div>
+                                <div class="quiz-explanation">
+                                    ${q.explanation}
+                                </div>
                             </div>
                         `;
                     }
                 });
 
                 html += `
-                        <button class="quiz-reset" onclick="App.resetQuiz()">
-                            <i class="fas fa-redo"></i> إعادة الاختبار
+                        <button class="quiz-reset-btn" onclick="App.resetQuiz()">
+                            <i class="fas fa-redo-alt"></i> إعادة الاختبار
                         </button>
                     </div>
                 `;
@@ -1514,8 +1639,8 @@ Positive feedback: amplifies change → completion (إتمام)`
                     </div>
 
                     <div class="progress-card">
-                        <div class="progress-label">
-                            <span>تقدم الدراسة</span>
+                        <div class="progress-text">
+                            <span>📚 تقدم الدراسة</span>
                             <span>${studiedPercent}%</span>
                         </div>
                         <div class="progress-bar">
@@ -1524,8 +1649,8 @@ Positive feedback: amplifies change → completion (إتمام)`
                     </div>
 
                     <div class="progress-card">
-                        <div class="progress-label">
-                            <span>المفضلة</span>
+                        <div class="progress-text">
+                            <span>❤️ المفضلة</span>
                             <span>${favoritePercent}%</span>
                         </div>
                         <div class="progress-bar">
@@ -1534,8 +1659,8 @@ Positive feedback: amplifies change → completion (إتمام)`
                     </div>
 
                     <div class="progress-card">
-                        <div class="progress-label">
-                            <span>الاختبارات</span>
+                        <div class="progress-text">
+                            <span>📝 الاختبارات</span>
                             <span>${quizPercent}%</span>
                         </div>
                         <div class="progress-bar">
@@ -1550,7 +1675,8 @@ Positive feedback: amplifies change → completion (إتمام)`
                 if (favorites.length === 0) {
                     return `
                         <div class="welcome-card" style="text-align: center;">
-                            <div class="welcome-text">✨ لا توجد صور</div>
+                            <div style="font-size: 50px; margin-bottom: 10px;">❤️</div>
+                            <div class="welcome-text">لا توجد صور</div>
                             <div class="start-text">أضف صوراً للمفضلة</div>
                         </div>
                     `;
@@ -1559,13 +1685,58 @@ Positive feedback: amplifies change → completion (إتمام)`
                 return `
                     <div class="images-grid">
                         ${favorites.map(index => `
-                            <div class="image-thumb favorite active" onclick="App.changeImage(${index})">
-                                <div class="thumb-img">🫀</div>
-                                <div class="thumb-number">صورة ${index + 1}</div>
+                            <div class="image-card" onclick="App.changeImage(${index})">
+                                <div class="image-icon">🫀</div>
+                                <div class="image-label">صورة ${index + 1}</div>
                             </div>
                         `).join('')}
                     </div>
                 `;
+            }
+
+            // ===== البحث المتطور =====
+            function setupSearch() {
+                const searchInput = document.getElementById('searchInput');
+                const searchResults = document.getElementById('searchResults');
+                
+                if (!searchInput) return;
+                
+                searchInput.addEventListener('input', (e) => {
+                    const query = e.target.value.trim();
+                    
+                    if (query.length < 2) {
+                        searchResults.classList.remove('active');
+                        return;
+                    }
+                    
+                    const results = App.search(query);
+                    
+                    if (results.length > 0) {
+                        let html = '';
+                        results.forEach(r => {
+                            html += `
+                                <div class="search-result-item" onclick="App.changeImage(${r.index})">
+                                    <div class="result-icon">🫀</div>
+                                    <div class="result-info">
+                                        <div class="result-title">${r.title}</div>
+                                        <div class="result-match">${r.match.substring(0, 60)}...</div>
+                                    </div>
+                                </div>
+                            `;
+                        });
+                        searchResults.innerHTML = html;
+                        searchResults.classList.add('active');
+                    } else {
+                        searchResults.innerHTML = '<div style="padding: 15px; text-align: center;">لا توجد نتائج</div>';
+                        searchResults.classList.add('active');
+                    }
+                });
+                
+                document.addEventListener('click', (e) => {
+                    if (!searchInput.contains(e.target) && !searchResults.contains(e.target)) {
+                        searchResults.classList.remove('active');
+                    }
+                });
             }
 
             // ===== تهيئة عناصر الصورة =====
@@ -1691,10 +1862,10 @@ Positive feedback: amplifies change → completion (إتمام)`
                         const index = favorites.indexOf(currentIndex);
                         if (index === -1) {
                             favorites.push(currentIndex);
-                            btn.classList.add('favorite-active');
+                            btn.classList.add('favorite');
                         } else {
                             favorites.splice(index, 1);
-                            btn.classList.remove('favorite-active');
+                            btn.classList.remove('favorite');
                         }
                         updateStats();
                     } else if (e.target.closest('#downloadBtn')) {
@@ -1709,49 +1880,20 @@ Positive feedback: amplifies change → completion (إتمام)`
                         window.speechSynthesis.speak(utterance);
                     }
                 });
-
-                document.addEventListener('input', (e) => {
-                    if (e.target.id === 'searchInput') {
-                        const query = e.target.value.toLowerCase();
-                        document.querySelectorAll('.image-thumb').forEach((thumb, i) => {
-                            const explanation = explanations[i].toLowerCase();
-                            thumb.style.display = (explanation.includes(query) || query === '') ? 'block' : 'none';
-                        });
-                    }
-                });
             }
 
-            // ===== تحديث التقدم =====
-            function updateProgress() {
-                if (loadedImages >= totalImages) return;
-                loadedImages++;
-                
-                if (loadedImages >= totalImages) {
-                    statusText.textContent = 'متاح بدون إنترنت';
-                    localStorage.setItem('images_ready', 'true');
-                }
-            }
-
-            async function cacheImages() {
+            // ===== التخزين المحلي للصور =====
+            function cacheImages() {
                 if ('caches' in window) {
-                    try {
-                        const cache = await caches.open('anatomy-v1');
-                        await Promise.all(imageFiles.map(async (img) => {
-                            const cached = await cache.match(img);
-                            if (cached) updateProgress();
-                            else {
-                                try {
-                                    const response = await fetch(img + '?v=1');
-                                    if (response.ok) {
-                                        await cache.put(img, response.clone());
-                                        updateProgress();
-                                    }
-                                } catch (err) {
-                                    updateProgress();
+                    caches.open('anatomy-v1').then(cache => {
+                        imageFiles.forEach(img => {
+                            fetch(img).then(response => {
+                                if (response.ok) {
+                                    cache.put(img, response);
                                 }
-                            }
-                        }));
-                    } catch (err) {}
+                            }).catch(() => {});
+                        });
+                    });
                 }
             }
 
@@ -1779,16 +1921,22 @@ Positive feedback: amplifies change → completion (إتمام)`
 
                 setupClickHandlers();
 
-                if (localStorage.getItem('images_ready') === 'true') {
-                    loadedImages = totalImages;
-                    statusText.textContent = 'متاح بدون إنترنت';
-                } else {
-                    cacheImages();
-                }
+                // تحميل الصور للتخزين المحلي
+                cacheImages();
 
+                // عرض المحتوى
                 renderContent('home');
+                
+                // تفعيل البحث بعد تحميل الصفحة
+                setTimeout(() => {
+                    setupSearch();
+                }, 500);
 
+                // حفظ الجلسة
                 setInterval(updateStats, 5000);
+                
+                // إظهار حالة عدم الاتصال
+                statusText.textContent = 'بدون إنترنت';
             }
 
             init();
