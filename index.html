@@ -2,7 +2,7 @@
 <html lang="ar" dir="rtl">
 <head>
     <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=5.0, user-scalable=yes">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no, viewport-fit=cover">
     <title>تشريح • الأطلس الذكي</title>
     
     <!-- Font Awesome 6 -->
@@ -12,6 +12,14 @@
     <link href="https://fonts.googleapis.com/css2?family=Tajawal:wght@300;400;500;700&display=swap" rel="stylesheet">
     
     <style>
+        /* منع تكبير الصفحة باللمس */
+        html, body {
+            touch-action: manipulation;
+            -webkit-touch-callout: none;
+            -webkit-user-select: none;
+            user-select: none;
+        }
+
         * {
             margin: 0;
             padding: 0;
@@ -145,6 +153,7 @@
             box-shadow: 0 4px 10px rgba(0,0,0,0.03);
             border: 2px solid transparent;
             transition: all 0.2s;
+            touch-action: manipulation;
         }
 
         .icon-item.active {
@@ -201,6 +210,7 @@
             display: block;
             transition: transform 0.2s ease-out;
             pointer-events: none;
+            transform-origin: center center; /* التكبير من المركز */
         }
 
         /* مؤشر تحميل الصورة */
@@ -258,6 +268,7 @@
             display: flex;
             align-items: center;
             justify-content: center;
+            touch-action: manipulation;
         }
 
         .zoom-btn:active {
@@ -348,6 +359,7 @@
             gap: 5px;
             font-size: 13px;
             transition: 0.2s;
+            touch-action: manipulation;
         }
 
         .action-sm:hover {
@@ -690,12 +702,12 @@ Cold → Shivering → Warming`,
             touchOverlay.addEventListener('touchend', (e) => {
                 const touches = e.touches;
                 
-                // التنقل بالسحب
+                // التنقل بالسحب - مع حد أدنى 80 بكسل لتجنب الأخطاء
                 if (touches.length === 0) {
                     const endX = e.changedTouches[0].clientX;
                     const diff = endX - startX;
                     
-                    if (Math.abs(diff) > 70) {
+                    if (Math.abs(diff) > 80) {
                         if (diff > 0 && currentIndex > 0) {
                             changeImage(currentIndex - 1); // سحب لليمين ← صورة سابقة
                         } else if (diff < 0 && currentIndex < imageFiles.length - 1) {
@@ -774,6 +786,40 @@ Cold → Shivering → Warming`,
                 }
             };
 
+            // ---------- دعم لوحة المفاتيح (للكمبيوتر) ----------
+            document.addEventListener('keydown', (e) => {
+                // التنقل بين الصور
+                if (e.key === 'ArrowRight') {
+                    e.preventDefault();
+                    changeImage(currentIndex + 1);
+                }
+                
+                if (e.key === 'ArrowLeft') {
+                    e.preventDefault();
+                    changeImage(currentIndex - 1);
+                }
+                
+                // التكبير والتصغير
+                if (e.key === '+' || e.key === '=') {
+                    e.preventDefault();
+                    scale = Math.min(maxScale, scale + 0.3);
+                    updateZoom();
+                }
+                
+                if (e.key === '-' || e.key === '_') {
+                    e.preventDefault();
+                    scale = Math.max(minScale, scale - 0.3);
+                    updateZoom();
+                }
+                
+                // زر 0 لإعادة التكبير
+                if (e.key === '0') {
+                    e.preventDefault();
+                    scale = 1;
+                    updateZoom();
+                }
+            });
+
             // ---------- تحديث التقدم ----------
             function updateProgress() {
                 loadedImages++;
@@ -788,30 +834,34 @@ Cold → Shivering → Warming`,
                 }
             }
 
-            // ---------- تخزين الصور في Cache ----------
+            // ---------- تخزين الصور في Cache (بشكل متوازي) ----------
             async function cacheImages() {
                 if ('caches' in window) {
                     try {
                         const cache = await caches.open('anatomy-v1');
                         
-                        for (let i = 0; i < imageFiles.length; i++) {
-                            const cached = await cache.match(imageFiles[i]);
-                            if (cached) {
-                                updateProgress();
-                            } else {
-                                fetch(imageFiles[i])
-                                    .then(async (response) => {
+                        // تحميل جميع الصور بالتوازي
+                        await Promise.all(
+                            imageFiles.map(async (img) => {
+                                const cached = await cache.match(img);
+                                
+                                if (cached) {
+                                    updateProgress();
+                                } else {
+                                    try {
+                                        const response = await fetch(img);
                                         if (response.ok) {
-                                            await cache.put(imageFiles[i], response.clone());
+                                            await cache.put(img, response.clone());
                                             updateProgress();
                                         }
-                                    })
-                                    .catch(() => {
+                                    } catch (err) {
+                                        console.log('فشل تحميل:', img);
                                         loadedImages++;
                                         updateProgress();
-                                    });
-                            }
-                        }
+                                    }
+                                }
+                            })
+                        );
                     } catch (err) {
                         console.log('Cache error:', err);
                     }
@@ -860,7 +910,10 @@ Cold → Shivering → Warming`,
                     statusIcon.className = 'fas fa-check-circle';
                 }
                 
+                // بدء تخزين الصور
                 cacheImages();
+                
+                // حفظ الجلسة
                 setInterval(() => {
                     localStorage.setItem('last_image', currentIndex);
                 }, 5000);
