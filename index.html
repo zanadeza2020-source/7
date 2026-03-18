@@ -1,0 +1,487 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>anatomy · notes | هادئ وبسيط</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Helvetica, Arial, sans-serif;
+        }
+
+        body {
+            background-color: #f7f5f0;  /* warm off-white */
+            color: #2c3e3f;
+            line-height: 1.5;
+            padding: 2rem 1.5rem;
+        }
+
+        .container {
+            max-width: 1300px;
+            margin: 0 auto;
+        }
+
+        /* header */
+        .header {
+            text-align: center;
+            margin-bottom: 3rem;
+        }
+
+        .header h1 {
+            font-weight: 350;
+            font-size: 2.2rem;
+            letter-spacing: -0.5px;
+            color: #3b5e6b;
+            border-bottom: 1px solid #d6d2c5;
+            display: inline-block;
+            padding-bottom: 0.6rem;
+            margin-bottom: 0.5rem;
+        }
+
+        .header p {
+            color: #5f6b6a;
+            font-size: 1.1rem;
+            font-weight: 300;
+        }
+
+        /* icon grid */
+        .icon-grid {
+            display: flex;
+            flex-wrap: wrap;
+            justify-content: center;
+            gap: 1.8rem;
+            margin: 3.5rem 0 3rem 0;
+        }
+
+        .icon-card {
+            background: #ffffffd9;
+            backdrop-filter: blur(2px);
+            border: 1px solid #e3dfd3;
+            border-radius: 42px;
+            width: 95px;
+            height: 95px;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            gap: 0.3rem;
+            box-shadow: 0 6px 14px rgba(0, 0, 0, 0.02), 0 2px 4px rgba(0, 0, 0, 0.02);
+            transition: all 0.2s ease;
+            cursor: pointer;
+            color: #3b5e6b;
+            font-weight: 400;
+            font-size: 0.9rem;
+        }
+
+        .icon-card:hover {
+            background: #ffffff;
+            border-color: #b3c6c3;
+            box-shadow: 0 12px 22px rgba(0, 0, 0, 0.04);
+            transform: translateY(-3px);
+            color: #1e3b41;
+        }
+
+        .icon-card.active {
+            background: #e0e9e6;
+            border-color: #88a9a4;
+            color: #1f4a4f;
+            font-weight: 500;
+            box-shadow: 0 5px 10px rgba(0, 0, 0, 0.05);
+        }
+
+        .icon-emoji {
+            font-size: 2rem;
+            line-height: 1;
+            filter: drop-shadow(0 2px 2px #d0cfc4);
+        }
+
+        /* main display panel (image + notes) */
+        .display-panel {
+            background: #ffffffde;
+            border-radius: 40px;
+            border: 1px solid #e2ddd1;
+            padding: 2.2rem 2rem;
+            box-shadow: 0 20px 35px -8px rgba(0, 0, 0, 0.05);
+            backdrop-filter: blur(3px);
+            margin-top: 1rem;
+        }
+
+        .image-section {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            margin-bottom: 2.8rem;
+        }
+
+        .image-placeholder {
+            max-width: 100%;
+            width: 100%;
+            background: #f1efe8;
+            border-radius: 32px;
+            border: 1px dashed #b9c5c0;
+            padding: 2rem 1rem;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            color: #66817c;
+            font-weight: 300;
+            font-size: 1.2rem;
+            margin-bottom: 1.2rem;
+            min-height: 240px;
+            box-shadow: inset 0 2px 6px rgba(0,0,0,0.01);
+        }
+
+        .image-filename {
+            font-size: 0.9rem;
+            background: #f0ece2;
+            padding: 0.4rem 1.4rem;
+            border-radius: 40px;
+            color: #4b6767;
+            border: 1px solid #dad5c7;
+        }
+
+        .notes-box {
+            background: #f4f2eb;
+            border-radius: 32px;
+            padding: 2rem 2rem;
+            border-left: 5px solid #accac3;
+            box-shadow: 0 2px 10px rgba(0, 0, 0, 0.01);
+        }
+
+        .notes-title {
+            display: flex;
+            align-items: center;
+            gap: 0.6rem;
+            font-size: 1.3rem;
+            color: #2a5e5b;
+            margin-bottom: 1.2rem;
+            font-weight: 400;
+            border-bottom: 1px solid #d0cfc0;
+            padding-bottom: 0.6rem;
+        }
+
+        .notes-content {
+            color: #2d3f40;
+            font-size: 1rem;
+            white-space: pre-line;        /* respect line breaks from extracted text */
+            word-break: break-word;
+            background: #fcfaf5;
+            padding: 1.6rem;
+            border-radius: 22px;
+            border: 1px solid #e0dbcf;
+            max-height: 450px;
+            overflow-y: auto;
+            line-height: 1.6;
+            font-weight: 350;
+        }
+
+        /* scrollbar */
+        .notes-content::-webkit-scrollbar {
+            width: 6px;
+        }
+        .notes-content::-webkit-scrollbar-track {
+            background: #ece7db;
+            border-radius: 10px;
+        }
+        .notes-content::-webkit-scrollbar-thumb {
+            background: #a1b9b2;
+            border-radius: 10px;
+        }
+
+        footer {
+            margin-top: 3rem;
+            text-align: center;
+            color: #8b9b98;
+            font-size: 0.9rem;
+        }
+    </style>
+</head>
+<body>
+<div class="container">
+    <div class="header">
+        <h1>تشريح · صورة وشرح</h1>
+        <p>مساحة هادئة — اختر أيقونة لعرض الصورة مع النص المستخرج منها</p>
+    </div>
+
+    <!-- icon row (each triggers one image + notes) -->
+    <div class="icon-grid" id="iconGrid">
+        <div class="icon-card" data-index="0">
+            <span class="icon-emoji">📸</span>
+            <span>صورة ١</span>
+        </div>
+        <div class="icon-card" data-index="1">
+            <span class="icon-emoji">📸</span>
+            <span>صورة ٢</span>
+        </div>
+        <div class="icon-card" data-index="2">
+            <span class="icon-emoji">📸</span>
+            <span>صورة ٣</span>
+        </div>
+        <div class="icon-card" data-index="3">
+            <span class="icon-emoji">📸</span>
+            <span>صورة ٤</span>
+        </div>
+        <div class="icon-card" data-index="4">
+            <span class="icon-emoji">📸</span>
+            <span>صورة ٥</span>
+        </div>
+        <div class="icon-card" data-index="5">
+            <span class="icon-emoji">📸</span>
+            <span>صورة ٦</span>
+        </div>
+        <div class="icon-card" data-index="6">
+            <span class="icon-emoji">📸</span>
+            <span>صورة ٧</span>
+        </div>
+        <div class="icon-card" data-index="7">
+            <span class="icon-emoji">📸</span>
+            <span>صورة ٨</span>
+        </div>
+    </div>
+
+    <!-- main display area -->
+    <div class="display-panel" id="displayPanel">
+        <div class="image-section">
+            <div class="image-placeholder" id="imagePlaceholder">
+                <!-- image preview (as text, because actual images not available) -->
+                [ preview of 1.jpg ]
+            </div>
+            <div class="image-filename" id="imageFilename">1.jpg</div>
+        </div>
+        <div class="notes-box">
+            <div class="notes-title">
+                <span>📋</span> شرح من الصورة
+            </div>
+            <div class="notes-content" id="notesContent">
+                <!-- extracted text from 1.jpg will appear here -->
+                **CHAPTER ONE: INTRODUCTION TO HUMAN ANATOMY AND PHYSIOLOGY | الفصل الأول: مقدمة في تشريح ووظائف الأعضاء البشري**  
+Anatomy | علم التشريح ... (نص الصورة الأولى)
+            </div>
+        </div>
+    </div>
+    <footer>
+        ألوان هادئة — مستخلص من الصور كما هي
+    </footer>
+</div>
+
+<script>
+    (function() {
+        // ---------- extracted text from each image (exactly as given) ----------
+        const notesData = [
+            // 1.jpg
+            `# CHAPTER ONE: INTRODUCTION TO HUMAN ANATOMY AND PHYSIOLOGY | الفصل الأول: مقدمة في تشريح ووظائف الأعضاء البشري
+
+## Anatomy | علم التشريح
+Anatomy is a scbonglai red model full model heads accumulation of heart, and a vornory dissection crossention on the heart.
+
+## Physiology | علم وظائف الأعضاء
+Physiology is a corcpanyaotes the pumping blood living blood with hannisd group flows as to emit operators (respiratory system, and gas exchange.)
+
+---
+
+### The study of anatomy | دراسة التشريح
+
+- **Gross anatomy | التشريح العبائي**
+  - Microscopic anatomy (Histology)  
+    (تشريح المجهري (علم الأنسجة))
+
+- **TISSUE | نسيج**
+  - Epithelial tissue / Connective tissue / Muscle tissue / Nerve tissue
+
+---
+
+### LEVEL OF STRUCTURAL ORGANIZATION OF THE BODY | مستوى التنظيم الهيكلي للجسم
+
+- **ATOMS MOLECULES AND COMPOUNDS | الذرات والجزئيات (إم والمركبات)**
+  H₂O, C, O, N, P, S
+
+- **ORGANISM LEVEL**  
+  Nucleus / Mitochondrion / Cell membrane
+
+- **SYSTEM | جهاز**
+  STOMACH | المدة  
+  Muscle tissue / Nerve tissue / Epithelial tissue
+
+---
+
+### RESPIRATORY SYSTEM | الجهاز التنفسي`,
+
+            // 2.jpg
+            `# ANATOMICAL DIRECTIONAL TERMS | المصطلحات الاتجاهية التشريحية
+
+*Directional terms are words that describe the position of one body part relative to another.*
+
+## Superior (cranial) | العلوي (القحفي)  
+Toward the head … above. The head is superior to the abdomen.
+
+## Inferior (caudal) | السفلي (الداخلي)  
+Away from head … below. The navel is inferior to the chin.
+
+## Ventral (anterior) | البطني (الأمامي)  
+Front … breastbone is anterior to spine.
+
+## Dorsal (posterior) | الظهري (الخلفي)  
+Back … heart is posterior to breastbone.
+
+## Medial | الإنسي / Lateral | الوحشي  
+Medial: toward midline. Lateral: away from midline.
+
+## Intermediate | المتوسط  
+Between medial and lateral (e.g. collarbone).
+
+## Proximal | الدالي / Distal | القاصي  
+Closer to / farther from attachment.
+
+## Superficial (external) | العميق (الداخلي)  
+Skin is superficial to skeletal. Lungs are deep to skin.
+
+**ANATOMICAL POSITION**`,
+
+            // 3.jpg
+            `# BODY REGIONS | مناطق الجسم
+
+*Head, neck, trunk, upper & lower extremity.*
+
+## 1. Head | الرأس
+- Facial region (eyes, nose, mouth)
+- Cranial region (Cranium)
+- Neck (Cervical region) | الرقة
+
+### Trunk regions (diagram)
+- Axillary Region (Armpit)
+- Mammary Region (Breast)
+- Sternal Region (Breast bone)
+- Abdominal Region (Stomach area)
+
+Trunk = thorax + abdomen + pelvis.
+- Vertebral region (along spine)
+
+## 5. Lower Extremity | الأطراف السفلية
+Basic definition …`,
+
+            // 4.jpg
+            `# 1 Chemical level | المستوى الكيميائي
+Atoms → molecules (H₂O, etc.)
+
+# 2 Cellular level | المستوى الخلوي
+Cells (nucleus, mitochondria...)
+
+# 3 Tissue level | المستوى النسيجي
+Smooth muscle, connective, nerve tissue
+
+# 4 Organ level | المستوى العضوي
+Organs made of tissues (heart, vessels)
+
+# 5 Organ system level | مستوى النظام العضوي
+Cardiovascular system: heart + blood vessels
+
+# 8 Anatomical Position | الوضعية التشريحية
+Standing erect, facing observer, palms forward.`,
+
+            // 5.jpg
+            `# ABDOMEN, APPENDICULAR BODY & BODY PLANES | البطن، الجسم الزوادي ومستويات الجسم
+
+*Nine abdominal regions:*
+- Right hypochondriac / Right lumbar / Right iliac
+- Hypogastric region
+
+**APPENDICULAR EXTREMITIES** (upper/lower limbs)
+
+**BODY PLANES**
+- Frontal (coronal): anterior/posterior
+- Sagittal: right/left halves
+- Transverse: upper/lower sections`,
+
+            // 6.jpg
+            `# STUDY GUIDE: BODY CAVITIES AND HOMEOSTASIS
+
+## 1. BODY CAVITIES | تجاويف الجسم
+Ventral cavity: Thoracic cavity (mediastinum, heart, lungs)
+Abdomenopelvic cavity (abdominal + pelvic)
+Pericardial cavity (surrounds heart)
+
+**HOMEOSTASIS** – internal balance
+Regulation: receptor → control center → effector
+
+**FEEDBACK SYSTEMS**
+Positive feedback: labor contractions, blood clotting
+Negative feedback: body temp, blood glucose`,
+
+            // 7.jpg
+            `# BODY CAVITIES | تجويف الجسم
+
+Hierarchy:
+- Cranial cavity (brain)
+- Vertebral canal (spinal cord)
+- Thoracic cavity (heart, lungs, pleura)
+- Abdominal-pelvic cavity (digestive, urinary, reproductive)
+
+Diaphragm separates thoracic and abdominal.
+
+Table: Cranial cavity (brain) / Vertebral canal / Thoracic cavity / Pleural cavities.
+
+**BODY CAVITIES**`,
+
+            // 8.jpg
+            `# NEGATIVE FEEDBACK AND HOMEOSTASIS
+
+## Negative feedback reduces stimulus.
+
+### Blood glucose regulation
+High glucose → pancreas (insulin) → cells take up glucose, liver stores glycogen → glucose decreases.
+Low glucose → pancreas (glucagon) → liver releases glucose → glucose increases.
+
+### Body temperature regulation
+Stimulus: temp >37.2°C → receptors (skin/brain) → control center (hypothalamus) → effectors (vessels dilate, sweat) → heat loss, temp drops.
+
+**Homeostasis restored.**`
+        ];
+
+        // just a simple placeholder prefix – we show the filename but indicate it's the image
+        function setDisplay(index) {
+            // image filename
+            const filename = (index+1) + '.jpg';
+            document.getElementById('imageFilename').innerText = filename;
+
+            // image placeholder (just a styled preview text)
+            document.getElementById('imagePlaceholder').innerHTML = `🖼️ [ محتوى الصورة: ${filename} ]`;
+
+            // notes content
+            document.getElementById('notesContent').innerText = notesData[index];
+
+            // update active icon highlight
+            const icons = document.querySelectorAll('.icon-card');
+            icons.forEach((ic, i) => {
+                if (i === index) ic.classList.add('active');
+                else ic.classList.remove('active');
+            });
+        }
+
+        // add click listeners to icons
+        const icons = document.querySelectorAll('.icon-card');
+        icons.forEach((icon, idx) => {
+            icon.addEventListener('click', () => {
+                setDisplay(idx);
+            });
+        });
+
+        // set default active (first image)
+        setDisplay(0);
+    })();
+</script>
+
+<!-- ensure responsive small devices -->
+<style>
+    @media (max-width: 600px) {
+        .icon-grid { gap: 0.8rem; }
+        .icon-card { width: 75px; height: 75px; font-size: 0.8rem; }
+        .icon-emoji { font-size: 1.7rem; }
+        .display-panel { padding: 1.5rem; }
+        .notes-content { padding: 1.2rem; }
+    }
+</style>
+</body>
+</html>
