@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=5.0, user-scalable=yes">
-    <title>تشريح • الأطلس التعليمي</title>
+    <title>تشريح • منصة التعلم التفاعلية</title>
     
     <!-- Font Awesome 6 -->
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
@@ -12,7 +12,22 @@
     <link href="https://fonts.googleapis.com/css2?family=Tajawal:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
     
     <style>
-        /* ===== إعدادات أساسية ===== */
+        /* ===== متغيرات الألوان ===== */
+        :root {
+            --primary: #16636f;
+            --primary-light: #22818f;
+            --primary-dark: #0e404a;
+            --accent: #ffb347;
+            --accent-light: #ffdb9c;
+            --bg-light: #f5fafc;
+            --text-dark: #1e4d58;
+            --text-light: #4f7a7a;
+            --card-bg: #ffffff;
+            --shadow-sm: 0 4px 12px rgba(22,99,111,0.08);
+            --shadow-md: 0 8px 20px rgba(22,99,111,0.12);
+            --border-radius: 28px;
+        }
+
         * {
             margin: 0;
             padding: 0;
@@ -22,9 +37,6 @@
 
         html, body {
             touch-action: manipulation;
-            -webkit-touch-callout: none;
-            -webkit-user-select: none;
-            user-select: none;
             height: 100%;
             width: 100%;
             overflow: hidden;
@@ -32,8 +44,8 @@
         }
 
         body {
-            background: #f5fafc;
-            color: #1e4d58;
+            background: var(--bg-light);
+            color: var(--text-dark);
             position: fixed;
             top: 0;
             left: 0;
@@ -43,17 +55,11 @@
 
         /* ===== الوضع الليلي ===== */
         body.dark-mode {
+            --bg-light: #1a2a30;
+            --text-dark: #e0f0f0;
+            --text-light: #9fc5c5;
+            --card-bg: #1d363b;
             background: #1a2a30;
-            color: #e0f0f0;
-        }
-
-        body.dark-mode .app-container {
-            background: #1e333a;
-        }
-
-        body.dark-mode .top-nav {
-            background: #0e3f48;
-            border-bottom-color: #3d6b6b;
         }
 
         body.dark-mode .card {
@@ -61,42 +67,9 @@
             border-color: #3d6f6f;
         }
 
-        body.dark-mode .bottom-nav {
-            background: #0e3f48;
-            border-top-color: #3d6b6b;
-        }
-
-        body.dark-mode .nav-item {
-            color: #9fc5c5;
-        }
-
-        body.dark-mode .nav-item.active {
-            color: #ffdb9c;
-        }
-
         body.dark-mode .search-box {
             background: #1d3a3f;
             border-color: #3d9b9b;
-        }
-
-        body.dark-mode .search-box input {
-            color: #e0f0f0;
-        }
-
-        body.dark-mode .explanation-box {
-            background: #1d363b;
-            border-color: #3d6f6f;
-            color: #d0ece5;
-        }
-
-        body.dark-mode .martyr-section {
-            background: #0e3f48;
-            border-color: #3d9b9b;
-        }
-
-        /* ===== كلاس hidden ===== */
-        .hidden {
-            display: none !important;
         }
 
         /* ===== حاوية التطبيق ===== */
@@ -105,151 +78,153 @@
             width: 100%;
             display: flex;
             flex-direction: column;
-            background: white;
+            background: var(--card-bg);
             position: relative;
             overflow: hidden;
         }
 
         /* ===== الشريط العلوي ===== */
         .top-nav {
-            background: #16636f;
+            background: var(--primary);
             color: white;
-            padding: 12px 20px;
+            padding: 10px 16px;
             display: flex;
             justify-content: space-between;
             align-items: center;
-            border-bottom: 2px solid #ffdb9c;
+            border-bottom: 2px solid var(--accent-light);
             box-shadow: 0 2px 8px rgba(0,0,0,0.1);
         }
 
         .nav-left {
             display: flex;
             align-items: center;
-            gap: 12px;
+            gap: 8px;
         }
 
         .menu-icon {
-            font-size: 22px;
+            font-size: 20px;
             cursor: pointer;
-            padding: 5px;
+            padding: 4px;
         }
 
         .app-title {
-            font-size: 20px;
+            font-size: 18px;
             font-weight: 700;
         }
 
         .nav-right {
             display: flex;
             align-items: center;
-            gap: 12px;
+            gap: 8px;
         }
 
         .status-badge {
-            background: #22818f;
-            padding: 6px 12px;
+            background: var(--primary-light);
+            padding: 4px 10px;
             border-radius: 30px;
-            font-size: 13px;
+            font-size: 12px;
             display: flex;
             align-items: center;
-            gap: 6px;
+            gap: 4px;
         }
 
         .dark-mode-toggle {
             background: transparent;
             border: 1px solid rgba(255,255,255,0.3);
             color: white;
-            width: 36px;
-            height: 36px;
+            width: 32px;
+            height: 32px;
             border-radius: 50%;
             display: flex;
             align-items: center;
             justify-content: center;
             cursor: pointer;
-            font-size: 16px;
+            font-size: 14px;
         }
 
-        /* ===== منطقة المحتوى الرئيسية ===== */
+        /* ===== منطقة المحتوى ===== */
         .content-area {
             flex: 1;
             overflow-y: auto;
             overflow-x: hidden;
             padding: 16px;
-            background: #f8fcfd;
+            background: var(--bg-light);
             -webkit-overflow-scrolling: touch;
         }
 
         /* ===== قسم الإهداء ===== */
-        .martyr-section {
-            background: linear-gradient(145deg, #16636f, #1a7a88);
-            border-radius: 30px;
-            padding: 25px 20px;
+        .dedication-section {
+            background: linear-gradient(145deg, var(--primary), var(--primary-light));
+            border-radius: 20px;
+            padding: 15px;
             margin-bottom: 20px;
             text-align: center;
             color: white;
-            border: 2px solid #ffdb9c;
-            box-shadow: 0 10px 25px rgba(22,99,111,0.3);
-            position: relative;
-            overflow: hidden;
+            border: 1px solid var(--accent-light);
+            box-shadow: var(--shadow-sm);
         }
 
-        .martyr-section::before {
-            content: '';
-            position: absolute;
-            top: -50%;
-            left: -50%;
-            width: 200%;
-            height: 200%;
-            background: radial-gradient(circle, rgba(255,255,255,0.1) 0%, transparent 70%);
-            animation: rotate 20s linear infinite;
-        }
-
-        @keyframes rotate {
-            from { transform: rotate(0deg); }
-            to { transform: rotate(360deg); }
-        }
-
-        .martyr-title {
-            font-size: 20px;
-            font-weight: 700;
-            margin-bottom: 10px;
-            position: relative;
-        }
-
-        .martyr-name {
-            font-size: 28px;
-            font-weight: 900;
-            margin-bottom: 15px;
-            color: #ffdb9c;
-            text-shadow: 0 2px 5px rgba(0,0,0,0.2);
-            position: relative;
-        }
-
-        .martyr-dua {
+        .dedication-title {
             font-size: 16px;
-            line-height: 1.8;
-            position: relative;
-            background: rgba(0,0,0,0.2);
-            padding: 15px;
-            border-radius: 25px;
-            backdrop-filter: blur(5px);
+            font-weight: 600;
+            margin-bottom: 5px;
+            opacity: 0.9;
         }
 
-        .martyr-dua i {
-            color: #ffdb9c;
-            margin: 0 5px;
+        .dedication-name {
+            font-size: 20px;
+            font-weight: 800;
+            color: var(--accent-light);
+            margin-bottom: 5px;
         }
 
-        .martyr-dua span {
-            display: block;
-            margin-top: 10px;
-            font-size: 24px;
+        .dedication-dua {
+            font-size: 13px;
+            line-height: 1.5;
+            background: rgba(0,0,0,0.15);
+            padding: 10px;
+            border-radius: 15px;
         }
 
-        /* ===== التبويبات العلوية ===== */
+        .dedication-dua i {
+            color: var(--accent-light);
+            font-size: 12px;
+            margin: 0 3px;
+        }
+
+        /* ===== بطاقة الترحيب ===== */
+        .welcome-card {
+            background: linear-gradient(145deg, #f0f9fc, #e6f4f7);
+            border-radius: 20px;
+            padding: 18px;
+            margin-bottom: 20px;
+            text-align: center;
+            border-right: 5px solid var(--primary);
+            box-shadow: var(--shadow-sm);
+        }
+
+        .welcome-text {
+            font-size: 22px;
+            font-weight: 800;
+            color: var(--primary);
+            margin-bottom: 5px;
+        }
+
+        .start-text {
+            font-size: 18px;
+            font-weight: 700;
+            color: var(--primary-dark);
+            background: rgba(255,255,255,0.7);
+            display: inline-block;
+            padding: 5px 25px;
+            border-radius: 40px;
+            margin-top: 5px;
+        }
+
+        /* ===== التبويبات ===== */
         .tabs-container {
             display: flex;
-            gap: 8px;
+            gap: 6px;
             margin-bottom: 16px;
             overflow-x: auto;
             padding: 4px 0;
@@ -261,148 +236,113 @@
         }
 
         .tab {
-            background: white;
-            padding: 8px 18px;
+            background: var(--card-bg);
+            padding: 6px 16px;
             border-radius: 40px;
             font-weight: 600;
-            font-size: 14px;
-            color: #16636f;
-            border: 2px solid #16636f;
+            font-size: 13px;
+            color: var(--primary);
+            border: 2px solid var(--primary);
             cursor: pointer;
             white-space: nowrap;
             transition: 0.2s;
         }
 
         .tab.active {
-            background: #16636f;
+            background: var(--primary);
             color: white;
         }
 
         /* ===== شريط البحث ===== */
         .search-box {
-            background: white;
+            background: var(--card-bg);
             border-radius: 40px;
-            padding: 4px 18px;
+            padding: 4px 16px;
             display: flex;
             align-items: center;
-            gap: 10px;
-            margin-bottom: 20px;
-            border: 2px solid #16636f;
-            box-shadow: 0 4px 12px rgba(22,99,111,0.1);
+            gap: 8px;
+            margin-bottom: 16px;
+            border: 2px solid var(--primary);
+            box-shadow: var(--shadow-sm);
         }
 
         .search-box i {
-            color: #16636f;
-            font-size: 16px;
+            color: var(--primary);
+            font-size: 15px;
         }
 
         .search-box input {
             flex: 1;
             border: none;
             outline: none;
-            padding: 12px 0;
-            font-size: 15px;
+            padding: 10px 0;
+            font-size: 14px;
             font-family: 'Tajawal', sans-serif;
             background: transparent;
+            color: var(--text-dark);
         }
 
-        /* ===== بطاقات المحتوى ===== */
-        .card {
-            background: white;
-            border-radius: 28px;
-            padding: 18px;
-            margin-bottom: 16px;
-            box-shadow: 0 4px 12px rgba(0,50,60,0.05);
-            border: 1px solid #d4ece5;
-        }
-
-        .card-header {
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-            margin-bottom: 15px;
-        }
-
-        .card-header h2 {
-            font-size: 18px;
-            font-weight: 700;
-            color: #16636f;
-            display: flex;
-            align-items: center;
-            gap: 8px;
-        }
-
-        /* ===== شبكة الأيقونات ===== */
-        .icon-grid {
+        /* ===== شبكة الصور ===== */
+        .images-grid {
             display: flex;
             flex-wrap: wrap;
-            gap: 8px;
+            gap: 10px;
             justify-content: center;
-            margin: 16px 0;
+            margin: 20px 0;
         }
 
-        .icon-item {
-            width: 65px;
-            height: 70px;
-            background: white;
-            border-radius: 22px;
-            display: flex;
-            flex-direction: column;
-            align-items: center;
-            justify-content: center;
-            gap: 4px;
+        .image-thumb {
+            width: 85px;
+            background: var(--card-bg);
+            border-radius: 18px;
+            overflow: hidden;
             cursor: pointer;
-            box-shadow: 0 3px 8px rgba(0,0,0,0.03);
+            box-shadow: var(--shadow-sm);
             border: 2px solid transparent;
             transition: 0.2s;
-            position: relative;
         }
 
-        .icon-item.favorite::after {
-            content: '❤️';
-            position: absolute;
-            top: -3px;
-            left: -3px;
-            font-size: 12px;
+        .image-thumb.active {
+            border-color: var(--primary);
+            transform: scale(1.02);
         }
 
-        .icon-item.active {
-            border-color: #16636f;
-            background: #e1f6f2;
+        .thumb-img {
+            width: 100%;
+            height: 70px;
+            background: var(--primary-dark);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: white;
+            font-size: 28px;
         }
 
-        .icon-item i {
-            font-size: 22px;
-            color: #16636f;
+        .thumb-number {
+            text-align: center;
+            padding: 5px;
+            font-weight: 700;
+            color: var(--primary);
+            background: rgba(22,99,111,0.05);
         }
 
-        .icon-item span {
-            font-size: 12px;
-            font-weight: 600;
-            color: #1a5f6b;
-            background: #edf9f5;
-            padding: 2px 8px;
-            border-radius: 30px;
-        }
-
-        /* ===== حاوية الصورة ===== */
+        /* ===== حاوية الصورة الرئيسية ===== */
         .image-container {
-            background: #12363d;
-            border-radius: 28px;
+            background: var(--primary-dark);
+            border-radius: 25px;
             overflow: hidden;
             aspect-ratio: 4/3;
-            border: 4px solid #c6ece3;
+            border: 4px solid var(--accent-light);
             position: relative;
-            margin-bottom: 16px;
+            margin-bottom: 15px;
             touch-action: none;
-            cursor: zoom-in;
         }
 
         #mainImage {
             width: 100%;
             height: 100%;
             object-fit: contain;
-            background: #12363d;
+            background: var(--primary-dark);
             display: block;
             transition: transform 0.2s ease-out;
             transform-origin: center center;
@@ -420,104 +360,130 @@
             touch-action: none;
         }
 
-        .zoom-controls {
+        .zoom-indicator {
             position: absolute;
-            bottom: 15px;
-            left: 50%;
-            transform: translateX(-50%);
-            background: rgba(0,0,0,0.7);
-            backdrop-filter: blur(8px);
-            padding: 6px 16px;
-            border-radius: 40px;
-            display: flex;
-            gap: 12px;
-            z-index: 20;
-            border: 1px solid #ffdb9c;
+            top: 10px;
+            right: 10px;
+            background: rgba(0,0,0,0.6);
+            color: white;
+            padding: 3px 10px;
+            border-radius: 30px;
+            font-size: 12px;
+            z-index: 15;
         }
 
-        .zoom-btn {
-            background: transparent;
+        /* ===== أزرار التحكم تحت الصورة ===== */
+        .image-controls {
+            display: flex;
+            gap: 10px;
+            justify-content: center;
+            margin: 10px 0 20px;
+        }
+
+        .control-btn {
+            background: var(--primary);
             border: none;
             color: white;
-            width: 36px;
-            height: 36px;
-            border-radius: 30px;
-            font-size: 16px;
+            width: 44px;
+            height: 44px;
+            border-radius: 50%;
+            font-size: 18px;
             cursor: pointer;
             display: flex;
             align-items: center;
             justify-content: center;
+            box-shadow: var(--shadow-md);
             transition: 0.2s;
         }
 
-        .zoom-btn:active {
-            background: #16636f;
+        .control-btn:active {
             transform: scale(0.9);
+            background: var(--primary-dark);
         }
 
-        .zoom-indicator {
-            position: absolute;
-            top: 12px;
-            right: 12px;
-            background: rgba(0,0,0,0.6);
-            backdrop-filter: blur(4px);
-            color: white;
-            padding: 4px 12px;
-            border-radius: 30px;
-            font-size: 12px;
-            z-index: 15;
-            border: 1px solid rgba(255,255,255,0.2);
+        .control-btn.reset {
+            background: var(--accent);
+            color: var(--primary-dark);
         }
 
-        /* ===== شروحات الصور ===== */
-        .explanation-box {
-            background: #f6fdfb;
+        .fullscreen-btn {
+            background: var(--primary-light);
+        }
+
+        /* ===== شرح الصورة ===== */
+        .explanation-section {
+            background: var(--card-bg);
             border-radius: 22px;
-            padding: 16px;
-            max-height: 300px;
-            overflow-y: auto;
-            line-height: 1.7;
-            font-size: 14px;
+            padding: 18px;
+            margin: 15px 0;
             border: 1px solid #c0e6dd;
-            white-space: pre-line;
-            scrollbar-width: thin;
         }
 
-        .explanation-title {
-            color: #16636f;
+        .section-title {
+            font-size: 18px;
             font-weight: 700;
-            margin: 12px 0 8px;
-            font-size: 15px;
+            color: var(--primary);
+            margin-bottom: 15px;
+            display: flex;
+            align-items: center;
+            gap: 8px;
+        }
+
+        .explanation-content {
+            line-height: 1.8;
+            font-size: 14px;
+            white-space: pre-line;
+        }
+
+        .explanation-content h2 {
+            font-size: 18px;
+            color: var(--primary);
+            margin: 15px 0 8px;
+        }
+
+        .explanation-content h3 {
+            font-size: 16px;
+            color: var(--primary-light);
+            margin: 12px 0 6px;
+        }
+
+        .explanation-content ul {
+            padding-right: 20px;
+            margin: 8px 0;
+        }
+
+        .explanation-content li {
+            margin: 4px 0;
         }
 
         /* ===== أزرار الإجراءات ===== */
         .action-buttons {
             display: flex;
             gap: 8px;
-            margin: 12px 0;
+            margin: 15px 0;
             flex-wrap: wrap;
         }
 
         .action-btn {
             flex: 1;
-            min-width: 70px;
+            min-width: 80px;
             background: white;
-            border: 1.5px solid #16636f;
-            padding: 8px 5px;
+            border: 1.5px solid var(--primary);
+            padding: 10px 5px;
             border-radius: 40px;
             font-weight: 600;
-            color: #16636f;
+            color: var(--primary);
             cursor: pointer;
             display: flex;
             align-items: center;
             justify-content: center;
-            gap: 4px;
-            font-size: 12px;
+            gap: 5px;
+            font-size: 13px;
             transition: 0.2s;
         }
 
         .action-btn:active {
-            background: #16636f;
+            background: var(--primary);
             color: white;
         }
 
@@ -527,45 +493,101 @@
             color: white;
         }
 
-        .action-btn:disabled {
-            opacity: 0.5;
+        /* ===== التنقل بين الصور ===== */
+        .nav-buttons {
+            display: flex;
+            gap: 10px;
+            margin: 15px 0;
+        }
+
+        .nav-btn {
+            flex: 1;
+            background: var(--primary);
+            border: none;
+            color: white;
+            padding: 12px;
+            border-radius: 40px;
+            font-weight: 600;
+            cursor: pointer;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 8px;
+        }
+
+        .nav-btn:disabled {
+            opacity: 0.4;
             pointer-events: none;
         }
 
-        /* ===== بطاقة الاختبار ===== */
-        .quiz-card {
-            background: white;
+        .nav-btn.secondary {
+            background: var(--accent);
+            color: var(--primary-dark);
+        }
+
+        /* ===== بطاقة الاختبار (مودل ستايل) ===== */
+        .quiz-container {
+            background: var(--card-bg);
             border-radius: 22px;
             padding: 18px;
-            margin-bottom: 16px;
-            border: 2px solid #16636f;
+            margin-bottom: 15px;
+            border: 2px solid var(--primary);
+        }
+
+        .quiz-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 15px;
+            padding-bottom: 10px;
+            border-bottom: 2px dashed var(--accent-light);
+        }
+
+        .quiz-title {
+            font-size: 18px;
+            font-weight: 700;
+            color: var(--primary);
+        }
+
+        .quiz-score {
+            background: var(--primary);
+            color: white;
+            padding: 5px 15px;
+            border-radius: 40px;
+            font-weight: 600;
+            font-size: 14px;
         }
 
         .quiz-question {
-            font-size: 15px;
+            font-size: 16px;
             font-weight: 700;
-            margin-bottom: 12px;
+            margin-bottom: 15px;
+            padding: 10px;
+            background: rgba(22,99,111,0.05);
+            border-radius: 15px;
         }
 
         .quiz-options {
-            display: grid;
-            grid-template-columns: repeat(2, 1fr);
-            gap: 8px;
+            display: flex;
+            flex-direction: column;
+            gap: 10px;
+            margin-bottom: 15px;
         }
 
         .quiz-option {
             background: #f0f7fa;
-            padding: 10px;
-            border-radius: 22px;
-            text-align: center;
+            padding: 14px 18px;
+            border-radius: 18px;
             cursor: pointer;
             border: 2px solid transparent;
             transition: 0.2s;
-            font-size: 13px;
+            font-weight: 500;
+            position: relative;
         }
 
         .quiz-option:hover {
-            border-color: #16636f;
+            border-color: var(--primary);
+            background: #e1f0ec;
         }
 
         .quiz-option.correct {
@@ -574,58 +596,102 @@
             border-color: #2e7d32;
         }
 
+        .quiz-option.correct::after {
+            content: '✓';
+            position: absolute;
+            left: 15px;
+            top: 50%;
+            transform: translateY(-50%);
+            font-size: 18px;
+            font-weight: 700;
+        }
+
         .quiz-option.wrong {
             background: #ff6b6b;
             color: white;
             border-color: #d32f2f;
         }
 
-        .quiz-feedback {
-            margin-top: 12px;
-            text-align: center;
-            font-weight: 600;
-            font-size: 13px;
-            padding: 8px;
-            border-radius: 30px;
-            background: #f0f7fa;
+        .quiz-option.wrong::after {
+            content: '✗';
+            position: absolute;
+            left: 15px;
+            top: 50%;
+            transform: translateY(-50%);
+            font-size: 18px;
+            font-weight: 700;
         }
 
-        .quiz-reset-btn {
-            background: #16636f;
+        .quiz-feedback {
+            margin: 15px 0 10px;
+            padding: 12px;
+            border-radius: 15px;
+            background: #f0f7fa;
+            font-size: 14px;
+        }
+
+        .quiz-explanation {
+            font-size: 14px;
+            color: var(--primary-dark);
+            margin-top: 8px;
+            padding-top: 8px;
+            border-top: 1px solid #c0e6dd;
+        }
+
+        .quiz-reset {
+            background: var(--primary);
             color: white;
             border: none;
-            padding: 10px 20px;
+            padding: 14px;
             border-radius: 40px;
-            font-weight: 600;
+            font-weight: 700;
             cursor: pointer;
             width: 100%;
-            margin-top: 10px;
+            margin-top: 15px;
+            font-size: 15px;
         }
 
         /* ===== بطاقة الإحصائيات ===== */
         .stats-grid {
             display: grid;
             grid-template-columns: repeat(3, 1fr);
-            gap: 8px;
-            margin-bottom: 16px;
+            gap: 10px;
+            margin-bottom: 20px;
         }
 
         .stat-card {
-            background: #f0f7fa;
+            background: var(--card-bg);
             border-radius: 18px;
-            padding: 12px;
+            padding: 15px;
             text-align: center;
+            box-shadow: var(--shadow-sm);
+            border: 1px solid #c0e6dd;
         }
 
         .stat-number {
-            font-size: 22px;
+            font-size: 24px;
             font-weight: 800;
-            color: #16636f;
+            color: var(--primary);
         }
 
         .stat-label {
-            font-size: 11px;
-            color: #4f7a7a;
+            font-size: 12px;
+            color: var(--text-light);
+            margin-top: 4px;
+        }
+
+        .progress-card {
+            background: var(--card-bg);
+            border-radius: 18px;
+            padding: 15px;
+            margin-bottom: 10px;
+        }
+
+        .progress-label {
+            display: flex;
+            justify-content: space-between;
+            margin-bottom: 5px;
+            font-size: 13px;
         }
 
         .progress-bar {
@@ -633,24 +699,23 @@
             background: #e1f0ec;
             border-radius: 20px;
             overflow: hidden;
-            margin: 8px 0;
         }
 
         .progress-fill {
             height: 100%;
-            background: #16636f;
+            background: var(--primary);
             border-radius: 20px;
             transition: width 0.3s;
         }
 
         /* ===== الشريط السفلي ===== */
         .bottom-nav {
-            background: #16636f;
+            background: var(--primary);
             display: flex;
             justify-content: space-around;
             align-items: center;
             padding: 6px 8px;
-            border-top: 2px solid #ffdb9c;
+            border-top: 2px solid var(--accent-light);
             color: white;
         }
 
@@ -676,50 +741,14 @@
         }
 
         .nav-item.active {
-            color: #ffdb9c;
+            color: var(--accent-light);
             background: rgba(255,255,255,0.1);
         }
 
-        /* ===== رسالة الخطأ ===== */
-        .error-message {
-            background: #ffede5;
-            border: 1.5px solid #c95a5a;
-            color: #a13b3b;
-            padding: 12px 20px;
-            border-radius: 45px;
-            margin: 15px 0;
-            display: none;
-            align-items: center;
-            gap: 10px;
-            font-size: 14px;
+        /* ===== كلاس hidden ===== */
+        .hidden {
+            display: none !important;
         }
-
-        /* ===== مؤشر التحميل ===== */
-        .loading-spinner {
-            display: inline-block;
-            width: 20px;
-            height: 20px;
-            border: 3px solid rgba(22,99,111,0.2);
-            border-radius: 50%;
-            border-top-color: #16636f;
-            animation: spin 0.8s linear infinite;
-        }
-
-        @keyframes spin {
-            to { transform: rotate(360deg); }
-        }
-
-        /* ===== تحسينات ===== */
-        .section-title {
-            font-size: 16px;
-            font-weight: 700;
-            color: #16636f;
-            margin: 16px 0 8px;
-        }
-
-        .mt-2 { margin-top: 8px; }
-        .mb-2 { margin-bottom: 8px; }
-        .text-center { text-align: center; }
     </style>
 </head>
 <body>
@@ -728,12 +757,12 @@
         <div class="top-nav">
             <div class="nav-left">
                 <i class="fas fa-bars menu-icon"></i>
-                <span class="app-title">أطلس التشريح</span>
+                <span class="app-title">تشريح</span>
             </div>
             <div class="nav-right">
                 <div class="status-badge" id="offlineStatus">
                     <i class="fas fa-cloud" id="statusIcon"></i>
-                    <span id="statusText">يتم التحميل...</span>
+                    <span id="statusText">جاهز</span>
                 </div>
                 <div class="dark-mode-toggle" id="darkModeToggle">
                     <i class="fas fa-moon"></i>
@@ -741,53 +770,38 @@
             </div>
         </div>
 
-        <!-- التبويبات العلوية -->
+        <!-- التبويبات -->
         <div class="tabs-container" id="topTabs">
             <div class="tab active" data-tab="home">الرئيسية</div>
             <div class="tab" data-tab="images">الصور</div>
-            <div class="tab" data-tab="quizzes">الاختبارات</div>
-            <div class="tab" data-tab="stats">الإحصائيات</div>
+            <div class="tab" data-tab="quizzes">اختبارات مودل</div>
+            <div class="tab" data-tab="stats">إحصائيات</div>
             <div class="tab" data-tab="favorites">المفضلة</div>
         </div>
 
-        <!-- منطقة المحتوى الرئيسية -->
+        <!-- منطقة المحتوى -->
         <div class="content-area" id="contentArea"></div>
 
         <!-- الشريط السفلي -->
         <div class="bottom-nav" id="bottomNav">
-            <div class="nav-item active" data-nav="home">
-                <i class="fas fa-home"></i>
-                <span>الرئيسية</span>
-            </div>
-            <div class="nav-item" data-nav="images">
-                <i class="fas fa-images"></i>
-                <span>الصور</span>
-            </div>
-            <div class="nav-item" data-nav="quizzes">
-                <i class="fas fa-question-circle"></i>
-                <span>الاختبارات</span>
-            </div>
-            <div class="nav-item" data-nav="stats">
-                <i class="fas fa-chart-bar"></i>
-                <span>الإحصائيات</span>
-            </div>
-            <div class="nav-item" data-nav="favorites">
-                <i class="fas fa-heart"></i>
-                <span>المفضلة</span>
-            </div>
+            <div class="nav-item active" data-nav="home"><i class="fas fa-home"></i><span>الرئيسية</span></div>
+            <div class="nav-item" data-nav="images"><i class="fas fa-images"></i><span>الصور</span></div>
+            <div class="nav-item" data-nav="quizzes"><i class="fas fa-question-circle"></i><span>اختبارات</span></div>
+            <div class="nav-item" data-nav="stats"><i class="fas fa-chart-bar"></i><span>إحصائيات</span></div>
+            <div class="nav-item" data-nav="favorites"><i class="fas fa-heart"></i><span>المفضلة</span></div>
         </div>
     </div>
 
     <script>
         (function() {
-            // ===== بيانات الصور والشروحات =====
+            // ===== بيانات الصور والشروحات الكاملة =====
             const imageFiles = [
                 '1.jpg', '2.jpg', '3.jpg', '4.jpg', '5.jpg',
                 '6.jpg', '7.jpg', '8.jpg', '9.jpg'
             ];
 
+            // الشروحات المفصلة الكاملة
             const explanations = [
-                // الصورة 1 - مقدمة في التشريح
                 `# CHAPTER ONE: INTRODUCTION TO HUMAN ANATOMY AND PHYSIOLOGY
 الفصل الأول: مقدمة في تشريح ووظائف الأعضاء البشري
 
@@ -802,10 +816,10 @@ Physiology is the study of body function. يركز على دراسة كيفية 
 • Microscopic anatomy (التشريح المجهري): دراسة التراكيب الدقيقة
 
 ## TISSUE | الأنسجة
-• Epithelial tissue / نسيج طلائي
-• Connective tissue / نسيج ضام
-• Muscle tissue / نسيج عضلي
-• Nerve tissue / نسيج عصبي
+• Epithelial tissue / نسيج طلائي: يغطي أسطح الجسم
+• Connective tissue / نسيج ضام: يدعم ويربط الأجزاء
+• Muscle tissue / نسيج عضلي: مسؤول عن الحركة
+• Nerve tissue / نسيج عصبي: ينقل الإشارات
 
 ## LEVEL OF STRUCTURAL ORGANIZATION | مستويات التنظيم
 1. Chemical level: Atoms → Molecules (H₂O, CO₂)
@@ -815,7 +829,6 @@ Physiology is the study of body function. يركز على دراسة كيفية 
 5. System level: Systems (Respiratory System)
 6. Organism level: Human body`,
 
-                // الصورة 2 - المصطلحات الاتجاهية
                 `# ANATOMICAL DIRECTIONAL TERMS | المصطلحات الاتجاهية
 
 ## Superior (cranial) | العلوي (القحفي)
@@ -840,9 +853,14 @@ Away from the midline. مثال: الذراعان وحشيان للصدر
 Closer to attachment. مثال: الكوع داني للمعصم
 
 ## Distal | القاصي
-Farther from attachment. مثال: الركبة قاصية للفخذ`,
+Farther from attachment. مثال: الركبة قاصية للفخذ
 
-                // الصورة 3 - مناطق الجسم
+## Superficial | السطحي
+Toward the surface. مثال: الجلد سطحي للعضلات
+
+## Deep | العميق
+Away from the surface. مثال: العظام عميقة للجلد`,
+
                 `# BODY REGIONS | مناطق الجسم
 
 ## Head | الرأس
@@ -859,36 +877,46 @@ Cervical region (المنطقة العنقية)
 • Vertebral region (الظهر)
 
 ## Upper Limb | الطرف العلوي
-Shoulder, Arm, Forearm, Hand
+• Shoulder (كتف)
+• Arm (عضد)
+• Forearm (ساعد)
+• Hand (يد)
 
 ## Lower Limb | الطرف السفلي
-Thigh, Leg, Foot`,
+• Thigh (فخذ)
+• Leg (ساق)
+• Foot (قدم)`,
 
-                // الصورة 4 - مستويات التنظيم
                 `# LEVELS OF ORGANIZATION | مستويات التنظيم
 
 ## 1. Chemical level | المستوى الكيميائي
-Atoms → Molecules (H₂O, CO₂, O₂)
+Atoms combine to form molecules. تتحد الذرات لتكوين الجزيئات.
+مثال: H₂O, CO₂, O₂, Glucose
 
 ## 2. Cellular level | المستوى الخلوي
-Cells: basic unit of life. تحتوي على نواة وميتوكوندريا
+Cells are the basic unit of life. الخلايا هي الوحدة الأساسية للحياة.
+• Nucleus (نواة): تحتوي على DNA
+• Mitochondria (ميتوكوندريا): تنتج الطاقة
+• Cell membrane (غشاء خلوي): يتحكم بالدخول والخروج
 
 ## 3. Tissue level | المستوى النسيجي
-Groups of similar cells. أربعة أنواع رئيسية
+Groups of similar cells. مجموعات من الخلايا المتشابهة.
+• Epithelial tissue (طلائي)
+• Connective tissue (ضام)
+• Muscle tissue (عضلي)
+• Nervous tissue (عصبي)
 
 ## 4. Organ level | المستوى العضوي
-Different tissues work together. مثل القلب والكبد
+Different tissues work together. أنسجة مختلفة تعمل معاً.
+مثال: Heart (قلب), Liver (كبد), Stomach (معدة)
 
 ## 5. System level | مستوى الجهاز
-Organs work together. مثل الجهاز القلبي الوعائي
+Organs work together. أعضاء تعمل معاً.
+مثال: Cardiovascular system (جهاز دوري), Respiratory system (جهاز تنفسي)
 
 ## 6. Organism level | مستوى الكائن الحي
-All systems working together
+All systems working together. جميع الأجهزة تعمل معاً.`,
 
-## Anatomical Position | الوضعية التشريحية
-Standing erect, facing forward, palms forward`,
-
-                // الصورة 5 - البطن ومستويات الجسم
                 `# ABDOMINAL REGIONS | المناطق البطنية
 
 ## Nine Regions | تسع مناطق
@@ -903,37 +931,36 @@ Standing erect, facing forward, palms forward`,
 9. Left iliac (حرقفي أيسر)
 
 ## Four Quadrants | أربعة أرباع
-• Right Upper Quadrant (RUQ)
-• Left Upper Quadrant (LUQ)
-• Right Lower Quadrant (RLQ)
-• Left Lower Quadrant (LLQ)
+• Right Upper Quadrant (RUQ): الكبد، المرارة
+• Left Upper Quadrant (LUQ): المعدة، الطحال
+• Right Lower Quadrant (RLQ): الزائدة الدودية
+• Left Lower Quadrant (LLQ): الأمعاء
 
 ## Body Planes | مستويات الجسم
-• Sagittal: right and left halves
-• Frontal: front and back
-• Transverse: upper and lower`,
+• Sagittal plane (سهمي): يقسم الجسم إلى يمين ويسار
+• Frontal plane (إكليلي): يقسم إلى أمام وخلف
+• Transverse plane (مستعرض): يقسم إلى علوي وسفلي`,
 
-                // الصورة 6 - تجاويف الجسم
                 `# BODY CAVITIES | تجاويف الجسم
 
 ## Thoracic Cavity | التجويف الصدري
 Contains heart and lungs. يحتوي على القلب والرئتين
 • Mediastinum (المنصف): contains heart, trachea, esophagus
-• Pericardial cavity (التجويف التاموري): surrounds heart
+• Pleural cavities (تجاويف جنبية): surround lungs
+• Pericardial cavity (تجويف تاموري): surrounds heart
 
 ## Abdominopelvic Cavity | التجويف البطني الحوضي
 • Abdominal cavity (بطني): stomach, liver, intestines
 • Pelvic cavity (حوضي): bladder, reproductive organs
 
 ## HOMEOSTASIS | الاتزان الداخلي
-Stability of internal environment
+Stability of internal environment. استقرار البيئة الداخلية للجسم
 
 ## Components | مكونات
 • Receptor (مستقبل): detects change
 • Control center (مركز تحكم): processes information
 • Effector (منفذ): responds to change`,
 
-                // الصورة 7 - هرمية التجاويف
                 `# BODY CAVITIES HIERARCHY | هرمية التجاويف
 
 ## Dorsal Cavity | التجويف الظهراني
@@ -944,90 +971,195 @@ Stability of internal environment
 • Thoracic cavity (صدري): heart and lungs
   - Pleural cavities (جنبية): surround lungs
   - Pericardial cavity (تاموري): surrounds heart
+  - Mediastinum (المنصف): between lungs
 • Abdominopelvic cavity (بطني حوضي)
   - Abdominal (بطني): digestive organs
-  - Pelvic (حوضي): bladder, reproductive
+  - Pelvic (حوضي): bladder, reproductive organs
 
 ## Diaphragm | الحجاب الحاجز
-Separates thoracic and abdominal cavities`,
+Separates thoracic and abdominal cavities. يفصل بين التجويف الصدري والبطن
 
-                // الصورة 8 - التغذية الراجعة السلبية
+## Table Summary | جدول ملخص
+| Cavity | Contents |
+|--------|----------|
+| Cranial | Brain |
+| Vertebral | Spinal cord |
+| Thoracic | Heart, lungs |
+| Abdominal | Digestive organs |
+| Pelvic | Bladder, reproductive |`,
+
                 `# NEGATIVE FEEDBACK | التغذية الراجعة السلبية
 
-## Blood Glucose Regulation | تنظيم السكر
-High glucose:
-• Beta cells release insulin
-• Cells take up glucose
-• Liver stores glycogen
-• Glucose decreases
+## Definition | تعريف
+A mechanism that reverses a change in the body. آلية تعكس التغيير في الجسم
 
-Low glucose:
-• Alpha cells release glucagon
-• Liver breaks down glycogen
-• Glucose increases
+## Blood Glucose Regulation | تنظيم سكر الدم
 
-## Body Temperature | درجة الحرارة
-High temperature:
-• Sweating
-• Blood vessels dilate
-• Heat loss → cooling
+High glucose (ارتفاع السكر):
+• Beta cells release insulin (خلايا بيتا تفرز أنسولين)
+• Cells take up glucose (الخلايا تمتص السكر)
+• Liver stores glycogen (الكبد يخزن جليكوجين)
+• Glucose decreases (ينخفض السكر)
 
-Low temperature:
-• Shivering
-• Blood vessels constrict
-• Heat production → warming`,
+Low glucose (انخفاض السكر):
+• Alpha cells release glucagon (خلايا ألفا تفرز جلوكاجون)
+• Liver breaks down glycogen (الكبد يكسر الجليكوجين)
+• Glucose increases (يرتفع السكر)
 
-                // الصورة 9 - التغذية الراجعة الإيجابية
+## Body Temperature Regulation | تنظيم درجة الحرارة
+
+High temperature (ارتفاع الحرارة):
+• Sweating (تعرق)
+• Blood vessels dilate (توسع أوعية)
+• Heat loss (فقدان حرارة)
+• Temperature decreases (تنخفض الحرارة)
+
+Low temperature (انخفاض الحرارة):
+• Shivering (ارتجاف)
+• Blood vessels constrict (تضيق أوعية)
+• Heat production (إنتاج حرارة)
+• Temperature increases (ترتفع الحرارة)`,
+
                 `# POSITIVE FEEDBACK | التغذية الراجعة الإيجابية
+
+## Definition | تعريف
+A mechanism that amplifies a change in the body. آلية تضخم التغيير في الجسم
 
 ## Childbirth Example | مثال الولادة
 1. Baby's head pushes against cervix
+   (رأس الجنين يضغط على عنق الرحم)
 2. Nerve impulses sent to brain
+   (نبضات عصبية ترسل للدماغ)
 3. Brain stimulates pituitary to release oxytocin
+   (الدماغ يحفز الغدة النخامية لإفراز الأوكسيتوسين)
 4. Oxytocin stimulates uterine contractions
+   (الأوكسيتوسين يحفز انقباضات الرحم)
 5. Baby pushed further against cervix
+   (يدفع الجنين بقوة أكبر)
 6. Cycle continues until birth
+   (تستمر الدورة حتى الولادة)
 
 ## Other Examples | أمثلة أخرى
 • Blood clotting (تجلط الدم)
 • Fever (الحمى)
+• Labor contractions (انقباضات الولادة)
 
 ## Comparison | مقارنة
-Negative feedback: reverses change → stability
-Positive feedback: amplifies change → completion`
+Negative feedback: reverses change → stability (استقرار)
+Positive feedback: amplifies change → completion (إتمام)`
             ];
 
-            // أسئلة الاختبارات
+            // أسئلة الاختبارات (مودل ستايل)
             const quizQuestions = [
                 {
-                    question: "What does 'Medial' mean?",
-                    options: ['Toward midline', 'Away from midline', 'Above', 'Below'],
+                    question: "What does the term 'Medial' mean in anatomy?",
+                    options: [
+                        'Toward the midline of the body',
+                        'Away from the midline of the body',
+                        'Toward the head end',
+                        'Toward the back of the body'
+                    ],
                     correct: 0,
-                    explanation: "Medial means toward the midline of the body."
+                    explanation: "Medial means toward the midline of the body. For example, the heart is medial to the arms."
                 },
                 {
-                    question: "Which cavity contains the heart?",
-                    options: ['Cranial', 'Thoracic', 'Abdominal', 'Pelvic'],
+                    question: "Which body cavity contains the heart and lungs?",
+                    options: [
+                        'Cranial cavity',
+                        'Thoracic cavity',
+                        'Abdominal cavity',
+                        'Pelvic cavity'
+                    ],
                     correct: 1,
-                    explanation: "The heart is located in the thoracic cavity."
+                    explanation: "The thoracic cavity contains the heart and lungs. It is protected by the rib cage and sternum."
                 },
                 {
                     question: "What is the study of tissues called?",
-                    options: ['Anatomy', 'Physiology', 'Histology', 'Cytology'],
+                    options: [
+                        'Anatomy',
+                        'Physiology',
+                        'Histology',
+                        'Cytology'
+                    ],
                     correct: 2,
-                    explanation: "Histology is the study of tissues."
+                    explanation: "Histology is the study of tissues. It examines the structure and function of tissues at the microscopic level."
                 },
                 {
-                    question: "Which term means 'toward the front'?",
-                    options: ['Posterior', 'Dorsal', 'Anterior', 'Superior'],
+                    question: "Which term means 'toward the front of the body'?",
+                    options: [
+                        'Posterior',
+                        'Dorsal',
+                        'Anterior',
+                        'Superior'
+                    ],
                     correct: 2,
-                    explanation: "Anterior means toward the front."
+                    explanation: "Anterior (or ventral) means toward the front of the body. For example, the breastbone is anterior to the spine."
                 },
                 {
                     question: "What is the basic unit of life?",
-                    options: ['Atom', 'Molecule', 'Cell', 'Tissue'],
+                    options: [
+                        'Atom',
+                        'Molecule',
+                        'Cell',
+                        'Tissue'
+                    ],
                     correct: 2,
-                    explanation: "The cell is the basic unit of life."
+                    explanation: "The cell is the basic unit of life. All living organisms are composed of cells."
+                },
+                {
+                    question: "Which type of tissue covers body surfaces and lines cavities?",
+                    options: [
+                        'Muscle tissue',
+                        'Nerve tissue',
+                        'Connective tissue',
+                        'Epithelial tissue'
+                    ],
+                    correct: 3,
+                    explanation: "Epithelial tissue covers body surfaces, lines cavities, and forms glands. It provides protection and regulates absorption and secretion."
+                },
+                {
+                    question: "What is homeostasis?",
+                    options: [
+                        'The study of body structure',
+                        'The study of body function',
+                        'Maintenance of stable internal environment',
+                        'The process of cell division'
+                    ],
+                    correct: 2,
+                    explanation: "Homeostasis is the maintenance of a stable internal environment. It involves regulatory mechanisms that keep conditions within normal ranges."
+                },
+                {
+                    question: "Which plane divides the body into superior and inferior parts?",
+                    options: [
+                        'Sagittal plane',
+                        'Frontal plane',
+                        'Transverse plane',
+                        'Oblique plane'
+                    ],
+                    correct: 2,
+                    explanation: "The transverse (horizontal) plane divides the body into superior (upper) and inferior (lower) parts."
+                },
+                {
+                    question: "What does 'Proximal' mean?",
+                    options: [
+                        'Closer to the point of attachment',
+                        'Farther from the point of attachment',
+                        'Toward the midline',
+                        'Away from the midline'
+                    ],
+                    correct: 0,
+                    explanation: "Proximal means closer to the point of attachment. For example, the elbow is proximal to the wrist."
+                },
+                {
+                    question: "Which system is responsible for gas exchange?",
+                    options: [
+                        'Cardiovascular system',
+                        'Respiratory system',
+                        'Digestive system',
+                        'Nervous system'
+                    ],
+                    correct: 1,
+                    explanation: "The respiratory system is responsible for gas exchange. It brings oxygen into the body and removes carbon dioxide."
                 }
             ];
 
@@ -1046,9 +1178,7 @@ Positive feedback: amplifies change → completion`
             function saveSessionData(data) {
                 try {
                     localStorage.setItem('session_data_' + SESSION_ID, JSON.stringify(data));
-                } catch (e) {
-                    console.log('Error saving session:', e);
-                }
+                } catch (e) {}
             }
 
             function loadSessionData() {
@@ -1077,19 +1207,18 @@ Positive feedback: amplifies change → completion`
             const totalImages = imageFiles.length;
             let favorites = [];
             let studiedImages = new Array(imageFiles.length).fill(false);
-            let quizScore = 0;
-            let answeredQuestions = new Array(quizQuestions.length).fill(false);
+            let quizScores = new Array(quizQuestions.length).fill(null);
+            let quizAnswers = new Array(quizQuestions.length).fill(null);
             let darkMode = false;
             let currentTab = 'home';
-            let eventListeners = [];
 
             // تحميل بيانات الجلسة
             const sessionData = loadSessionData();
             if (sessionData) {
                 if (sessionData.favorites) favorites = sessionData.favorites;
                 if (sessionData.studiedImages) studiedImages = sessionData.studiedImages;
-                if (sessionData.quizScore) quizScore = sessionData.quizScore;
-                if (sessionData.answeredQuestions) answeredQuestions = sessionData.answeredQuestions;
+                if (sessionData.quizScores) quizScores = sessionData.quizScores;
+                if (sessionData.quizAnswers) quizAnswers = sessionData.quizAnswers;
                 if (sessionData.darkMode) darkMode = sessionData.darkMode;
                 if (sessionData.lastImage) currentIndex = sessionData.lastImage;
             }
@@ -1100,66 +1229,61 @@ Positive feedback: amplifies change → completion`
             const topTabs = document.querySelectorAll('.tab');
             const darkModeToggle = document.getElementById('darkModeToggle');
             const statusText = document.getElementById('statusText');
-            const statusIcon = document.getElementById('statusIcon');
 
-            // ===== دوال عامة للتسجيل في window =====
+            // ===== دوال عامة =====
             window.App = {
                 changeImage: function(index) {
                     if (index < 0 || index >= imageFiles.length) return;
                     currentIndex = index;
                     studiedImages[index] = true;
                     updateStats();
-                    
-                    if (currentTab === 'images' || currentTab === 'favorites' || currentTab === 'home') {
+                    if (currentTab === 'images' || currentTab === 'favorites') {
                         renderContent(currentTab);
+                    } else {
+                        renderContent('images');
                     }
                 },
                 
-                toggleExplanation: function() {
-                    const exp = document.getElementById('studyExplanation');
-                    if (exp) exp.classList.toggle('hidden');
-                },
-                
                 resetQuiz: function() {
-                    quizScore = 0;
-                    answeredQuestions = new Array(quizQuestions.length).fill(false);
+                    quizScores = new Array(quizQuestions.length).fill(null);
+                    quizAnswers = new Array(quizQuestions.length).fill(null);
                     updateStats();
                     renderContent('quizzes');
                 },
                 
-                showToast: function(message) {
-                    alert(message);
+                answerQuiz: function(qIndex, optIndex, isCorrect) {
+                    if (quizAnswers[qIndex] !== null) return;
+                    
+                    quizAnswers[qIndex] = optIndex;
+                    quizScores[qIndex] = isCorrect;
+                    
+                    updateStats();
+                    renderContent('quizzes');
                 }
             };
 
             // ===== تحديث الإحصائيات =====
             function updateStats() {
-                const studied = studiedImages.filter(v => v).length;
-                
                 saveSessionData({
                     favorites,
                     studiedImages,
-                    quizScore,
-                    answeredQuestions,
+                    quizScores,
+                    quizAnswers,
                     darkMode,
                     lastImage: currentIndex
                 });
             }
 
-            // ===== عرض المحتوى حسب التبويب =====
+            // ===== عرض المحتوى =====
             function renderContent(tab) {
                 currentTab = tab;
                 
-                // تحديث التبويبات العلوية
                 topTabs.forEach(t => {
-                    if (t.dataset.tab === tab) t.classList.add('active');
-                    else t.classList.remove('active');
+                    t.classList.toggle('active', t.dataset.tab === tab);
                 });
 
-                // تحديث الشريط السفلي
                 bottomNavItems.forEach(item => {
-                    if (item.dataset.nav === tab) item.classList.add('active');
-                    else item.classList.remove('active');
+                    item.classList.toggle('active', item.dataset.nav === tab);
                 });
 
                 let html = '';
@@ -1174,7 +1298,6 @@ Positive feedback: amplifies change → completion`
 
                 contentArea.innerHTML = html;
                 
-                // تهيئة عناصر الصورة إذا كنا في صفحة images
                 if (tab === 'images') {
                     setTimeout(() => {
                         initImageElements();
@@ -1182,170 +1305,188 @@ Positive feedback: amplifies change → completion`
                 }
             }
 
-            // ===== الصفحة الرئيسية مع الإهداء والبحث في الأعلى =====
+            // ===== الصفحة الرئيسية =====
             function renderHome() {
                 const studied = studiedImages.filter(v => v).length;
-                const studiedPercent = Math.round((studied / imageFiles.length) * 100);
+                const correctAnswers = quizScores.filter(s => s === true).length;
+                const totalQuestions = quizQuestions.length;
+                const scorePercent = Math.round((correctAnswers / totalQuestions) * 100) || 0;
                 
                 return `
-                    <!-- قسم الإهداء في الأعلى -->
-                    <div class="martyr-section">
-                        <div class="martyr-title">إهداء لروح الشهيد الطاهرة</div>
-                        <div class="martyr-name">ياسر عطيه المصري (ابو مصعب)</div>
-                        <div class="martyr-dua">
+                    <!-- قسم الإهداء -->
+                    <div class="dedication-section">
+                        <div class="dedication-title">إهداء</div>
+                        <div class="dedication-name">ياسر عطيه المصري (ابو مصعب)</div>
+                        <div class="dedication-dua">
                             <i class="fas fa-quote-right"></i>
-                            نسأل الله أن يتقبله في الشهداء، وأن يرفع درجته في عليين، 
-                            وأن يجعل هذا العمل صدقة جارية له إلى يوم الدين 
+                            اللهم ارحمه واغفر له وأسكنه الفردوس الأعلى
                             <i class="fas fa-quote-left"></i>
-                            <span>🤲</span>
                         </div>
                     </div>
 
-                    <!-- شريط البحث تحت الإهداء مباشرة -->
+                    <!-- بطاقة الترحيب -->
+                    <div class="welcome-card">
+                        <div class="welcome-text">أهلاً بك</div>
+                        <div class="start-text">ابدأ الدراسة</div>
+                    </div>
+
+                    <!-- البحث -->
                     <div class="search-box">
                         <i class="fas fa-search"></i>
-                        <input type="text" id="searchInput" placeholder="ابحث عن مصطلح في الشروحات...">
+                        <input type="text" id="searchInput" placeholder="ابحث في الشروحات...">
                     </div>
 
-                    <div class="card">
-                        <div class="card-header">
-                            <h2><i class="fas fa-images"></i> الصور التشريحية</h2>
-                        </div>
-                        
-                        <div class="icon-grid" id="homeIconGrid">
-                            ${imageFiles.map((_, i) => `
-                                <div class="icon-item ${favorites.includes(i) ? 'favorite' : ''}" onclick="App.changeImage(${i})">
-                                    <i class="fas fa-image"></i>
-                                    <span>${i + 1}</span>
-                                </div>
-                            `).join('')}
-                        </div>
+                    <!-- شبكة الصور -->
+                    <div class="images-grid" id="homeImageGrid">
+                        ${imageFiles.map((_, i) => `
+                            <div class="image-thumb ${favorites.includes(i) ? 'favorite' : ''}" onclick="App.changeImage(${i})">
+                                <div class="thumb-img">🫀</div>
+                                <div class="thumb-number">صورة ${i + 1}</div>
+                            </div>
+                        `).join('')}
                     </div>
 
-                    <div class="card">
-                        <div class="card-header">
-                            <h2><i class="fas fa-star"></i> تقدمك</h2>
+                    <!-- إحصائيات سريعة -->
+                    <div class="stats-grid">
+                        <div class="stat-card">
+                            <div class="stat-number">${studied}</div>
+                            <div class="stat-label">صور درستها</div>
                         </div>
-                        <div class="stats-grid">
-                            <div class="stat-card">
-                                <div class="stat-number">${studied}</div>
-                                <div class="stat-label">صور درستها</div>
-                            </div>
-                            <div class="stat-card">
-                                <div class="stat-number">${favorites.length}</div>
-                                <div class="stat-label">المفضلة</div>
-                            </div>
-                            <div class="stat-card">
-                                <div class="stat-number">${Math.round((quizScore / (quizQuestions.length * 10)) * 100) || 0}%</div>
-                                <div class="stat-label">الاختبارات</div>
-                            </div>
+                        <div class="stat-card">
+                            <div class="stat-number">${favorites.length}</div>
+                            <div class="stat-label">المفضلة</div>
                         </div>
-                        
-                        <div class="progress-bar">
-                            <div class="progress-fill" style="width: ${studiedPercent}%"></div>
+                        <div class="stat-card">
+                            <div class="stat-number">${scorePercent}%</div>
+                            <div class="stat-label">الاختبارات</div>
                         </div>
-                        <div class="text-center">تقدم الدراسة: ${studiedPercent}%</div>
                     </div>
                 `;
             }
 
-            // ===== صفحة الصور مع تحسين التكبير والتحريك =====
+            // ===== صفحة الصور =====
             function renderImages() {
                 return `
-                    <div class="card">
-                        <div class="card-header">
-                            <h2><i class="fas fa-image"></i> الصورة ${currentIndex + 1}</h2>
-                            <span style="background: #16636f; color: white; padding: 4px 12px; border-radius: 30px; font-size: 12px;">${imageFiles[currentIndex]}</span>
-                        </div>
+                    <div class="image-container" id="imageContainer">
+                        <img id="mainImage" src="${imageFiles[currentIndex]}" alt="صورة تشريحية">
+                        <div class="touch-overlay" id="touchOverlay"></div>
+                        <div class="zoom-indicator" id="zoomLevel">1.0x</div>
+                    </div>
 
-                        <div class="image-container" id="imageContainer">
-                            <img id="mainImage" src="${imageFiles[currentIndex]}" alt="صورة تشريحية" crossorigin="anonymous">
-                            <div class="touch-overlay" id="touchOverlay"></div>
-                            
-                            <div class="zoom-indicator">
-                                <span id="zoomLevel">1.0x</span>
-                            </div>
+                    <!-- أزرار التحكم تحت الصورة -->
+                    <div class="image-controls">
+                        <button class="control-btn" id="zoomOut"><i class="fas fa-minus"></i></button>
+                        <button class="control-btn reset" id="zoomReset"><i class="fas fa-undo-alt"></i></button>
+                        <button class="control-btn" id="zoomIn"><i class="fas fa-plus"></i></button>
+                        <button class="control-btn fullscreen-btn" id="fullscreenBtn"><i class="fas fa-expand"></i></button>
+                    </div>
 
-                            <div class="zoom-controls">
-                                <button class="zoom-btn" id="zoomOut"><i class="fas fa-minus"></i></button>
-                                <button class="zoom-btn" id="zoomReset"><i class="fas fa-undo-alt"></i></button>
-                                <button class="zoom-btn" id="zoomIn"><i class="fas fa-plus"></i></button>
-                            </div>
-                        </div>
+                    <!-- أزرار الإجراءات -->
+                    <div class="action-buttons">
+                        <button class="action-btn ${favorites.includes(currentIndex) ? 'favorite-active' : ''}" id="favoriteBtn">
+                            <i class="fas fa-heart"></i> مفضلة
+                        </button>
+                        <button class="action-btn" id="downloadBtn">
+                            <i class="fas fa-download"></i> تحميل
+                        </button>
+                        <button class="action-btn" id="speakBtn">
+                            <i class="fas fa-volume-up"></i> استماع
+                        </button>
+                    </div>
 
-                        <div class="action-buttons">
-                            <button class="action-btn ${favorites.includes(currentIndex) ? 'favorite-active' : ''}" id="favoriteBtn">
-                                <i class="fas fa-heart"></i> مفضلة
-                            </button>
-                            <button class="action-btn" id="downloadBtn">
-                                <i class="fas fa-download"></i> تحميل
-                            </button>
-                            <button class="action-btn" id="speakBtn">
-                                <i class="fas fa-volume-up"></i> استماع
-                            </button>
-                        </div>
+                    <!-- التنقل بين الصور -->
+                    <div class="nav-buttons">
+                        <button class="nav-btn" onclick="App.changeImage(${currentIndex - 1})" ${currentIndex === 0 ? 'disabled' : ''}>
+                            <i class="fas fa-arrow-right"></i> السابقة
+                        </button>
+                        <button class="nav-btn secondary" onclick="App.changeImage(${currentIndex + 1})" ${currentIndex === imageFiles.length - 1 ? 'disabled' : ''}>
+                            التالية <i class="fas fa-arrow-left"></i>
+                        </button>
+                    </div>
 
-                        <div class="explanation-title">
-                            <i class="fas fa-pen"></i> شرح الصورة
+                    <!-- شرح الصورة -->
+                    <div class="explanation-section">
+                        <div class="section-title">
+                            <i class="fas fa-pen"></i> شرح الصورة ${currentIndex + 1}
                         </div>
-                        <div class="explanation-box">
+                        <div class="explanation-content">
                             ${explanations[currentIndex].replace(/\n/g, '<br>')}
-                        </div>
-
-                        <div style="display: flex; gap: 8px; margin-top: 12px;">
-                            <button class="action-btn" onclick="App.changeImage(${currentIndex - 1})" ${currentIndex === 0 ? 'disabled' : ''}>
-                                <i class="fas fa-arrow-right"></i> السابقة
-                            </button>
-                            <button class="action-btn" onclick="App.changeImage(${currentIndex + 1})" ${currentIndex === imageFiles.length - 1 ? 'disabled' : ''}>
-                                التالية <i class="fas fa-arrow-left"></i>
-                            </button>
                         </div>
                     </div>
                 `;
             }
 
-            // ===== صفحة الاختبارات =====
+            // ===== صفحة الاختبارات (مودل ستايل) =====
             function renderQuizzes() {
-                const score = Math.round((quizScore / (quizQuestions.length * 10)) * 100) || 0;
+                const correctAnswers = quizScores.filter(s => s === true).length;
+                const totalQuestions = quizQuestions.length;
+                const scorePercent = Math.round((correctAnswers / totalQuestions) * 100) || 0;
                 
-                return `
-                    <div class="card">
-                        <div class="card-header">
-                            <h2><i class="fas fa-question-circle"></i> اختبار سريع</h2>
+                let html = `
+                    <div class="quiz-container">
+                        <div class="quiz-header">
+                            <div class="quiz-title">اختبارات مودل</div>
+                            <div class="quiz-score">${scorePercent}%</div>
                         </div>
                         
-                        <div style="margin-bottom: 16px;">
-                            <div style="display: flex; justify-content: space-between; align-items: center;">
-                                <span>نتيجتك: ${score}%</span>
-                                <button class="action-btn" onclick="App.resetQuiz()" style="width: auto; padding: 5px 15px;">
-                                    <i class="fas fa-redo"></i> إعادة
-                                </button>
+                        <div style="margin-bottom: 20px;">
+                            <div style="display: flex; justify-content: space-between; margin-bottom: 5px;">
+                                <span>تقدمك: ${correctAnswers}/${totalQuestions}</span>
                             </div>
                             <div class="progress-bar">
-                                <div class="progress-fill" style="width: ${score}%"></div>
+                                <div class="progress-fill" style="width: ${scorePercent}%"></div>
                             </div>
                         </div>
+                `;
 
-                        <div id="quizContainer">
-                            ${quizQuestions.map((q, i) => `
-                                <div class="quiz-card" data-question="${i}">
-                                    <div class="quiz-question">${i + 1}. ${q.question}</div>
-                                    <div class="quiz-options">
-                                        ${q.options.map((opt, j) => `
-                                            <div class="quiz-option ${answeredQuestions[i] && j === q.correct ? 'correct' : ''} ${answeredQuestions[i] && j !== q.correct ? 'wrong' : ''}" 
-                                                 data-option="${j}" data-correct="${j === q.correct}" data-question="${i}">
-                                                ${opt}
-                                            </div>
-                                        `).join('')}
-                                    </div>
-                                    <div class="quiz-feedback" id="feedback-${i}">
-                                        ${answeredQuestions[i] ? (quizScore > (i * 10) ? '✅ إجابة صحيحة' : '❌ إجابة خاطئة') : ''}
-                                    </div>
-                                </div>
-                            `).join('')}
-                        </div>
+                quizQuestions.forEach((q, i) => {
+                    const answered = quizAnswers[i] !== null;
+                    const isCorrect = quizScores[i] === true;
+                    
+                    html += `
+                        <div class="quiz-question">${i + 1}. ${q.question}</div>
+                        <div class="quiz-options">
+                    `;
+                    
+                    q.options.forEach((opt, j) => {
+                        const isSelected = quizAnswers[i] === j;
+                        const isCorrectOpt = j === q.correct;
+                        
+                        let optionClass = 'quiz-option';
+                        if (answered) {
+                            if (isCorrectOpt) optionClass += ' correct';
+                            if (isSelected && !isCorrectOpt) optionClass += ' wrong';
+                        }
+                        
+                        html += `
+                            <div class="${optionClass}" 
+                                 onclick="App.answerQuiz(${i}, ${j}, ${j === q.correct})"
+                                 ${answered ? 'style="pointer-events: none;"' : ''}>
+                                ${opt}
+                            </div>
+                        `;
+                    });
+                    
+                    html += `</div>`;
+                    
+                    if (answered) {
+                        html += `
+                            <div class="quiz-feedback">
+                                ${isCorrect ? '✅ إجابة صحيحة' : '❌ إجابة خاطئة'}
+                                <div class="quiz-explanation">${q.explanation}</div>
+                            </div>
+                        `;
+                    }
+                });
+
+                html += `
+                        <button class="quiz-reset" onclick="App.resetQuiz()">
+                            <i class="fas fa-redo"></i> إعادة الاختبار
+                        </button>
                     </div>
                 `;
+
+                return html;
             }
 
             // ===== صفحة الإحصائيات =====
@@ -1353,38 +1494,52 @@ Positive feedback: amplifies change → completion`
                 const studied = studiedImages.filter(v => v).length;
                 const studiedPercent = Math.round((studied / imageFiles.length) * 100);
                 const favoritePercent = Math.round((favorites.length / imageFiles.length) * 100);
-                const quizPercent = Math.round((quizScore / (quizQuestions.length * 10)) * 100) || 0;
+                const correctAnswers = quizScores.filter(s => s === true).length;
+                const quizPercent = Math.round((correctAnswers / quizQuestions.length) * 100) || 0;
 
                 return `
-                    <div class="card">
-                        <div class="card-header">
-                            <h2><i class="fas fa-chart-bar"></i> إحصائياتك</h2>
+                    <div class="stats-grid">
+                        <div class="stat-card">
+                            <div class="stat-number">${studied}</div>
+                            <div class="stat-label">صور درستها</div>
                         </div>
-                        
-                        <div class="stats-grid">
-                            <div class="stat-card">
-                                <div class="stat-number">${studied}</div>
-                                <div class="stat-label">صور درستها</div>
-                            </div>
-                            <div class="stat-card">
-                                <div class="stat-number">${favorites.length}</div>
-                                <div class="stat-label">المفضلة</div>
-                            </div>
-                            <div class="stat-card">
-                                <div class="stat-number">${quizPercent}%</div>
-                                <div class="stat-label">الاختبارات</div>
-                            </div>
+                        <div class="stat-card">
+                            <div class="stat-number">${favorites.length}</div>
+                            <div class="stat-label">المفضلة</div>
                         </div>
+                        <div class="stat-card">
+                            <div class="stat-number">${quizPercent}%</div>
+                            <div class="stat-label">الاختبارات</div>
+                        </div>
+                    </div>
 
-                        <div class="explanation-box">
-                            <p><strong>تقدم الدراسة:</strong> ${studiedPercent}%</p>
-                            <div class="progress-bar"><div class="progress-fill" style="width: ${studiedPercent}%"></div></div>
-                            
-                            <p style="margin-top: 10px;"><strong>المفضلة:</strong> ${favoritePercent}%</p>
-                            <div class="progress-bar"><div class="progress-fill" style="width: ${favoritePercent}%; background: #ff6b6b;"></div></div>
-                            
-                            <p style="margin-top: 10px;"><strong>الاختبارات:</strong> ${quizPercent}%</p>
-                            <div class="progress-bar"><div class="progress-fill" style="width: ${quizPercent}%; background: #4caf50;"></div></div>
+                    <div class="progress-card">
+                        <div class="progress-label">
+                            <span>تقدم الدراسة</span>
+                            <span>${studiedPercent}%</span>
+                        </div>
+                        <div class="progress-bar">
+                            <div class="progress-fill" style="width: ${studiedPercent}%"></div>
+                        </div>
+                    </div>
+
+                    <div class="progress-card">
+                        <div class="progress-label">
+                            <span>المفضلة</span>
+                            <span>${favoritePercent}%</span>
+                        </div>
+                        <div class="progress-bar">
+                            <div class="progress-fill" style="width: ${favoritePercent}%; background: #ff6b6b;"></div>
+                        </div>
+                    </div>
+
+                    <div class="progress-card">
+                        <div class="progress-label">
+                            <span>الاختبارات</span>
+                            <span>${quizPercent}%</span>
+                        </div>
+                        <div class="progress-bar">
+                            <div class="progress-fill" style="width: ${quizPercent}%; background: #4caf50;"></div>
                         </div>
                     </div>
                 `;
@@ -1394,50 +1549,30 @@ Positive feedback: amplifies change → completion`
             function renderFavorites() {
                 if (favorites.length === 0) {
                     return `
-                        <div class="card">
-                            <div class="card-header">
-                                <h2><i class="fas fa-heart"></i> المفضلة</h2>
-                            </div>
-                            <div class="explanation-box text-center">
-                                <p>✨ لا توجد صور في المفضلة بعد</p>
-                                <p style="margin-top: 8px;">اضغط على ❤️ في أي صورة لإضافتها</p>
-                            </div>
+                        <div class="welcome-card" style="text-align: center;">
+                            <div class="welcome-text">✨ لا توجد صور</div>
+                            <div class="start-text">أضف صوراً للمفضلة</div>
                         </div>
                     `;
                 }
 
                 return `
-                    <div class="card">
-                        <div class="card-header">
-                            <h2><i class="fas fa-heart"></i> المفضلة (${favorites.length})</h2>
-                        </div>
-                        <div class="icon-grid">
-                            ${favorites.map(index => `
-                                <div class="icon-item favorite active" onclick="App.changeImage(${index}); renderContent('images');">
-                                    <i class="fas fa-image"></i>
-                                    <span>${index + 1}</span>
-                                </div>
-                            `).join('')}
-                        </div>
+                    <div class="images-grid">
+                        ${favorites.map(index => `
+                            <div class="image-thumb favorite active" onclick="App.changeImage(${index})">
+                                <div class="thumb-img">🫀</div>
+                                <div class="thumb-number">صورة ${index + 1}</div>
+                            </div>
+                        `).join('')}
                     </div>
                 `;
             }
 
-            // ===== تهيئة عناصر الصورة للتكبير والتحريك =====
+            // ===== تهيئة عناصر الصورة =====
             function initImageElements() {
                 const touchOverlay = document.getElementById('touchOverlay');
                 if (!touchOverlay) return;
 
-                // إزالة المستمعات القديمة
-                if (touchOverlay._listeners) {
-                    touchOverlay._listeners.forEach(({type, handler}) => {
-                        touchOverlay.removeEventListener(type, handler);
-                    });
-                }
-                
-                touchOverlay._listeners = [];
-
-                // دوال اللمس للتكبير والتحريك
                 const touchStart = (e) => {
                     e.preventDefault();
                     const touches = e.touches;
@@ -1465,11 +1600,9 @@ Positive feedback: amplifies change → completion`
                         panX = touches[0].clientX - lastPanX;
                         panY = touches[0].clientY - lastPanY;
                         
-                        // تحديد حدود التحريك بناءً على مستوى التكبير
-                        const maxPanX = (window.innerWidth * (scale - 1)) / 4;
-                        const maxPanY = (300 * (scale - 1)) / 2;
-                        panX = Math.min(maxPanX, Math.max(-maxPanX, panX));
-                        panY = Math.min(maxPanY, Math.max(-maxPanY, panY));
+                        const maxPan = 100 * (scale - 1);
+                        panX = Math.min(maxPan, Math.max(-maxPan, panX));
+                        panY = Math.min(maxPan, Math.max(-maxPan, panY));
                         
                         updateImageTransform();
                     } else if (touches.length === 2 && initialDistance > 0) {
@@ -1505,7 +1638,6 @@ Positive feedback: amplifies change → completion`
                     
                     if (touches.length < 2) initialDistance = 0;
                     
-                    // النقرة المزدوجة للتكبير
                     const currentTime = new Date().getTime();
                     if (currentTime - lastTap < 300) {
                         if (scale > 1.5) {
@@ -1520,19 +1652,10 @@ Positive feedback: amplifies change → completion`
                     lastTap = currentTime;
                 };
 
-                // إضافة المستمعات
                 touchOverlay.addEventListener('touchstart', touchStart, { passive: false });
                 touchOverlay.addEventListener('touchmove', touchMove, { passive: false });
                 touchOverlay.addEventListener('touchend', touchEnd);
                 touchOverlay.addEventListener('touchcancel', touchEnd);
-                touchOverlay.addEventListener('contextmenu', (e) => e.preventDefault());
-                
-                touchOverlay._listeners.push(
-                    { type: 'touchstart', handler: touchStart },
-                    { type: 'touchmove', handler: touchMove },
-                    { type: 'touchend', handler: touchEnd },
-                    { type: 'touchcancel', handler: touchEnd }
-                );
             }
 
             function updateImageTransform() {
@@ -1547,7 +1670,6 @@ Positive feedback: amplifies change → completion`
             // ===== أحداث النقر =====
             function setupClickHandlers() {
                 document.addEventListener('click', (e) => {
-                    // أزرار التكبير
                     if (e.target.closest('#zoomIn')) {
                         scale = Math.min(maxScale, scale + 0.3);
                         updateImageTransform();
@@ -1559,10 +1681,12 @@ Positive feedback: amplifies change → completion`
                         panX = 0;
                         panY = 0;
                         updateImageTransform();
-                    }
-                    
-                    // زر المفضلة
-                    else if (e.target.closest('#favoriteBtn')) {
+                    } else if (e.target.closest('#fullscreenBtn')) {
+                        const container = document.getElementById('imageContainer');
+                        if (container.requestFullscreen) {
+                            container.requestFullscreen();
+                        }
+                    } else if (e.target.closest('#favoriteBtn')) {
                         const btn = e.target.closest('#favoriteBtn');
                         const index = favorites.indexOf(currentIndex);
                         if (index === -1) {
@@ -1573,76 +1697,25 @@ Positive feedback: amplifies change → completion`
                             btn.classList.remove('favorite-active');
                         }
                         updateStats();
-                        
-                        // تحديث الأيقونات في الصفحة الرئيسية إذا كانت مفتوحة
-                        if (currentTab === 'home') {
-                            renderContent('home');
-                        }
-                    }
-                    
-                    // زر التحميل
-                    else if (e.target.closest('#downloadBtn')) {
+                    } else if (e.target.closest('#downloadBtn')) {
                         const link = document.createElement('a');
                         link.href = imageFiles[currentIndex];
                         link.download = imageFiles[currentIndex];
                         link.click();
-                    }
-                    
-                    // زر الاستماع
-                    else if (e.target.closest('#speakBtn')) {
+                    } else if (e.target.closest('#speakBtn')) {
                         const text = explanations[currentIndex].substring(0, 200);
                         const utterance = new SpeechSynthesisUtterance(text);
                         utterance.lang = 'ar-SA';
                         window.speechSynthesis.speak(utterance);
                     }
-                    
-                    // خيارات الاختبار
-                    else if (e.target.classList.contains('quiz-option') && !e.target.classList.contains('correct') && !e.target.classList.contains('wrong')) {
-                        const questionIndex = e.target.dataset.question;
-                        if (answeredQuestions[questionIndex]) return;
-                        
-                        const isCorrect = e.target.dataset.correct === 'true';
-                        
-                        // تعطيل كل الخيارات
-                        document.querySelectorAll(`[data-question="${questionIndex}"] .quiz-option`).forEach(opt => {
-                            opt.style.pointerEvents = 'none';
-                        });
-                        
-                        e.target.classList.add(isCorrect ? 'correct' : 'wrong');
-                        
-                        if (isCorrect) {
-                            quizScore += 10;
-                            document.getElementById(`feedback-${questionIndex}`).textContent = '✅ إجابة صحيحة!';
-                            
-                            // إظهار الإجابة الصحيحة
-                            document.querySelectorAll(`[data-question="${questionIndex}"] .quiz-option[data-correct="true"]`).forEach(opt => {
-                                opt.classList.add('correct');
-                            });
-                        } else {
-                            document.getElementById(`feedback-${questionIndex}`).textContent = '❌ إجابة خاطئة';
-                            
-                            // إظهار الإجابة الصحيحة
-                            document.querySelectorAll(`[data-question="${questionIndex}"] .quiz-option[data-correct="true"]`).forEach(opt => {
-                                opt.classList.add('correct');
-                            });
-                        }
-                        
-                        answeredQuestions[questionIndex] = true;
-                        updateStats();
-                    }
                 });
 
-                // البحث
                 document.addEventListener('input', (e) => {
                     if (e.target.id === 'searchInput') {
                         const query = e.target.value.toLowerCase();
-                        document.querySelectorAll('.icon-item').forEach((item, i) => {
+                        document.querySelectorAll('.image-thumb').forEach((thumb, i) => {
                             const explanation = explanations[i].toLowerCase();
-                            if (explanation.includes(query) || query === '') {
-                                item.style.display = 'flex';
-                            } else {
-                                item.style.display = 'none';
-                            }
+                            thumb.style.display = (explanation.includes(query) || query === '') ? 'block' : 'none';
                         });
                     }
                 });
@@ -1651,59 +1724,44 @@ Positive feedback: amplifies change → completion`
             // ===== تحديث التقدم =====
             function updateProgress() {
                 if (loadedImages >= totalImages) return;
-                
                 loadedImages++;
-                const percent = (loadedImages / totalImages) * 100;
                 
                 if (loadedImages >= totalImages) {
                     statusText.textContent = 'متاح بدون إنترنت';
-                    statusIcon.className = 'fas fa-check-circle';
                     localStorage.setItem('images_ready', 'true');
                 }
             }
 
-            // ===== تخزين الصور في Cache =====
             async function cacheImages() {
                 if ('caches' in window) {
                     try {
                         const cache = await caches.open('anatomy-v1');
-                        
-                        await Promise.all(
-                            imageFiles.map(async (img) => {
-                                const cached = await cache.match(img);
-                                
-                                if (cached) {
-                                    updateProgress();
-                                } else {
-                                    try {
-                                        const response = await fetch(img + '?v=1');
-                                        if (response.ok) {
-                                            await cache.put(img, response.clone());
-                                            updateProgress();
-                                        } else {
-                                            loadedImages++;
-                                        }
-                                    } catch (err) {
-                                        loadedImages++;
+                        await Promise.all(imageFiles.map(async (img) => {
+                            const cached = await cache.match(img);
+                            if (cached) updateProgress();
+                            else {
+                                try {
+                                    const response = await fetch(img + '?v=1');
+                                    if (response.ok) {
+                                        await cache.put(img, response.clone());
+                                        updateProgress();
                                     }
+                                } catch (err) {
+                                    updateProgress();
                                 }
-                            })
-                        );
-                    } catch (err) {
-                        console.log('Cache error:', err);
-                    }
+                            }
+                        }));
+                    } catch (err) {}
                 }
             }
 
             // ===== التهيئة =====
             function init() {
-                // تطبيق الوضع الليلي
                 if (darkMode) {
                     document.body.classList.add('dark-mode');
                     darkModeToggle.innerHTML = '<i class="fas fa-sun"></i>';
                 }
                 
-                // زر الوضع الليلي
                 darkModeToggle.addEventListener('click', () => {
                     darkMode = !darkMode;
                     document.body.classList.toggle('dark-mode', darkMode);
@@ -1711,49 +1769,25 @@ Positive feedback: amplifies change → completion`
                     updateStats();
                 });
 
-                // أحداث التبويبات العلوية
                 topTabs.forEach(tab => {
-                    tab.addEventListener('click', () => {
-                        renderContent(tab.dataset.tab);
-                    });
+                    tab.addEventListener('click', () => renderContent(tab.dataset.tab));
                 });
 
-                // أحداث الشريط السفلي
                 bottomNavItems.forEach(item => {
-                    item.addEventListener('click', () => {
-                        renderContent(item.dataset.nav);
-                    });
+                    item.addEventListener('click', () => renderContent(item.dataset.nav));
                 });
 
-                // دعم أزرار لوحة المفاتيح للتنقل بين الصور
-                window.addEventListener('keydown', (e) => {
-                    if (currentTab === 'images') {
-                        if (e.key === 'ArrowLeft') {
-                            e.preventDefault();
-                            App.changeImage(currentIndex + 1);
-                        } else if (e.key === 'ArrowRight') {
-                            e.preventDefault();
-                            App.changeImage(currentIndex - 1);
-                        }
-                    }
-                });
-
-                // تهيئة أحداث النقر
                 setupClickHandlers();
 
-                // بدء التحميل
                 if (localStorage.getItem('images_ready') === 'true') {
                     loadedImages = totalImages;
                     statusText.textContent = 'متاح بدون إنترنت';
-                    statusIcon.className = 'fas fa-check-circle';
                 } else {
                     cacheImages();
                 }
 
-                // عرض المحتوى الأولي (الصفحة الرئيسية مع الإهداء)
                 renderContent('home');
 
-                // حفظ الجلسة كل 5 ثواني
                 setInterval(updateStats, 5000);
             }
 
