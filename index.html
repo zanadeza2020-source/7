@@ -3,16 +3,15 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=5.0, user-scalable=yes">
-    <title>تشريح • أطلس الطالب</title>
+    <title>تشريح • الأطلس الذكي</title>
     
-    <!-- Font Awesome 6 (أيقونات خفيفة) -->
+    <!-- Font Awesome 6 -->
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
     
     <!-- Google Fonts -->
     <link href="https://fonts.googleapis.com/css2?family=Tajawal:wght@300;400;500;700&display=swap" rel="stylesheet">
     
     <style>
-        /* متغيرات بألوان هادئة */
         * {
             margin: 0;
             padding: 0;
@@ -22,8 +21,8 @@
 
         body {
             font-family: 'Tajawal', sans-serif;
-            background: #f2f7f9;
-            color: #1a464a;
+            background: #f0f7fa;
+            color: #1a4f58;
             min-height: 100vh;
             padding: 12px;
         }
@@ -33,30 +32,30 @@
             margin: 0 auto;
         }
 
-        /* ===== رأس الموقع ===== */
+        /* ===== الهيدر ===== */
         .header {
-            background: #1a5f6b;
+            background: #16636f;
             color: white;
-            border-radius: 50px;
-            padding: 15px 25px;
-            margin-bottom: 20px;
+            border-radius: 45px;
+            padding: 15px 20px;
+            margin-bottom: 15px;
             display: flex;
             justify-content: space-between;
             align-items: center;
             flex-wrap: wrap;
-            gap: 15px;
-            box-shadow: 0 8px 18px rgba(0,45,55,0.15);
+            gap: 12px;
+            box-shadow: 0 8px 18px rgba(0,55,65,0.15);
         }
 
         .logo {
             display: flex;
             align-items: center;
-            gap: 12px;
+            gap: 10px;
         }
 
         .logo i {
             font-size: 28px;
-            color: #ffd98c;
+            color: #ffdb9c;
         }
 
         .logo h1 {
@@ -64,140 +63,132 @@
             font-weight: 700;
         }
 
-        .logo p {
-            font-size: 13px;
-            opacity: 0.9;
-        }
-
         .offline-badge {
-            background: #2c7a88;
-            padding: 8px 18px;
+            background: #22818f;
+            padding: 8px 16px;
             border-radius: 40px;
             display: flex;
             align-items: center;
-            gap: 10px;
+            gap: 8px;
             font-size: 14px;
-            border: 1px solid #aad8d0;
+            border: 1px solid #9de0d8;
         }
 
-        /* ===== شريط التحميل الصغير ===== */
+        /* ===== شريط التقدم ===== */
         .progress-mini {
             background: white;
             border-radius: 40px;
             padding: 12px 20px;
-            margin-bottom: 20px;
+            margin-bottom: 15px;
             display: flex;
             align-items: center;
             gap: 15px;
             flex-wrap: wrap;
-            box-shadow: 0 4px 12px rgba(0,0,0,0.03);
+            box-shadow: 0 3px 10px rgba(0,0,0,0.02);
             border: 1px solid #d4ece5;
         }
 
         .progress-icon {
-            background: #1a5f6b;
-            width: 40px;
-            height: 40px;
+            background: #16636f;
+            width: 38px;
+            height: 38px;
             border-radius: 30px;
             display: flex;
             align-items: center;
             justify-content: center;
-            color: #ffd98c;
-            font-size: 18px;
+            color: #ffdb9c;
         }
 
         .progress-bar-small {
             flex: 1;
-            height: 10px;
+            height: 8px;
             background: #e1f0ec;
             border-radius: 20px;
             overflow: hidden;
-            min-width: 150px;
+            min-width: 140px;
         }
 
         .progress-fill-small {
             height: 100%;
-            background: linear-gradient(90deg, #1a5f6b, #4f9faa);
+            background: linear-gradient(90deg, #16636f, #3fa6b2);
             width: 0%;
-            transition: width 0.3s;
+            transition: width 0.3s ease;
             border-radius: 20px;
         }
 
         .progress-stats {
             font-size: 14px;
-            color: #1a5f6b;
             font-weight: 600;
-            display: flex;
-            gap: 5px;
+            color: #16636f;
         }
 
-        /* ===== شبكة الأيقونات المصغرة ===== */
-        .icon-mini-grid {
+        /* ===== شبكة الأيقونات ===== */
+        .icon-grid {
             display: flex;
             flex-wrap: wrap;
             justify-content: center;
             gap: 8px;
-            margin: 20px 0;
+            margin: 15px 0;
         }
 
-        .icon-mini {
-            width: 65px;
-            height: 70px;
+        .icon-item {
+            width: 60px;
+            height: 65px;
             background: white;
-            border-radius: 25px;
+            border-radius: 22px;
             display: flex;
             flex-direction: column;
             align-items: center;
             justify-content: center;
-            gap: 5px;
+            gap: 4px;
             cursor: pointer;
-            box-shadow: 0 5px 12px rgba(0,0,0,0.05);
+            box-shadow: 0 4px 10px rgba(0,0,0,0.03);
             border: 2px solid transparent;
-            transition: 0.2s;
+            transition: all 0.2s;
         }
 
-        .icon-mini.active {
-            border-color: #1a5f6b;
-            background: #e5f6f2;
+        .icon-item.active {
+            border-color: #16636f;
+            background: #e1f6f2;
+            transform: scale(0.98);
         }
 
-        .icon-mini i {
-            font-size: 24px;
-            color: #1a5f6b;
+        .icon-item i {
+            font-size: 22px;
+            color: #16636f;
         }
 
-        .icon-mini span {
-            font-size: 13px;
+        .icon-item span {
+            font-size: 12px;
             font-weight: 700;
-            color: #1f5b5b;
-            background: #eff9f6;
-            padding: 2px 10px;
+            color: #1a5f6b;
+            background: #edf9f5;
+            padding: 2px 8px;
             border-radius: 30px;
         }
 
-        /* ===== لوحة العرض الرئيسية ===== */
+        /* ===== اللوحة الرئيسية ===== */
         .main-panel {
             background: white;
-            border-radius: 45px;
+            border-radius: 40px;
             padding: 18px;
-            box-shadow: 0 15px 30px rgba(0,45,55,0.08);
-            border: 1px solid #d9f0ea;
+            box-shadow: 0 15px 30px rgba(0,50,60,0.05);
+            border: 1px solid #ccebe4;
         }
 
-        /* شبكة العرض - تتحول لعمودي على الجوال */
         .display-grid {
             display: grid;
             grid-template-columns: 1.3fr 1fr;
             gap: 18px;
         }
 
-        /* ===== حاوية الصورة المحسنة للجوال ===== */
+        /* ===== حاوية الصورة ===== */
         .image-box {
             background: #12363d;
-            border-radius: 40px;
+            border-radius: 35px;
             overflow: hidden;
             aspect-ratio: 4/3;
-            border: 4px solid #d2efe7;
+            border: 4px solid #c6ece3;
             position: relative;
             touch-action: none;
         }
@@ -208,11 +199,26 @@
             object-fit: contain;
             background: #12363d;
             display: block;
-            transition: transform 0.1s;
+            transition: transform 0.2s ease-out;
             pointer-events: none;
         }
 
-        /* طبقة اللمس */
+        /* مؤشر تحميل الصورة */
+        #imageLoader {
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            color: white;
+            background: rgba(0,0,0,0.5);
+            padding: 8px 18px;
+            border-radius: 40px;
+            font-size: 14px;
+            z-index: 15;
+            backdrop-filter: blur(4px);
+            border: 1px solid rgba(255,255,255,0.2);
+        }
+
         .touch-overlay {
             position: absolute;
             top: 0;
@@ -224,31 +230,30 @@
             touch-action: none;
         }
 
-        /* أزرار التحكم - خارج الصورة وليس داخلها */
+        /* أزرار التحكم */
         .zoom-controls {
             position: absolute;
-            bottom: -5px;
+            bottom: -3px;
             left: 50%;
             transform: translateX(-50%);
             background: rgba(0, 0, 0, 0.7);
             backdrop-filter: blur(8px);
-            padding: 6px 15px;
-            border-radius: 50px;
+            padding: 5px 15px;
+            border-radius: 40px;
             display: flex;
-            gap: 12px;
+            gap: 10px;
             z-index: 20;
-            border: 1px solid #7acfc2;
-            opacity: 0.9;
+            border: 1px solid #80d6cc;
         }
 
         .zoom-btn {
             background: transparent;
             border: none;
             color: white;
-            width: 36px;
-            height: 36px;
+            width: 34px;
+            height: 34px;
             border-radius: 30px;
-            font-size: 16px;
+            font-size: 15px;
             cursor: pointer;
             display: flex;
             align-items: center;
@@ -256,10 +261,9 @@
         }
 
         .zoom-btn:active {
-            background: #1a5f6b;
+            background: #16636f;
         }
 
-        /* مؤشر التكبير (صغير) */
         .zoom-indicator {
             position: absolute;
             top: 10px;
@@ -267,19 +271,18 @@
             background: rgba(0,0,0,0.4);
             backdrop-filter: blur(4px);
             color: white;
-            padding: 4px 12px;
+            padding: 3px 12px;
             border-radius: 30px;
             font-size: 12px;
             z-index: 15;
-            border: 1px solid rgba(255,255,255,0.2);
         }
 
         /* ===== بطاقة المعلومات ===== */
         .info-box {
-            background: #f7fdfb;
+            background: #f6fdfb;
             border-radius: 35px;
             padding: 18px;
-            border: 1px solid #d1ede5;
+            border: 1px solid #ccebe4;
         }
 
         .info-header {
@@ -288,23 +291,23 @@
             align-items: center;
             margin-bottom: 15px;
             flex-wrap: wrap;
-            gap: 10px;
+            gap: 8px;
         }
 
         .info-header h3 {
             font-size: 18px;
-            color: #1a5f6b;
+            color: #16636f;
             display: flex;
             align-items: center;
-            gap: 8px;
+            gap: 6px;
         }
 
         .file-badge {
-            background: #1a5f6b;
+            background: #16636f;
             color: white;
-            padding: 5px 18px;
+            padding: 5px 16px;
             border-radius: 40px;
-            font-size: 14px;
+            font-size: 13px;
             font-weight: 600;
         }
 
@@ -312,16 +315,16 @@
             background: white;
             border-radius: 30px;
             padding: 18px;
-            max-height: 250px;
+            max-height: 240px;
             overflow-y: auto;
             line-height: 1.7;
             font-size: 14px;
-            border: 1px solid #c7e6de;
+            border: 1px solid #c0e6dd;
             white-space: pre-line;
             scrollbar-width: thin;
         }
 
-        /* ===== أزرار الإجراءات الصغيرة ===== */
+        /* ===== أزرار الإجراءات ===== */
         .action-group {
             display: flex;
             gap: 8px;
@@ -331,130 +334,76 @@
 
         .action-sm {
             flex: 1;
-            min-width: 80px;
+            min-width: 75px;
             background: white;
-            border: 1.5px solid #1a5f6b;
-            padding: 10px 5px;
+            border: 1.5px solid #16636f;
+            padding: 9px 4px;
             border-radius: 40px;
             font-weight: 600;
-            color: #1a5f6b;
+            color: #16636f;
             cursor: pointer;
             display: flex;
             align-items: center;
             justify-content: center;
-            gap: 6px;
+            gap: 5px;
             font-size: 13px;
             transition: 0.2s;
         }
 
         .action-sm:hover {
-            background: #1a5f6b;
+            background: #16636f;
             color: white;
         }
 
-        .action-sm i {
-            font-size: 14px;
-        }
-
-        /* ===== رسالة الخطأ ===== */
+        /* ===== رسائل الخطأ ===== */
         .error-message {
             background: #ffede5;
-            border: 1.5px solid #cf5a5a;
-            color: #a13e3e;
+            border: 1.5px solid #c95a5a;
+            color: #a13b3b;
             padding: 12px 20px;
-            border-radius: 50px;
+            border-radius: 45px;
             margin: 15px 0 0;
             display: none;
             align-items: center;
-            gap: 12px;
+            gap: 10px;
             font-size: 14px;
         }
 
         /* ===== تذييل ===== */
         .footer {
-            margin-top: 20px;
+            margin-top: 18px;
             text-align: center;
             font-size: 13px;
-            color: #61969b;
-            padding: 12px;
+            color: #588e94;
+            padding: 10px;
         }
 
-        /* ===== تحسينات للجوال ===== */
+        /* ===== تحسينات الجوال ===== */
         @media (max-width: 800px) {
             .display-grid {
                 grid-template-columns: 1fr;
-                gap: 15px;
             }
-            
             .header {
                 flex-direction: column;
                 text-align: center;
             }
-            
-            .icon-mini {
-                width: 55px;
-                height: 60px;
+            .icon-item {
+                width: 52px;
+                height: 58px;
             }
-            
-            .icon-mini i {
+            .icon-item i {
                 font-size: 20px;
-            }
-            
-            .icon-mini span {
-                font-size: 11px;
-                padding: 2px 6px;
-            }
-            
-            .progress-mini {
-                padding: 10px 15px;
-            }
-            
-            .image-box {
-                aspect-ratio: 4/3;
-            }
-            
-            .zoom-controls {
-                padding: 4px 10px;
-            }
-            
-            .zoom-btn {
-                width: 32px;
-                height: 32px;
-                font-size: 14px;
-            }
-        }
-
-        /* للشاشات الصغيرة جداً */
-        @media (max-width: 400px) {
-            .icon-mini {
-                width: 48px;
-                height: 55px;
-            }
-            
-            .action-group {
-                flex-wrap: wrap;
-            }
-            
-            .action-sm {
-                flex: 1 1 40%;
-            }
-            
-            .progress-stats {
-                font-size: 12px;
             }
         }
     </style>
 </head>
 <body>
     <div class="container">
-        <!-- رأس الموقع -->
+        <!-- الهيدر -->
         <div class="header">
             <div class="logo">
-                <i class="fas fa-heartbeat"></i>
-                <div>
-                    <h1>أطلس التشريح</h1>
-                    <p><i class="fas fa-graduation-cap"></i> للطلاب</p>
-                </div>
+                <i class="fas fa-brain"></i>
+                <h1>أطلس التشريح الذكي</h1>
             </div>
             <div class="offline-badge" id="offlineStatus">
                 <i class="fas fa-cloud" id="statusIcon"></i>
@@ -462,7 +411,7 @@
             </div>
         </div>
 
-        <!-- شريط التحميل المصغر -->
+        <!-- شريط التقدم -->
         <div class="progress-mini">
             <div class="progress-icon">
                 <i class="fas fa-database"></i>
@@ -475,23 +424,22 @@
             </div>
         </div>
 
-        <!-- شبكة الأيقونات المصغرة -->
-        <div class="icon-mini-grid" id="iconGrid"></div>
+        <!-- شبكة الأيقونات -->
+        <div class="icon-grid" id="iconGrid"></div>
 
         <!-- العرض الرئيسي -->
         <div class="main-panel">
             <div class="display-grid">
-                <!-- حاوية الصورة -->
+                <!-- الصورة -->
                 <div class="image-box" id="imageContainer">
-                    <img id="mainImage" src="" alt="صورة تشريحية">
+                    <img id="mainImage" src="" alt="صورة تشريحية" loading="lazy">
+                    <div id="imageLoader">🔄 تحميل الصورة...</div>
                     <div class="touch-overlay" id="touchOverlay"></div>
                     
-                    <!-- مؤشر التكبير -->
                     <div class="zoom-indicator" id="zoomIndicator">
                         <i class="fas fa-search"></i> <span id="zoomLevel">1.0x</span>
                     </div>
 
-                    <!-- أزرار التحكم (أسفل الصورة) -->
                     <div class="zoom-controls">
                         <button class="zoom-btn" id="zoomOut"><i class="fas fa-minus"></i></button>
                         <button class="zoom-btn" id="zoomReset"><i class="fas fa-undo-alt"></i></button>
@@ -500,37 +448,21 @@
                     </div>
                 </div>
 
-                <!-- بطاقة المعلومات -->
+                <!-- المعلومات -->
                 <div class="info-box">
                     <div class="info-header">
-                        <h3>
-                            <i class="fas fa-pen"></i>
-                            شرح الصورة
-                        </h3>
+                        <h3><i class="fas fa-pen"></i> شرح الصورة</h3>
                         <span class="file-badge" id="filename">1.jpg</span>
                     </div>
                     <div class="notes-content" id="notesContent">
                         جاري التحميل...
                     </div>
 
-                    <!-- أزرار الإجراءات المصغرة -->
                     <div class="action-group">
-                        <button class="action-sm" id="downloadImg">
-                            <i class="fas fa-download"></i>
-                            <span>الصورة</span>
-                        </button>
-                        <button class="action-sm" id="downloadTxt">
-                            <i class="fas fa-file-alt"></i>
-                            <span>النص</span>
-                        </button>
-                        <button class="action-sm" id="copyLink">
-                            <i class="fas fa-link"></i>
-                            <span>الرابط</span>
-                        </button>
-                        <button class="action-sm" id="shareBtn">
-                            <i class="fas fa-share-alt"></i>
-                            <span>مشاركة</span>
-                        </button>
+                        <button class="action-sm" id="downloadImg"><i class="fas fa-download"></i> صورة</button>
+                        <button class="action-sm" id="downloadTxt"><i class="fas fa-file-alt"></i> نص</button>
+                        <button class="action-sm" id="copyLink"><i class="fas fa-link"></i> رابط</button>
+                        <button class="action-sm" id="shareBtn"><i class="fas fa-share-alt"></i> مشاركة</button>
                     </div>
                 </div>
             </div>
@@ -544,14 +476,14 @@
 
         <!-- تذييل -->
         <div class="footer" id="footer">
-            <i class="fas fa-check-circle" style="color: #1a5f6b;"></i>
+            <i class="fas fa-check-circle" style="color: #16636f;"></i>
             <span>يعمل بدون إنترنت بعد التحميل</span>
         </div>
     </div>
 
     <script>
         (function() {
-            // ===== البيانات =====
+            // ---------- البيانات ----------
             const notesData = [
                 `# CHAPTER ONE: INTRODUCTION
 
@@ -654,13 +586,14 @@ Cold → Shivering → Warming`,
                 '6.jpg', '7.jpg', '8.jpg', '9.jpg'
             ];
 
-            // ===== متغيرات =====
+            // ---------- متغيرات الحالة ----------
             let currentIndex = 0;
             let scale = 1;
-            let minScale = 0.8;
-            let maxScale = 3.5;
+            const minScale = 0.8;
+            const maxScale = 3.5;
             let initialDistance = 0;
             let lastTap = 0;
+            let startX = 0;
             let loadedImages = 0;
             const totalImages = imageFiles.length;
 
@@ -677,13 +610,14 @@ Cold → Shivering → Warming`,
             const statusIcon = document.getElementById('statusIcon');
             const errorMsg = document.getElementById('errorMsg');
             const errorText = document.getElementById('errorText');
+            const imageLoader = document.getElementById('imageLoader');
 
-            // ===== بناء الأيقونات المصغرة =====
+            // ---------- بناء الأيقونات ----------
             function buildIcons() {
                 iconGrid.innerHTML = '';
                 for (let i = 0; i < imageFiles.length; i++) {
                     const btn = document.createElement('div');
-                    btn.className = `icon-mini ${i === 0 ? 'active' : ''}`;
+                    btn.className = `icon-item ${i === 0 ? 'active' : ''}`;
                     btn.setAttribute('data-index', i);
                     btn.innerHTML = `
                         <i class="fas fa-image"></i>
@@ -694,16 +628,17 @@ Cold → Shivering → Warming`,
                 }
             }
 
-            // ===== تغيير الصورة =====
+            // ---------- تغيير الصورة ----------
             function changeImage(index) {
                 if (index < 0 || index >= imageFiles.length) return;
                 
                 currentIndex = index;
+                imageLoader.style.display = 'block';
                 mainImage.src = imageFiles[index];
                 filename.innerText = imageFiles[index];
                 notes.innerText = notesData[index];
                 
-                document.querySelectorAll('.icon-mini').forEach((btn, i) => {
+                document.querySelectorAll('.icon-item').forEach((btn, i) => {
                     if (i === index) btn.classList.add('active');
                     else btn.classList.remove('active');
                 });
@@ -711,19 +646,25 @@ Cold → Shivering → Warming`,
                 scale = 1;
                 updateZoom();
                 window.location.hash = `img-${index + 1}`;
-                errorMsg.style.display = 'none';
             }
 
-            // ===== تحديث التكبير =====
+            // ---------- تحديث التكبير ----------
             function updateZoom() {
                 mainImage.style.transform = `scale(${scale})`;
                 zoomLevel.innerText = scale.toFixed(1) + 'x';
             }
 
-            // ===== نظام اللمس =====
+            // ---------- نظام اللمس المتطور ----------
             touchOverlay.addEventListener('touchstart', (e) => {
                 e.preventDefault();
                 const touches = e.touches;
+                
+                // للتنقل بالسحب
+                if (touches.length === 1) {
+                    startX = touches[0].clientX;
+                }
+                
+                // للتكبير باللمس المزدوج
                 if (touches.length === 2) {
                     const dx = touches[0].clientX - touches[1].clientX;
                     const dy = touches[0].clientY - touches[1].clientY;
@@ -734,6 +675,7 @@ Cold → Shivering → Warming`,
             touchOverlay.addEventListener('touchmove', (e) => {
                 e.preventDefault();
                 const touches = e.touches;
+                
                 if (touches.length === 2 && initialDistance > 0) {
                     const dx = touches[0].clientX - touches[1].clientX;
                     const dy = touches[0].clientY - touches[1].clientY;
@@ -746,9 +688,25 @@ Cold → Shivering → Warming`,
             });
 
             touchOverlay.addEventListener('touchend', (e) => {
-                if (e.touches.length < 2) initialDistance = 0;
+                const touches = e.touches;
                 
-                // كشف النقرة المزدوجة
+                // التنقل بالسحب
+                if (touches.length === 0) {
+                    const endX = e.changedTouches[0].clientX;
+                    const diff = endX - startX;
+                    
+                    if (Math.abs(diff) > 70) {
+                        if (diff > 0 && currentIndex > 0) {
+                            changeImage(currentIndex - 1); // سحب لليمين ← صورة سابقة
+                        } else if (diff < 0 && currentIndex < imageFiles.length - 1) {
+                            changeImage(currentIndex + 1); // سحب لليسار ← صورة تالية
+                        }
+                    }
+                }
+                
+                if (touches.length < 2) initialDistance = 0;
+                
+                // النقرة المزدوجة للتكبير
                 const currentTime = new Date().getTime();
                 if (currentTime - lastTap < 300) {
                     scale = scale > 1.5 ? 1 : 2.2;
@@ -757,10 +715,9 @@ Cold → Shivering → Warming`,
                 lastTap = currentTime;
             });
 
-            // منع القوائم
             touchOverlay.addEventListener('contextmenu', (e) => e.preventDefault());
 
-            // ===== أزرار التحكم =====
+            // ---------- أزرار التحكم ----------
             document.getElementById('zoomIn').onclick = () => {
                 scale = Math.min(maxScale, scale + 0.3);
                 updateZoom();
@@ -781,7 +738,7 @@ Cold → Shivering → Warming`,
                 if (container.requestFullscreen) container.requestFullscreen();
             };
 
-            // ===== أزرار الإجراءات =====
+            // ---------- أزرار الإجراءات ----------
             document.getElementById('downloadImg').onclick = () => {
                 const link = document.createElement('a');
                 link.href = imageFiles[currentIndex];
@@ -800,19 +757,24 @@ Cold → Shivering → Warming`,
 
             document.getElementById('copyLink').onclick = () => {
                 const url = window.location.href.split('#')[0] + `#img-${currentIndex + 1}`;
-                navigator.clipboard.writeText(url).then(() => alert('✅ تم نسخ الرابط'));
+                navigator.clipboard.writeText(url).then(() => {
+                    alert('✅ تم نسخ الرابط');
+                });
             };
 
             document.getElementById('shareBtn').onclick = () => {
                 if (navigator.share) {
                     navigator.share({
-                        title: `صورة ${imageFiles[currentIndex]}`,
-                        text: notesData[currentIndex].substring(0, 100)
+                        title: 'أطلس التشريح',
+                        text: notesData[currentIndex].substring(0, 100) + '...',
+                        url: window.location.href
                     });
+                } else {
+                    alert('يمكنك نسخ الرابط للمشاركة');
                 }
             };
 
-            // ===== تحديث التقدم =====
+            // ---------- تحديث التقدم ----------
             function updateProgress() {
                 loadedImages++;
                 const percent = (loadedImages / totalImages) * 100;
@@ -821,65 +783,87 @@ Cold → Shivering → Warming`,
                 
                 if (loadedImages >= totalImages) {
                     statusText.innerText = 'متاح بدون إنترنت';
-                    statusIcon.className = 'fas fa-cloud-check';
+                    statusIcon.className = 'fas fa-check-circle';
+                    localStorage.setItem('images_ready', 'true');
                 }
             }
 
-            // ===== التحقق من الصور =====
-            async function checkImages() {
+            // ---------- تخزين الصور في Cache ----------
+            async function cacheImages() {
                 if ('caches' in window) {
-                    const cache = await caches.open('anatomy-v1');
-                    for (let i = 0; i < imageFiles.length; i++) {
-                        const response = await cache.match(imageFiles[i]);
-                        if (response) updateProgress();
-                        else {
-                            fetch(imageFiles[i])
-                                .then(() => updateProgress())
-                                .catch(() => {
-                                    loadedImages++;
-                                    updateProgress();
-                                });
+                    try {
+                        const cache = await caches.open('anatomy-v1');
+                        
+                        for (let i = 0; i < imageFiles.length; i++) {
+                            const cached = await cache.match(imageFiles[i]);
+                            if (cached) {
+                                updateProgress();
+                            } else {
+                                fetch(imageFiles[i])
+                                    .then(async (response) => {
+                                        if (response.ok) {
+                                            await cache.put(imageFiles[i], response.clone());
+                                            updateProgress();
+                                        }
+                                    })
+                                    .catch(() => {
+                                        loadedImages++;
+                                        updateProgress();
+                                    });
+                            }
                         }
+                    } catch (err) {
+                        console.log('Cache error:', err);
                     }
                 }
             }
 
-            // ===== معالجة الأخطاء =====
+            // ---------- معالجة الصورة ----------
+            mainImage.onload = function() {
+                imageLoader.style.display = 'none';
+                errorMsg.style.display = 'none';
+            };
+
             mainImage.onerror = function() {
+                imageLoader.style.display = 'none';
                 if (!navigator.onLine) {
                     errorText.innerText = '⚠️ الصورة غير متوفرة بدون إنترنت';
                     errorMsg.style.display = 'flex';
                 }
             };
 
-            mainImage.onload = () => errorMsg.style.display = 'none';
-
-            // ===== معالجة الرابط =====
+            // ---------- معالجة الرابط ----------
             function handleHash() {
                 const hash = window.location.hash;
                 if (hash && hash.startsWith('#img-')) {
                     const num = parseInt(hash.replace('#img-', ''));
-                    if (num >= 1 && num <= imageFiles.length) changeImage(num - 1);
+                    if (num >= 1 && num <= imageFiles.length) {
+                        changeImage(num - 1);
+                    }
                 }
             }
 
-            // ===== بدء التطبيق =====
+            // ---------- بدء التطبيق ----------
             function init() {
                 buildIcons();
                 handleHash();
                 
                 const lastImage = localStorage.getItem('last_image');
-                if (lastImage && !window.location.hash) changeImage(parseInt(lastImage));
+                if (lastImage && !window.location.hash) {
+                    changeImage(parseInt(lastImage));
+                }
                 
                 if (localStorage.getItem('images_ready') === 'true') {
                     progressFill.style.width = '100%';
                     loadedCount.innerText = totalImages;
                     statusText.innerText = 'متاح بدون إنترنت';
-                    statusIcon.className = 'fas fa-cloud-check';
+                    statusIcon.className = 'fas fa-check-circle';
                 }
                 
-                checkImages();
-                setInterval(() => localStorage.setItem('last_image', currentIndex), 5000);
+                cacheImages();
+                setInterval(() => {
+                    localStorage.setItem('last_image', currentIndex);
+                }, 5000);
             }
 
             init();
