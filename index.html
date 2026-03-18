@@ -3,40 +3,42 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>أطلس التشريح - للطلاب</title>
+    <title>التشريح - بدون إنترنت</title>
     <style>
-        /* ألوان هادئة ومناسبة للدراسة */
+        /* ألوان مريحة للطلاب */
         * {
             margin: 0;
             padding: 0;
             box-sizing: border-box;
-            font-family: system-ui, -apple-system, 'Segoe UI', Roboto, Arial, sans-serif;
+            font-family: system-ui, -apple-system, sans-serif;
         }
 
         body {
-            background: #f0f4f8;
-            color: #1a3b3f;
+            background: #f0f5f7;
+            color: #1d4a55;
             padding: 15px;
+            min-height: 100vh;
         }
 
         .container {
-            max-width: 1300px;
+            max-width: 1400px;
             margin: 0 auto;
         }
 
         /* رأس الموقع */
         .header {
-            background: #1c5f6b;
+            background: #0d4f5c;
             color: white;
-            padding: 20px 25px;
-            border-radius: 35px;
-            margin-bottom: 20px;
+            padding: 20px 30px;
+            border-radius: 50px;
+            margin-bottom: 25px;
             display: flex;
             justify-content: space-between;
             align-items: center;
             flex-wrap: wrap;
             gap: 15px;
-            box-shadow: 0 6px 15px rgba(0,40,45,0.2);
+            box-shadow: 0 10px 25px rgba(5, 60, 70, 0.4);
+            border: 1px solid #57b8b0;
         }
 
         .logo {
@@ -45,248 +47,242 @@
             gap: 15px;
         }
 
-        .logo span {
-            font-size: 40px;
-        }
-
         .logo h1 {
             font-size: 28px;
             font-weight: 600;
         }
 
         .logo p {
-            font-size: 14px;
+            font-size: 15px;
             opacity: 0.9;
         }
 
-        /* مؤشر الاتصال */
-        .offline-badge {
-            background: #2a818f;
-            padding: 10px 22px;
+        /* مؤشر التخزين الدائم */
+        .storage-badge {
+            background: #207a88;
+            padding: 12px 25px;
             border-radius: 60px;
-            display: flex;
-            align-items: center;
-            gap: 10px;
-            font-size: 16px;
-            border: 1px solid #8ad0d0;
-        }
-
-        .offline-badge i {
-            font-size: 20px;
-        }
-
-        /* شريط التحميل */
-        .loading-bar {
-            background: white;
-            border-radius: 60px;
-            height: 10px;
-            margin: 5px 0 15px;
-            overflow: hidden;
-            box-shadow: inset 0 2px 5px rgba(0,0,0,0.1);
-        }
-
-        .loading-progress {
-            height: 100%;
-            background: #1c5f6b;
-            width: 0%;
-            transition: width 0.3s;
-            border-radius: 60px;
-        }
-
-        /* رسالة الحالة */
-        .status-message {
-            background: #e8f3f0;
-            border: 1px solid #9fcbc5;
-            border-radius: 60px;
-            padding: 12px 20px;
-            margin-bottom: 20px;
             display: flex;
             align-items: center;
             gap: 12px;
-            font-size: 15px;
-            color: #14565e;
+            border: 2px solid #9de0d8;
+            font-weight: 500;
         }
 
-        /* شبكة الأيقونات */
-        .icons-grid {
+        /* شريط التحميل */
+        .progress-section {
+            background: white;
+            border-radius: 60px;
+            padding: 15px 25px;
+            margin: 20px 0;
+            box-shadow: 0 5px 15px rgba(0,40,45,0.1);
+        }
+
+        .progress-bar {
+            height: 16px;
+            background: #e1f0ec;
+            border-radius: 40px;
+            overflow: hidden;
+            margin: 12px 0;
+        }
+
+        .progress-fill {
+            height: 100%;
+            background: #0d4f5c;
+            width: 0%;
+            transition: width 0.4s;
+            border-radius: 40px;
+        }
+
+        .status-text {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            color: #1c656e;
+            font-size: 16px;
+        }
+
+        /* شبكة الصور */
+        .image-grid {
             display: flex;
             flex-wrap: wrap;
             justify-content: center;
-            gap: 8px;
-            margin: 20px 0;
+            gap: 10px;
+            margin: 25px 0;
         }
 
-        .icon-btn {
-            width: 80px;
-            height: 90px;
+        .image-btn {
+            width: 85px;
+            height: 95px;
             background: white;
-            border-radius: 28px;
+            border-radius: 30px;
             display: flex;
             flex-direction: column;
             align-items: center;
             justify-content: center;
-            gap: 6px;
+            gap: 8px;
             cursor: pointer;
-            box-shadow: 0 5px 12px rgba(0,0,0,0.08);
-            border: 2px solid transparent;
+            box-shadow: 0 8px 18px rgba(0,45,50,0.1);
+            border: 3px solid transparent;
             transition: 0.2s;
+            font-weight: 600;
+            color: #0d4f5c;
         }
 
-        .icon-btn.active {
-            border-color: #1c5f6b;
-            background: #e1f2ef;
+        .image-btn.active {
+            border-color: #0d4f5c;
+            background: #daf2ed;
+            transform: scale(0.98);
         }
 
-        .icon-btn span {
+        .image-btn span {
             font-size: 28px;
         }
 
-        .icon-btn small {
-            font-weight: 600;
-            color: #1f5a63;
-            background: #e8f0ed;
-            padding: 3px 12px;
-            border-radius: 40px;
-            font-size: 13px;
-        }
-
         /* منطقة العرض */
-        .display-area {
+        .main-area {
             background: white;
-            border-radius: 45px;
-            padding: 20px;
-            box-shadow: 0 12px 28px rgba(0,0,0,0.1);
-            margin-top: 10px;
+            border-radius: 50px;
+            padding: 25px;
+            box-shadow: 0 20px 35px rgba(0,55,60,0.15);
+            border: 1px solid #bbe6df;
         }
 
-        .split-view {
+        .split-panel {
             display: grid;
-            grid-template-columns: 1.2fr 1fr;
-            gap: 20px;
+            grid-template-columns: 1.3fr 1fr;
+            gap: 25px;
         }
 
-        /* حاوية الصورة */
-        .image-container {
-            background: #14373e;
-            border-radius: 35px;
+        /* الصورة */
+        .image-frame {
+            background: #10353b;
+            border-radius: 45px;
             overflow: hidden;
             aspect-ratio: 4/3;
-            border: 4px solid #d1ece5;
+            border: 5px solid #bde8e0;
             position: relative;
         }
 
-        #mainImage {
+        #displayImage {
             width: 100%;
             height: 100%;
             object-fit: contain;
-            background: #14373e;
+            background: #10353b;
             display: block;
         }
 
-        .image-controls {
+        .zoom-controls {
             position: absolute;
-            bottom: 12px;
+            bottom: 15px;
             left: 50%;
             transform: translateX(-50%);
-            background: rgba(0,0,0,0.6);
-            padding: 5px 15px;
-            border-radius: 50px;
+            background: rgba(0,0,0,0.7);
+            backdrop-filter: blur(5px);
+            padding: 8px 18px;
+            border-radius: 60px;
             display: flex;
-            gap: 10px;
+            gap: 12px;
+            border: 1px solid #7fc9c0;
         }
 
-        .ctrl-btn {
+        .zoom-btn {
             background: transparent;
             border: none;
             color: white;
-            font-size: 18px;
-            padding: 8px 12px;
-            cursor: pointer;
+            font-size: 20px;
+            width: 40px;
+            height: 40px;
             border-radius: 40px;
+            cursor: pointer;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-weight: bold;
         }
 
-        .ctrl-btn:hover {
+        .zoom-btn:hover {
             background: rgba(255,255,255,0.2);
         }
 
-        /* بطاقة المعلومات */
-        .info-card {
-            background: #f7fdfb;
-            border-radius: 35px;
-            padding: 22px;
-            border: 1px solid #c3e2db;
+        /* بطاقة النص */
+        .info-panel {
+            background: #f3fcf9;
+            border-radius: 45px;
+            padding: 25px;
+            border: 1px solid #bae1d9;
         }
 
         .info-header {
             display: flex;
             justify-content: space-between;
             align-items: center;
-            margin-bottom: 18px;
+            margin-bottom: 20px;
             flex-wrap: wrap;
-            gap: 10px;
+            gap: 12px;
         }
 
-        .info-header h3 {
-            font-size: 22px;
-            color: #1c5f6b;
+        .info-header h2 {
+            color: #0d4f5c;
+            font-size: 24px;
         }
 
-        .file-badge {
-            background: #1c5f6b;
+        .filename {
+            background: #0d4f5c;
             color: white;
-            padding: 6px 20px;
+            padding: 8px 25px;
             border-radius: 60px;
-            font-size: 15px;
             font-weight: 600;
+            font-size: 16px;
         }
 
         .notes-box {
             background: white;
-            border-radius: 28px;
-            padding: 20px;
-            max-height: 280px;
+            border-radius: 35px;
+            padding: 22px;
+            max-height: 300px;
             overflow-y: auto;
-            line-height: 1.7;
-            font-size: 15px;
-            border: 1px solid #cde3dd;
+            line-height: 1.8;
+            border: 1px solid #cbede4;
             white-space: pre-line;
+            font-size: 15px;
         }
 
-        /* أزرار الإجراءات */
-        .actions {
+        /* أزرار التحميل */
+        .action-buttons {
             display: flex;
-            gap: 10px;
-            margin-top: 18px;
+            gap: 12px;
+            margin-top: 20px;
             flex-wrap: wrap;
         }
 
         .action-btn {
             flex: 1;
             background: white;
-            border: 2px solid #1c5f6b;
+            border: 2px solid #0d4f5c;
             padding: 12px 10px;
             border-radius: 50px;
             font-weight: 600;
-            color: #1c5f6b;
+            color: #0d4f5c;
             cursor: pointer;
             display: flex;
             align-items: center;
             justify-content: center;
             gap: 8px;
-            font-size: 15px;
-            min-width: 120px;
+            min-width: 110px;
+            transition: 0.2s;
         }
 
         .action-btn:hover {
-            background: #1c5f6b;
+            background: #0d4f5c;
             color: white;
         }
 
-        /* رسالة الخطأ */
-        .error-box {
-            background: #ffe3de;
-            border: 2px solid #c94a4a;
-            color: #912f2f;
+        /* رسائل الخطأ */
+        .error-message {
+            background: #ffebe6;
+            border: 2px solid #d14c4c;
+            color: #a13737;
             padding: 15px 25px;
             border-radius: 60px;
             margin: 20px 0 0;
@@ -298,14 +294,14 @@
 
         /* تذييل */
         .footer {
-            text-align: center;
             margin-top: 30px;
-            color: #5e8a8a;
-            font-size: 14px;
+            text-align: center;
+            color: #578e94;
+            padding: 10px;
         }
 
-        @media (max-width: 800px) {
-            .split-view {
+        @media (max-width: 900px) {
+            .split-panel {
                 grid-template-columns: 1fr;
             }
             .header {
@@ -317,65 +313,70 @@
 </head>
 <body>
     <div class="container">
-        <!-- رأس الموقع مع مؤشر عدم الاتصال -->
+        <!-- الهيدر -->
         <div class="header">
             <div class="logo">
-                <span>🧠</span>
                 <div>
-                    <h1>أطلس التشريح</h1>
-                    <p>للطلاب - يعمل بدون إنترنت</p>
+                    <h1>📚 أطلس التشريح</h1>
+                    <p>للطلاب - تخزين دائم بدون إنترنت</p>
                 </div>
             </div>
-            <div class="offline-badge" id="offlineStatus">
-                <span>📶</span>
-                <span id="statusText">يتم التحميل...</span>
+            <div class="storage-badge" id="storageStatus">
+                <span>💾</span>
+                <span id="statusText">جاري التثبيت...</span>
             </div>
         </div>
 
-        <!-- شريط التحميل -->
-        <div class="loading-bar">
-            <div class="loading-progress" id="loadingProgress"></div>
+        <!-- شريط التقدم -->
+        <div class="progress-section" id="progressSection">
+            <div class="status-text">
+                <span id="statusIcon">🔄</span>
+                <span id="statusMessage">يتم تحميل الموارد وتخزينها...</span>
+            </div>
+            <div class="progress-bar">
+                <div class="progress-fill" id="progressFill"></div>
+            </div>
+            <div style="display: flex; justify-content: space-between; color: #0d4f5c;">
+                <span id="loadedCount">0</span>
+                <span>/</span>
+                <span id="totalCount">9</span>
+                <span style="margin-right: auto;">صورة</span>
+            </div>
         </div>
 
-        <!-- رسالة الحالة -->
-        <div class="status-message" id="statusMessage">
-            <span>🔄</span>
-            <span id="messageText">جاري تحميل الموارد والصور...</span>
-        </div>
+        <!-- أيقونات الصور -->
+        <div class="image-grid" id="imageGrid"></div>
 
-        <!-- أزرار الصور -->
-        <div class="icons-grid" id="imageIcons"></div>
-
-        <!-- منطقة العرض الرئيسية -->
-        <div class="display-area">
-            <div class="split-view">
+        <!-- العرض الرئيسي -->
+        <div class="main-area">
+            <div class="split-panel">
                 <!-- الصورة -->
-                <div class="image-container">
-                    <img id="mainImage" src="" alt="صورة تشريحية">
-                    <div class="image-controls">
-                        <button class="ctrl-btn" id="zoomInBtn">+</button>
-                        <button class="ctrl-btn" id="zoomOutBtn">-</button>
-                        <button class="ctrl-btn" id="resetZoomBtn">↺</button>
+                <div class="image-frame">
+                    <img id="displayImage" src="" alt="صورة تشريحية">
+                    <div class="zoom-controls">
+                        <button class="zoom-btn" id="zoomIn">+</button>
+                        <button class="zoom-btn" id="zoomOut">−</button>
+                        <button class="zoom-btn" id="zoomReset">↺</button>
                     </div>
                 </div>
 
-                <!-- المعلومات -->
-                <div class="info-card">
+                <!-- النص -->
+                <div class="info-panel">
                     <div class="info-header">
-                        <h3>📝 شرح الصورة</h3>
-                        <span class="file-badge" id="fileName">1.jpg</span>
+                        <h2>📝 شرح الصورة</h2>
+                        <span class="filename" id="filename">1.jpg</span>
                     </div>
                     <div class="notes-box" id="notesContent">
-                        جاري تحميل النص...
+                        جاري التحميل من التخزين الدائم...
                     </div>
-                    <div class="actions">
-                        <button class="action-btn" id="downloadImageBtn">
+                    <div class="action-buttons">
+                        <button class="action-btn" id="downloadImage">
                             <span>📷</span> تحميل الصورة
                         </button>
-                        <button class="action-btn" id="downloadTextBtn">
+                        <button class="action-btn" id="downloadText">
                             <span>📄</span> تحميل النص
                         </button>
-                        <button class="action-btn" id="copyLinkBtn">
+                        <button class="action-btn" id="copyLink">
                             <span>🔗</span> نسخ الرابط
                         </button>
                     </div>
@@ -384,422 +385,394 @@
         </div>
 
         <!-- رسالة الخطأ -->
-        <div class="error-box" id="errorBox">
+        <div class="error-message" id="errorMsg">
             <span>⚠️</span>
             <span id="errorText"></span>
         </div>
 
         <!-- تذييل -->
         <div class="footer">
-            <p>✓ جميع الموارد محملة محلياً - يعمل بدون إنترنت</p>
-            <p id="cacheStatus"></p>
+            <p id="footerText">⚡ يعمل بدون إنترنت بعد التحميل الأول</p>
         </div>
     </div>
 
+    <!-- Service Worker للتخزين الدائم -->
     <script>
-        (function() {
-            // ---------- البيانات النصية (مخزنة محلياً) ----------
-            const notesData = [
-                // 1.jpg
-                `# CHAPTER ONE: INTRODUCTION TO HUMAN ANATOMY AND PHYSIOLOGY | الفصل الأول: مقدمة في تشريح ووظائف الأعضاء البشري
+        // تسجيل Service Worker
+        if ('serviceWorker' in navigator) {
+            navigator.serviceWorker.register('sw.js')
+                .then(reg => console.log('✓ Service Worker مسجل'))
+                .catch(err => console.log('✗ Service Worker فشل:', err));
+        }
+
+        // البيانات النصية للصور (مخزنة محلياً)
+        const notesData = [
+            `# CHAPTER ONE: INTRODUCTION TO HUMAN ANATOMY AND PHYSIOLOGY
 
 ## Anatomy | علم التشريح
-Anatomy is a study of the structure of the body and its parts.
+Anatomy is the study of body structure.
 
 ## Physiology | علم وظائف الأعضاء
-Physiology is the study of how the body functions.
+Physiology is the study of body function.
 
-### The study of anatomy | دراسة التشريح
-- **Gross anatomy | التشريح العياني**
-- **Microscopic anatomy (Histology) | التشريح المجهري**
-
-### TISSUE | نسيج
+### Tissues | الأنسجة
 - Epithelial tissue / نسيج طلائي
 - Connective tissue / نسيج ضام
 - Muscle tissue / نسيج عضلي
 - Nerve tissue / نسيج عصبي`,
 
-                // 2.jpg
-                `# ANATOMICAL DIRECTIONAL TERMS | المصطلحات الاتجاهية التشريحية
+            `# ANATOMICAL DIRECTIONAL TERMS
 
-## Superior (cranial) | العلوي (القحفي)
-Toward the head end. The head is superior to the abdomen.
+## Superior (cranial) | علوي
+The head is superior to the neck.
 
-## Inferior (caudal) | السفلي (الذنبي)
-Away from head. The navel is inferior to the chin.
+## Inferior (caudal) | سفلي
+The stomach is inferior to the heart.
 
-## Anterior (ventral) | الأمامي (البطني)
-Toward front. The breastbone is anterior to the spine.
+## Anterior (ventral) | أمامي
+The chest is anterior to the spine.
 
-## Posterior (dorsal) | الخلفي (الظهري)
-Toward back. The heart is posterior to the breastbone.
+## Posterior (dorsal) | خلفي
+The spine is posterior to the heart.
 
-## Medial | الإنسي
-Toward midline. The heart is medial to the arms.
+## Medial | إنسي
+The nose is medial to the eyes.
 
-## Lateral | الوحشي
-Away from midline. The arms are lateral to the chest.`,
+## Lateral | وحشي
+The ears are lateral to the head.`,
 
-                // 3.jpg
-                `# BODY REGIONS | مناطق الجسم
+            `# BODY REGIONS | مناطق الجسم
 
-## Head | الرأس
-- Facial region / المنطقة الوجهية
-- Cranial region / المنطقة القحفية
-
-## Neck | الرقبة
-Cervical region / المنطقة العنقية
+## Head and Neck | الرأس والرقبة
+- Cranial / قحفي
+- Facial / وجهي
+- Cervical / عنقي
 
 ## Trunk | الجذع
-- Thoracic region / المنطقة الصدرية
-- Abdominal region / المنطقة البطنية
-- Pelvic region / المنطقة الحوضية
+- Thoracic / صدري
+- Abdominal / بطني
+- Pelvic / حوضي
 
 ## Upper Limb | الطرف العلوي
-- Arm / العضد
-- Forearm / الساعد
-- Hand / اليد
+- Shoulder / كتف
+- Arm / عضد
+- Forearm / ساعد
 
 ## Lower Limb | الطرف السفلي
-- Thigh / الفخذ
-- Leg / الساق
-- Foot / القدم`,
+- Thigh / فخذ
+- Leg / ساق
+- Foot / قدم`,
 
-                // 4.jpg
-                `# LEVELS OF ORGANIZATION | مستويات التنظيم
+            `# LEVELS OF ORGANIZATION
 
-## 1. Chemical Level | المستوى الكيميائي
-Atoms and molecules (H₂O, CO₂, O₂)
+## 1. Chemical Level
+Atoms → Molecules (H₂O, DNA)
 
-## 2. Cellular Level | المستوى الخلوي
-Cells: basic unit of life
+## 2. Cellular Level
+Cells (muscle cells, nerve cells)
 
-## 3. Tissue Level | المستوى النسيجي
-Groups of similar cells
+## 3. Tissue Level
+Tissues (epithelial, connective)
 
-## 4. Organ Level | المستوى العضوي
-Different tissues work together
+## 4. Organ Level
+Organs (heart, liver, brain)
 
-## 5. System Level | مستوى الجهاز
-Organs work together
+## 5. System Level
+Systems (respiratory, digestive)
 
-## 6. Organism Level | مستوى الكائن الحي
-All systems working together`,
+## 6. Organism Level
+The whole human body`,
 
-                // 5.jpg
-                `# ABDOMINAL REGIONS | المناطق البطنية
+            `# ABDOMINAL REGIONS
 
-## Nine Regions | تسع مناطق
-- Right hypochondriac / تحت الضلع الأيمن
-- Epigastric / فوق المعدة
-- Left hypochondriac / تحت الضلع الأيسر
-- Right lumbar / قطني أيمن
-- Umbilical / السري
-- Left lumbar / قطني أيسر
-- Right iliac / حرقفي أيمن
-- Hypogastric / فوق العانة
-- Left iliac / حرقفي أيسر
+## Nine Regions | 9 مناطق
+- Right hypochondriac
+- Epigastric
+- Left hypochondriac
+- Right lumbar
+- Umbilical
+- Left lumbar
+- Right iliac
+- Hypogastric
+- Left iliac
 
-## Body Planes | مستويات الجسم
-- Sagittal / سهمي
-- Frontal / إكليلي
-- Transverse / مستعرض`,
+## Four Quadrants | 4 أرباع
+- Right Upper Quadrant
+- Left Upper Quadrant
+- Right Lower Quadrant
+- Left Lower Quadrant`,
 
-                // 6.jpg
-                `# BODY CAVITIES | تجاويف الجسم
+            `# BODY CAVITIES
 
 ## Dorsal Cavity | التجويف الخلفي
-- Cranial cavity / تجويف قحفي (brain)
-- Vertebral canal / قناة فقرية (spinal cord)
+- Cranial cavity (brain)
+- Spinal cavity (spinal cord)
 
 ## Ventral Cavity | التجويف الأمامي
-- Thoracic cavity / تجويف صدري (heart, lungs)
-- Abdominopelvic cavity / تجويف بطني حوضي
-  - Abdominal / بطني (digestive organs)
-  - Pelvic / حوضي (bladder, reproductive organs)
+- Thoracic cavity (heart, lungs)
+- Abdominal cavity (digestive organs)
+- Pelvic cavity (bladder, reproductive)
 
 ## Diaphragm | الحجاب الحاجز
 Separates thoracic and abdominal cavities`,
 
-                // 7.jpg
-                `# HOMEOSTASIS | الاتزان الداخلي
+            `# HOMEOSTASIS
 
-## Definition | تعريف
+## Definition
 Maintenance of stable internal environment
 
-## Components | مكونات
-- Receptor / مستقبل
-- Control center / مركز تحكم
-- Effector / منفذ
+## Components
+- Receptor: detects change
+- Control center: processes information
+- Effector: responds to change
 
-## Feedback Systems | أنظمة التغذية الراجعة
-- Negative feedback / تغذية راجعة سلبية
-  - Body temperature
-  - Blood glucose
-- Positive feedback / تغذية راجعة إيجابية
-  - Childbirth
-  - Blood clotting`,
+## Negative Feedback
+Returns body to normal state
+Example: Body temperature regulation
 
-                // 8.jpg
-                `# NEGATIVE FEEDBACK EXAMPLES | أمثلة على التغذية الراجعة السلبية
+## Positive Feedback
+Amplifies change
+Example: Childbirth contractions`,
 
-## Body Temperature | درجة حرارة الجسم
-High temp → sweating → cooling
-Low temp → shivering → warming
+            `# NEGATIVE FEEDBACK EXAMPLES
 
-## Blood Glucose | جلوكوز الدم
-High glucose → insulin release → glucose decreases
-Low glucose → glucagon release → glucose increases
+## Blood Glucose Regulation
+High glucose → Insulin released → Glucose decreases
+Low glucose → Glucagon released → Glucose increases
 
-## Blood Pressure | ضغط الدم
-High pressure → heart rate decreases
-Low pressure → heart rate increases`,
+## Body Temperature
+Hot → Sweating → Cooling
+Cold → Shivering → Warming
 
-                // 9.jpg
-                `# REVIEW | مراجعة
+## Blood Pressure
+High pressure → Heart rate slows
+Low pressure → Heart rate increases`,
 
-## Anatomical Position | الوضع التشريحي
-- Standing erect / وقوف مستقيم
-- Face forward / وجه للأمام
-- Palms forward / كفوف للأمام
+            `# REVIEW - Anatomical Position
 
-## Directional Terms Summary | ملخص المصطلحات الاتجاهية
-- Superior/Inferior: علوي/سفلي
-- Anterior/Posterior: أمامي/خلفي
-- Medial/Lateral: إنسي/وحشي
-- Proximal/Distal: دان/قاصي
-- Superficial/Deep: سطحي/عميق`
-            ];
+## Standard Position
+- Standing upright
+- Face forward
+- Arms at sides
+- Palms forward
 
-            // أسماء ملفات الصور
-            const imageFiles = [
-                '1.jpg', '2.jpg', '3.jpg', '4.jpg', '5.jpg',
-                '6.jpg', '7.jpg', '8.jpg', '9.jpg'
-            ];
+## Directional Terms Summary
+Superior/Inferior: above/below
+Anterior/Posterior: front/back
+Medial/Lateral: toward midline/away
+Proximal/Distal: closer/farther
+Superficial/Deep: surface/internal`
+        ];
 
-            // ---------- متغيرات الحالة ----------
-            let currentIndex = 0;
-            let zoom = 1;
-            let loadedCount = 0;
-            const totalResources = imageFiles.length + 1; // صور + نص
+        // أسماء الصور
+        const imageFiles = [
+            '1.jpg', '2.jpg', '3.jpg', '4.jpg', '5.jpg',
+            '6.jpg', '7.jpg', '8.jpg', '9.jpg'
+        ];
 
-            // عناصر الصفحة
-            const imageIcons = document.getElementById('imageIcons');
-            const mainImage = document.getElementById('mainImage');
-            const fileName = document.getElementById('fileName');
-            const notesContent = document.getElementById('notesContent');
-            const loadingProgress = document.getElementById('loadingProgress');
-            const statusMessage = document.getElementById('messageText');
-            const offlineStatus = document.getElementById('statusText');
-            const errorBox = document.getElementById('errorBox');
-            const errorText = document.getElementById('errorText');
-            const cacheStatus = document.getElementById('cacheStatus');
+        // متغيرات الحالة
+        let currentIndex = 0;
+        let zoom = 1;
+        let loadedImages = 0;
+        const totalImages = imageFiles.length;
 
-            // ---------- تحديث شريط التحميل ----------
-            function updateLoadingProgress() {
-                loadedCount++;
-                const percent = (loadedCount / totalResources) * 100;
-                loadingProgress.style.width = percent + '%';
-                
-                if (loadedCount >= totalResources) {
-                    statusMessage.innerText = '✓ جميع الموارد محملة محلياً - الموقع يعمل بدون إنترنت';
-                    offlineStatus.innerText = '✓ بدون إنترنت';
-                    cacheStatus.innerText = '✓ تم تخزين ' + imageFiles.length + ' صور و 9 نصوص في الذاكرة';
-                }
+        // عناصر DOM
+        const imageGrid = document.getElementById('imageGrid');
+        const displayImage = document.getElementById('displayImage');
+        const filename = document.getElementById('filename');
+        const notesContent = document.getElementById('notesContent');
+        const progressFill = document.getElementById('progressFill');
+        const loadedCountSpan = document.getElementById('loadedCount');
+        const statusMessage = document.getElementById('statusMessage');
+        const statusIcon = document.getElementById('statusIcon');
+        const storageStatus = document.getElementById('statusText');
+        const errorMsg = document.getElementById('errorMsg');
+        const errorText = document.getElementById('errorText');
+
+        // بناء أزرار الصور
+        function buildImageButtons() {
+            imageGrid.innerHTML = '';
+            for (let i = 0; i < imageFiles.length; i++) {
+                const btn = document.createElement('div');
+                btn.className = `image-btn ${i === 0 ? 'active' : ''}`;
+                btn.setAttribute('data-index', i);
+                btn.innerHTML = `<span>${i + 1}</span><small>صورة</small>`;
+                btn.onclick = () => changeImage(i);
+                imageGrid.appendChild(btn);
             }
+        }
 
-            // ---------- بناء أزرار الصور ----------
-            function buildImageIcons() {
-                imageIcons.innerHTML = '';
+        // تغيير الصورة
+        function changeImage(index) {
+            if (index < 0 || index >= imageFiles.length) return;
+            
+            currentIndex = index;
+            
+            // محاولة تحميل الصورة من cache
+            if (navigator.onLine) {
+                displayImage.src = imageFiles[index];
+            } else {
+                // إذا كنا أوفلاین، نجرب من cache
+                displayImage.src = imageFiles[index];
+            }
+            
+            filename.innerText = imageFiles[index];
+            notesContent.innerText = notesData[index];
+            
+            // تحديث الأزرار
+            document.querySelectorAll('.image-btn').forEach((btn, i) => {
+                if (i === index) btn.classList.add('active');
+                else btn.classList.remove('active');
+            });
+            
+            // تحديث الرابط
+            window.location.hash = `img-${index + 1}`;
+            
+            // إعادة التكبير
+            zoom = 1;
+            displayImage.style.transform = `scale(${zoom})`;
+            
+            errorMsg.style.display = 'none';
+        }
+
+        // تحديث شريط التقدم
+        function updateProgress() {
+            loadedImages++;
+            const percent = (loadedImages / totalImages) * 100;
+            progressFill.style.width = percent + '%';
+            loadedCountSpan.innerText = loadedImages;
+            
+            if (loadedImages >= totalImages) {
+                statusMessage.innerText = '✓ جميع الصور مخزنة في التخزين الدائم';
+                statusIcon.innerText = '✅';
+                storageStatus.innerText = '✅ متاح بدون إنترنت';
+                document.getElementById('footerText').innerHTML = '✅ الموقع يعمل بدون إنترنت الآن - جميع الصور محفوظة';
+                
+                // تخزين النصوص في localStorage
+                localStorage.setItem('notes_data', JSON.stringify(notesData));
+                localStorage.setItem('images_ready', 'true');
+            }
+        }
+
+        // التحقق من الصور في cache
+        async function checkCachedImages() {
+            if ('caches' in window) {
+                const cache = await caches.open('anatomy-v1');
+                
                 for (let i = 0; i < imageFiles.length; i++) {
-                    const btn = document.createElement('div');
-                    btn.className = `icon-btn ${i === 0 ? 'active' : ''}`;
-                    btn.setAttribute('data-index', i);
-                    btn.innerHTML = `
-                        <span>${i + 1}</span>
-                        <small>صورة</small>
-                    `;
-                    btn.onclick = function() {
-                        const index = parseInt(this.getAttribute('data-index'));
-                        changeImage(index);
-                    };
-                    imageIcons.appendChild(btn);
-                }
-            }
-
-            // ---------- تغيير الصورة ----------
-            function changeImage(index) {
-                if (index < 0 || index >= imageFiles.length) return;
-                
-                currentIndex = index;
-                
-                // تحديث الصورة
-                mainImage.src = imageFiles[index];
-                
-                // تحديث النص واسم الملف
-                fileName.innerText = imageFiles[index];
-                notesContent.innerText = notesData[index];
-                
-                // تحديث الأزرار
-                document.querySelectorAll('.icon-btn').forEach((btn, i) => {
-                    if (i === index) btn.classList.add('active');
-                    else btn.classList.remove('active');
-                });
-                
-                // إعادة التكبير
-                zoom = 1;
-                mainImage.style.transform = `scale(${zoom})`;
-                
-                // تحديث الرابط
-                window.location.hash = `img-${index + 1}`;
-                
-                // إخفاء الخطأ
-                errorBox.style.display = 'none';
-            }
-
-            // ---------- التحقق من وجود الصور ----------
-            function checkImageExists(index) {
-                const img = new Image();
-                img.onload = function() {
-                    updateLoadingProgress();
-                };
-                img.onerror = function() {
-                    console.warn('الصورة غير موجودة:', imageFiles[index]);
-                    updateLoadingProgress(); // نكمل حتى لو الصورة مش موجودة
-                };
-                img.src = imageFiles[index];
-            }
-
-            // ---------- تحميل جميع الموارد ----------
-            function loadAllResources() {
-                // تحميل الصور
-                for (let i = 0; i < imageFiles.length; i++) {
-                    checkImageExists(i);
-                }
-                
-                // تحميل النصوص (تعتبر محملة)
-                setTimeout(() => {
-                    updateLoadingProgress(); // للنصوص
-                }, 500);
-                
-                // بعد 3 ثواني نخفي رسالة التحميل
-                setTimeout(() => {
-                    if (loadedCount < totalResources) {
-                        statusMessage.innerText = '✓ تم التحميل - بعض الصور قد لا تكون موجودة';
-                        offlineStatus.innerText = '✓ بدون إنترنت';
-                    }
-                }, 3000);
-            }
-
-            // ---------- معالجة رابط الصفحة ----------
-            function handleHash() {
-                const hash = window.location.hash;
-                if (hash && hash.startsWith('#img-')) {
-                    const num = parseInt(hash.replace('#img-', ''));
-                    if (num >= 1 && num <= imageFiles.length) {
-                        changeImage(num - 1);
+                    const response = await cache.match(imageFiles[i]);
+                    if (response) {
+                        updateProgress();
+                    } else {
+                        // إذا الصورة مش في cache، نحملها
+                        fetch(imageFiles[i])
+                            .then(() => updateProgress())
+                            .catch(() => {
+                                loadedImages++;
+                                updateProgress();
+                            });
                     }
                 }
             }
+        }
 
-            // ---------- أزرار التحكم بالصورة ----------
-            document.getElementById('zoomInBtn').onclick = function() {
-                zoom = Math.min(zoom + 0.2, 3);
-                mainImage.style.transform = `scale(${zoom})`;
-            };
-
-            document.getElementById('zoomOutBtn').onclick = function() {
-                zoom = Math.max(zoom - 0.2, 0.5);
-                mainImage.style.transform = `scale(${zoom})`;
-            };
-
-            document.getElementById('resetZoomBtn').onclick = function() {
-                zoom = 1;
-                mainImage.style.transform = `scale(${zoom})`;
-            };
-
-            // ---------- تحميل الصورة ----------
-            document.getElementById('downloadImageBtn').onclick = function() {
-                const link = document.createElement('a');
-                link.href = imageFiles[currentIndex];
-                link.download = imageFiles[currentIndex];
-                link.click();
-            };
-
-            // ---------- تحميل النص ----------
-            document.getElementById('downloadTextBtn').onclick = function() {
-                const text = notesData[currentIndex];
-                const blob = new Blob([text], { type: 'text/plain' });
-                const link = document.createElement('a');
-                link.href = URL.createObjectURL(blob);
-                link.download = `notes_${currentIndex + 1}.txt`;
-                link.click();
-            };
-
-            // ---------- نسخ الرابط ----------
-            document.getElementById('copyLinkBtn').onclick = function() {
-                const url = window.location.href.split('#')[0] + `#img-${currentIndex + 1}`;
-                navigator.clipboard.writeText(url).then(function() {
-                    alert('✅ تم نسخ الرابط');
-                }).catch(function() {
-                    alert('❌ فشل النسخ');
-                });
-            };
-
-            // ---------- معالجة أخطاء الصورة ----------
-            mainImage.onerror = function() {
-                errorText.innerText = `⚠️ الصورة ${imageFiles[currentIndex]} غير موجودة - تأكد من رفعها في نفس المجلد`;
-                errorBox.style.display = 'flex';
-            };
-
-            mainImage.onload = function() {
-                errorBox.style.display = 'none';
-            };
-
-            // ---------- حفظ الجلسة في localStorage ----------
-            function saveSession() {
-                const sessionId = 'user_' + Math.random().toString(36).substring(2, 8);
-                localStorage.setItem('session_id', sessionId);
-                localStorage.setItem('last_image', currentIndex);
+        // معالجة أخطاء الصورة
+        displayImage.onerror = function() {
+            if (!navigator.onLine) {
+                errorText.innerText = '⚠️ أنت بدون إنترنت والصورة غير مخزنة محلياً';
+                errorMsg.style.display = 'flex';
             }
+        };
 
-            // ---------- استعادة الجلسة ----------
-            function loadSession() {
-                const lastImage = localStorage.getItem('last_image');
-                if (lastImage !== null) {
-                    return parseInt(lastImage);
+        displayImage.onload = function() {
+            errorMsg.style.display = 'none';
+        };
+
+        // أزرار التحكم
+        document.getElementById('zoomIn').onclick = () => {
+            zoom = Math.min(zoom + 0.2, 3);
+            displayImage.style.transform = `scale(${zoom})`;
+        };
+
+        document.getElementById('zoomOut').onclick = () => {
+            zoom = Math.max(zoom - 0.2, 0.5);
+            displayImage.style.transform = `scale(${zoom})`;
+        };
+
+        document.getElementById('zoomReset').onclick = () => {
+            zoom = 1;
+            displayImage.style.transform = `scale(${zoom})`;
+        };
+
+        // تحميل الصورة
+        document.getElementById('downloadImage').onclick = () => {
+            const link = document.createElement('a');
+            link.href = imageFiles[currentIndex];
+            link.download = imageFiles[currentIndex];
+            link.click();
+        };
+
+        // تحميل النص
+        document.getElementById('downloadText').onclick = () => {
+            const text = notesData[currentIndex];
+            const blob = new Blob([text], { type: 'text/plain' });
+            const link = document.createElement('a');
+            link.href = URL.createObjectURL(blob);
+            link.download = `notes_${currentIndex + 1}.txt`;
+            link.click();
+        };
+
+        // نسخ الرابط
+        document.getElementById('copyLink').onclick = () => {
+            const url = window.location.href.split('#')[0] + `#img-${currentIndex + 1}`;
+            navigator.clipboard.writeText(url).then(() => {
+                alert('✅ تم نسخ الرابط');
+            });
+        };
+
+        // معالجة الرابط
+        function handleHash() {
+            const hash = window.location.hash;
+            if (hash && hash.startsWith('#img-')) {
+                const num = parseInt(hash.replace('#img-', ''));
+                if (num >= 1 && num <= imageFiles.length) {
+                    changeImage(num - 1);
                 }
-                return 0;
             }
+        }
 
-            // ---------- بدء الموقع ----------
-            function init() {
-                buildImageIcons();
-                
-                // استعادة آخر صورة
-                const savedIndex = loadSession();
-                
-                // معالجة الرابط
-                handleHash();
-                
-                // إذا ما في رابط، استخدم آخر صورة محفوظة
-                if (!window.location.hash) {
-                    changeImage(savedIndex);
-                }
-                
-                // تحميل الموارد
-                loadAllResources();
-                
-                // حفظ الجلسة
-                saveSession();
-                
-                // عرض حالة عدم الاتصال
-                offlineStatus.innerText = '✓ بدون إنترنت';
+        // حفظ الجلسة
+        function saveSession() {
+            localStorage.setItem('last_image', currentIndex);
+        }
+
+        // بدء التطبيق
+        function init() {
+            buildImageButtons();
+            handleHash();
+            
+            // استعادة آخر صورة
+            const lastImage = localStorage.getItem('last_image');
+            if (lastImage && !window.location.hash) {
+                changeImage(parseInt(lastImage));
             }
+            
+            // التحقق من التخزين
+            if (localStorage.getItem('images_ready') === 'true') {
+                statusMessage.innerText = '✓ الموارد متاحة محلياً';
+                storageStatus.innerText = '✅ متاح بدون إنترنت';
+                progressFill.style.width = '100%';
+                loadedCountSpan.innerText = totalImages;
+            }
+            
+            // بدء تحميل الصور للتخزين
+            checkCachedImages();
+            
+            // حفظ الجلسة كل 5 ثواني
+            setInterval(saveSession, 5000);
+        }
 
-            // بدء كل شيء
-            init();
-        })();
+        init();
     </script>
 </body>
 </html>
