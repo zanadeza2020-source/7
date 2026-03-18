@@ -2,160 +2,329 @@
 <html lang="ar" dir="rtl">
 <head>
     <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>أطلس التشريح • 9 صور كاملة</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=5.0, user-scalable=yes">
+    <title>تشريح • أطلس تفاعلي سريع</title>
+    
+    <!-- تحسين الأداء وسرعة التحميل -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://cdnjs.cloudflare.com">
+    
+    <!-- Font Awesome للأيقونات -->
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+    
+    <!-- خط Tajawal العصري والأنيق -->
     <link href="https://fonts.googleapis.com/css2?family=Tajawal:wght@300;400;500;700;900&display=swap" rel="stylesheet">
+    
     <style>
+        /* reset متقدم */
         * {
             margin: 0;
             padding: 0;
             box-sizing: border-box;
-            font-family: 'Tajawal', sans-serif;
+            -webkit-tap-highlight-color: transparent;
+        }
+
+        /* متغيرات للألوان والتنسيق */
+        :root {
+            --primary: #1d5a5f;
+            --primary-light: #39858c;
+            --secondary: #b8e2da;
+            --bg: #f4f8fc;
+            --card-bg: #ffffff;
+            --text: #1e3a3f;
+            --text-light: #4d6f75;
+            --shadow: 0 20px 35px -8px rgba(18, 52, 60, 0.2);
+            --shadow-hover: 0 25px 40px -8px rgba(8, 46, 54, 0.3);
+            --border-radius: 32px;
+            --transition: all 0.2s cubic-bezier(0.4, 0, 0.2, 1);
+        }
+
+        /* تحسينات الأداء */
+        html {
+            scroll-behavior: smooth;
+            -webkit-font-smoothing: antialiased;
+            -moz-osx-font-smoothing: grayscale;
         }
 
         body {
-            background: #f0f4f7;
-            padding: 1.5rem;
+            font-family: 'Tajawal', sans-serif;
+            background: var(--bg);
+            color: var(--text);
+            min-height: 100vh;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            padding: 12px;
+            line-height: 1.6;
         }
 
         .container {
-            max-width: 1400px;
+            max-width: 1600px;
+            width: 100%;
             margin: 0 auto;
         }
 
-        /* رأس الصفحة */
+        /* تحسينات للأجهزة المختلفة */
+        @media (min-width: 1921px) {
+            .container { max-width: 1800px; }
+            body { padding: 24px; }
+        }
+
+        @media (max-width: 768px) {
+            body { padding: 8px; }
+            :root { --border-radius: 24px; }
+        }
+
+        @media (max-width: 480px) {
+            body { padding: 4px; }
+        }
+
+        /* الهيدر المتجاوب */
         .header {
-            background: #1c4c5c;
-            border-radius: 40px;
-            padding: 1.5rem 2.5rem;
-            margin-bottom: 2rem;
+            background: linear-gradient(135deg, var(--primary), #17494d);
+            border-radius: var(--border-radius);
+            padding: 20px 28px;
+            margin-bottom: 20px;
             color: white;
             display: flex;
             justify-content: space-between;
             align-items: center;
             flex-wrap: wrap;
-            box-shadow: 0 10px 25px rgba(0,0,0,0.2);
+            gap: 16px;
+            box-shadow: var(--shadow);
+            backdrop-filter: blur(10px);
+            border: 1px solid rgba(255,255,255,0.15);
         }
 
-        .header h1 {
-            font-size: 2.2rem;
-            font-weight: 700;
+        @media (max-width: 640px) {
+            .header {
+                padding: 16px 20px;
+                flex-direction: column;
+                text-align: center;
+            }
+        }
+
+        .logo {
             display: flex;
             align-items: center;
-            gap: 1rem;
+            gap: 15px;
         }
 
-        .header i {
-            color: #b2e3da;
-            font-size: 2.5rem;
+        .logo i {
+            font-size: clamp(2rem, 5vw, 2.8rem);
+            color: var(--secondary);
+            filter: drop-shadow(0 4px 8px rgba(0,0,0,0.2));
         }
 
-        .image-counter {
-            background: #2f697b;
-            padding: 0.7rem 2rem;
+        .logo h1 {
+            font-size: clamp(1.5rem, 4vw, 2.2rem);
+            font-weight: 800;
+            letter-spacing: -0.5px;
+        }
+
+        .logo p {
+            font-size: clamp(0.85rem, 2vw, 1rem);
+            opacity: 0.9;
+            font-weight: 300;
+        }
+
+        .session-info {
+            background: rgba(255,255,255,0.15);
+            backdrop-filter: blur(8px);
+            padding: 10px 24px;
             border-radius: 60px;
-            font-size: 1.3rem;
-            font-weight: 600;
-            border: 2px solid #9bd3d3;
+            border: 1px solid rgba(255,255,255,0.3);
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            font-size: 1rem;
         }
 
-        /* شبكة الأزرار */
-        .buttons-grid {
+        @media (max-width: 480px) {
+            .session-info {
+                width: 100%;
+                justify-content: center;
+                padding: 8px 16px;
+            }
+        }
+
+        /* شبكة الأيقونات السريعة */
+        .icon-strip {
             display: flex;
             flex-wrap: wrap;
             justify-content: center;
-            gap: 0.8rem;
-            margin: 2rem 0 2.5rem;
+            gap: 10px;
+            margin: 20px 0 25px;
+            padding: 5px;
         }
 
-        .image-btn {
-            width: 90px;
-            height: 90px;
+        .icon-btn {
+            width: clamp(70px, 10vw, 95px);
+            height: clamp(70px, 10vw, 95px);
             background: white;
-            border-radius: 30px;
+            border-radius: clamp(20px, 4vw, 30px);
             display: flex;
             flex-direction: column;
             align-items: center;
             justify-content: center;
-            gap: 0.3rem;
+            gap: 6px;
             cursor: pointer;
-            box-shadow: 0 10px 15px rgba(0,0,0,0.1);
-            transition: all 0.3s;
-            border: 3px solid transparent;
+            box-shadow: 0 8px 18px rgba(0,0,0,0.08);
+            transition: var(--transition);
+            border: 2px solid transparent;
+            position: relative;
+            -webkit-touch-callout: none;
+            -webkit-user-select: none;
+            user-select: none;
+            touch-action: manipulation;
         }
 
-        .image-btn:hover {
-            transform: translateY(-8px);
-            box-shadow: 0 18px 25px rgba(27, 78, 85, 0.2);
+        .icon-btn:active {
+            transform: scale(0.96);
+            background: #f0f8f6;
         }
 
-        .image-btn.active {
-            border-color: #1a7b7b;
-            background: #e1f3f0;
-            box-shadow: 0 0 0 4px rgba(26, 123, 123, 0.2);
+        .icon-btn:hover {
+            transform: translateY(-6px);
+            box-shadow: 0 15px 25px rgba(26, 88, 88, 0.2);
         }
 
-        .image-btn i {
-            font-size: 2.2rem;
-            color: #236b6b;
+        .icon-btn.active {
+            border-color: var(--primary);
+            background: #ecf9f6;
+            box-shadow: 0 0 0 4px rgba(29, 90, 95, 0.15);
         }
 
-        .image-btn span {
+        .icon-btn i {
+            font-size: clamp(1.5rem, 3vw, 2.2rem);
+            color: var(--primary);
+        }
+
+        .icon-btn span {
             font-weight: 700;
-            color: #1a5151;
-            background: #e7f3f0;
-            padding: 0.2rem 1rem;
-            border-radius: 30px;
-            font-size: 0.9rem;
+            color: var(--primary-light);
+            background: #e1f2ef;
+            padding: 2px 12px;
+            border-radius: 40px;
+            font-size: clamp(0.8rem, 2vw, 0.95rem);
         }
 
-        /* منطقة العرض */
-        .main-panel {
+        /* الرابط المخصص للصورة */
+        .copy-link {
+            background: rgba(29, 90, 95, 0.05);
+            border-radius: 60px;
+            padding: 10px 20px;
+            margin: 10px 0 15px;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            flex-wrap: wrap;
+            gap: 10px;
+            direction: ltr;
+        }
+
+        .link-box {
             background: white;
-            border-radius: 70px;
-            padding: 2.5rem;
-            box-shadow: 0 25px 40px rgba(0, 0, 0, 0.15);
-            border: 1px solid #e0ecea;
+            padding: 10px 18px;
+            border-radius: 50px;
+            font-size: 0.9rem;
+            color: var(--primary);
+            flex: 1;
+            min-width: 200px;
+            border: 1px solid #c2dfd9;
+            overflow-x: auto;
+            white-space: nowrap;
+            -webkit-overflow-scrolling: touch;
         }
 
-        .split-layout {
+        .copy-btn {
+            background: var(--primary);
+            border: none;
+            color: white;
+            padding: 10px 25px;
+            border-radius: 50px;
+            font-weight: 600;
+            cursor: pointer;
+            display: inline-flex;
+            align-items: center;
+            gap: 8px;
+            transition: var(--transition);
+            border: 1px solid transparent;
+        }
+
+        .copy-btn:active {
+            background: var(--primary-light);
+            transform: scale(0.97);
+        }
+
+        /* لوحة العرض الرئيسية - شبكة متجاوبة */
+        .main-panel {
             display: grid;
-            grid-template-columns: 1.3fr 1fr;
-            gap: 2.2rem;
+            grid-template-columns: 1.2fr 0.9fr;
+            gap: 20px;
+            background: rgba(255,255,255,0.7);
+            backdrop-filter: blur(20px);
+            border-radius: 50px;
+            padding: 22px;
+            box-shadow: var(--shadow);
+            border: 1px solid rgba(255,255,255,0.8);
+        }
+
+        @media (max-width: 1000px) {
+            .main-panel {
+                grid-template-columns: 1fr;
+                gap: 18px;
+                padding: 18px;
+            }
+        }
+
+        @media (max-width: 480px) {
+            .main-panel {
+                padding: 12px;
+                border-radius: 30px;
+            }
         }
 
         /* حاوية الصورة */
-        .image-box {
-            background: #1f424a;
-            border-radius: 50px;
+        .image-wrapper {
+            background: #15373d;
+            border-radius: 40px;
             overflow: hidden;
-            box-shadow: 0 20px 35px rgba(0, 0, 0, 0.3);
-            border: 6px solid #d9f0ec;
+            box-shadow: 0 20px 35px rgba(0,0,0,0.3);
+            border: 5px solid #e4f3ef;
             aspect-ratio: 4/3;
             position: relative;
+            touch-action: pan-y pinch-zoom;
         }
 
         #mainImage {
             width: 100%;
             height: 100%;
             object-fit: contain;
-            background: #1b3f45;
+            background: #15373d;
             display: block;
-            transition: transform 0.3s;
+            transition: transform 0.2s;
+            will-change: transform;
+            -webkit-user-select: none;
+            user-select: none;
+            pointer-events: none;
         }
 
+        /* أزرار التحكم بالصورة */
         .image-controls {
             position: absolute;
-            bottom: 20px;
+            bottom: 15px;
             left: 50%;
             transform: translateX(-50%);
             background: rgba(0, 0, 0, 0.6);
-            padding: 0.5rem 1.5rem;
-            border-radius: 50px;
+            backdrop-filter: blur(12px);
+            padding: 8px 20px;
+            border-radius: 60px;
             display: flex;
-            gap: 1rem;
-            backdrop-filter: blur(5px);
+            gap: 15px;
+            border: 1px solid rgba(255,255,255,0.3);
+            flex-wrap: wrap;
+            justify-content: center;
         }
 
         .ctrl-btn {
@@ -163,176 +332,279 @@
             border: none;
             color: white;
             font-size: 1.3rem;
-            padding: 0.4rem 0.8rem;
+            padding: 8px 12px;
             border-radius: 40px;
             cursor: pointer;
             transition: 0.2s;
+            min-width: 44px;
+            min-height: 44px;
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            touch-action: manipulation;
         }
 
-        .ctrl-btn:hover {
-            background: rgba(255,255,255,0.2);
+        .ctrl-btn:active {
+            background: rgba(255,255,255,0.25);
+            transform: scale(0.95);
         }
 
-        /* بطاقة الشرح */
-        .info-box {
-            background: #f6fcfb;
-            border-radius: 50px;
-            padding: 2rem;
-            border: 1px solid #c2e2db;
-            box-shadow: inset 0 2px 8px rgba(0,0,0,0.02);
+        @media (max-width: 480px) {
+            .image-controls {
+                padding: 4px 10px;
+                gap: 8px;
+            }
+            .ctrl-btn {
+                font-size: 1.2rem;
+                padding: 6px 8px;
+                min-width: 40px;
+                min-height: 40px;
+            }
+        }
+
+        /* بطاقة المعلومات */
+        .info-card {
+            background: #ffffffec;
+            backdrop-filter: blur(8px);
+            border-radius: 40px;
+            padding: 24px;
+            border: 1px solid white;
+            box-shadow: 0 15px 30px rgba(0,0,0,0.05);
+            display: flex;
+            flex-direction: column;
         }
 
         .info-header {
             display: flex;
             justify-content: space-between;
             align-items: center;
-            margin-bottom: 1.5rem;
-            padding-bottom: 0.8rem;
-            border-bottom: 3px solid #c1ddd6;
+            margin-bottom: 18px;
+            flex-wrap: wrap;
+            gap: 12px;
         }
 
         .info-header h2 {
-            font-size: 1.8rem;
-            color: #165a5a;
+            font-size: clamp(1.4rem, 3vw, 1.9rem);
+            color: var(--primary);
             display: flex;
             align-items: center;
-            gap: 0.8rem;
+            gap: 10px;
         }
 
         .file-badge {
-            background: #165a5a;
+            background: var(--primary);
             color: white;
-            padding: 0.5rem 2rem;
+            padding: 8px 22px;
             border-radius: 60px;
             font-weight: 700;
-            font-size: 1.1rem;
+            font-size: clamp(0.9rem, 2vw, 1.1rem);
+            box-shadow: 0 4px 12px rgba(0,0,0,0.1);
         }
 
-        .notes-content {
-            background: white;
-            border-radius: 40px;
-            padding: 2rem;
-            max-height: 350px;
+        /* النص مع scroll مخصص */
+        .notes-scroll {
+            background: #f6fdfb;
+            border-radius: 35px;
+            padding: 20px;
+            max-height: 300px;
             overflow-y: auto;
             line-height: 1.8;
-            font-size: 1rem;
+            font-size: clamp(0.95rem, 2vw, 1.05rem);
             color: #174f4f;
             white-space: pre-line;
-            border: 1px solid #c2ddd6;
-            box-shadow: inset 0 2px 6px rgba(0,0,0,0.02);
+            border: 1px solid #d1ece4;
+            -webkit-overflow-scrolling: touch;
+            scrollbar-width: thin;
+            scrollbar-color: var(--primary) #d1ece4;
         }
 
-        .download-section {
-            margin-top: 1.5rem;
+        .notes-scroll::-webkit-scrollbar {
+            width: 6px;
+        }
+
+        .notes-scroll::-webkit-scrollbar-track {
+            background: #d1ece4;
+            border-radius: 10px;
+        }
+
+        .notes-scroll::-webkit-scrollbar-thumb {
+            background: var(--primary);
+            border-radius: 10px;
+        }
+
+        /* أزرار التحميل */
+        .action-buttons {
             display: flex;
-            justify-content: flex-end;
+            gap: 12px;
+            margin-top: 20px;
+            flex-wrap: wrap;
         }
 
         .btn {
+            flex: 1 1 auto;
+            min-width: 140px;
             background: white;
-            border: 2px solid #1a7b7b;
-            padding: 0.8rem 2rem;
+            border: 2px solid var(--primary);
+            padding: 12px 20px;
             border-radius: 60px;
             font-weight: 700;
-            color: #1a7b7b;
+            color: var(--primary);
             cursor: pointer;
-            transition: 0.2s;
+            transition: var(--transition);
             display: inline-flex;
             align-items: center;
-            gap: 0.8rem;
-            font-size: 1.1rem;
+            justify-content: center;
+            gap: 10px;
+            font-size: clamp(0.9rem, 2vw, 1.1rem);
+            touch-action: manipulation;
         }
 
-        .btn:hover {
-            background: #1a7b7b;
+        .btn:active {
+            background: var(--primary);
             color: white;
+            transform: scale(0.98);
         }
 
-        /* رسالة خطأ الصور */
+        .btn i {
+            font-size: 1.2rem;
+        }
+
+        @media (max-width: 480px) {
+            .action-buttons {
+                flex-direction: column;
+            }
+            .btn {
+                width: 100%;
+            }
+        }
+
+        /* مؤشر التحميل */
+        .loading {
+            display: inline-block;
+            width: 20px;
+            height: 20px;
+            border: 3px solid rgba(29,90,95,0.2);
+            border-radius: 50%;
+            border-top-color: var(--primary);
+            animation: spin 0.6s linear infinite;
+        }
+
+        @keyframes spin {
+            to { transform: rotate(360deg); }
+        }
+
+        /* رسائل الخطأ */
         .error-message {
-            background: #fff1e0;
-            border: 2px solid #c95c5c;
-            color: #a03a3a;
-            padding: 1rem 2rem;
+            background: #ffe9e0;
+            border: 2px solid #d14c4c;
+            color: #aa3a3a;
+            padding: 15px 25px;
             border-radius: 60px;
-            margin-top: 1.5rem;
+            margin: 20px 0 0;
             text-align: center;
             font-weight: 600;
             display: none;
         }
 
-        .error-message i {
-            margin-left: 0.7rem;
+        /* تحسينات إضافية */
+        .hidden {
+            display: none !important;
         }
 
-        @media (max-width: 900px) {
-            .split-layout {
-                grid-template-columns: 1fr;
-            }
+        .text-center {
+            text-align: center;
         }
     </style>
 </head>
 <body>
 <div class="container">
-    <!-- رأس الموقع -->
+    <!-- هيدر الموقع -->
     <div class="header">
-        <h1>
-            <i class="fas fa-heartbeat"></i>
-            أطلس التشريح البشري
-        </h1>
-        <div class="image-counter">
-            <i class="fas fa-images"></i> 9 صور عالية الدقة
+        <div class="logo">
+            <i class="fas fa-brain"></i>
+            <div>
+                <h1>أطلس التشريح</h1>
+                <p>تجربة سلسة وسريعة على جميع الأجهزة</p>
+            </div>
+        </div>
+        <div class="session-info" id="sessionInfo">
+            <i class="fas fa-user-circle"></i>
+            <span>جلسة: </span>
+            <span id="sessionId">...</span>
         </div>
     </div>
 
-    <!-- أزرار الصور 1-9 -->
-    <div class="buttons-grid" id="imageButtons"></div>
+    <!-- شريط الأيقونات السريع -->
+    <div class="icon-strip" id="iconStrip"></div>
 
-    <!-- منطقة العرض الرئيسية -->
+    <!-- رابط الصورة المخصص -->
+    <div class="copy-link">
+        <div class="link-box" id="imageLink">https://yourdomain.com/#image-1</div>
+        <button class="copy-btn" id="copyLinkBtn">
+            <i class="fas fa-copy"></i>
+            <span>نسخ الرابط</span>
+        </button>
+    </div>
+
+    <!-- اللوحة الرئيسية -->
     <div class="main-panel">
-        <div class="split-layout">
-            <!-- الجانب الأيمن: الصورة -->
-            <div class="image-box">
-                <img id="mainImage" src="" alt="صورة تشريحية">
-                <div class="image-controls">
-                    <button class="ctrl-btn" id="zoomIn"><i class="fas fa-search-plus"></i></button>
-                    <button class="ctrl-btn" id="zoomOut"><i class="fas fa-search-minus"></i></button>
-                    <button class="ctrl-btn" id="fullscreen"><i class="fas fa-expand"></i></button>
-                </div>
+        <!-- الجانب الأيمن: الصورة -->
+        <div class="image-wrapper">
+            <img id="mainImage" src="" alt="صورة تشريحية" loading="lazy">
+            <div class="image-controls">
+                <button class="ctrl-btn" id="zoomInBtn" title="تكبير"><i class="fas fa-search-plus"></i></button>
+                <button class="ctrl-btn" id="zoomOutBtn" title="تصغير"><i class="fas fa-search-minus"></i></button>
+                <button class="ctrl-btn" id="resetZoomBtn" title="إعادة الحجم"><i class="fas fa-undo-alt"></i></button>
+                <button class="ctrl-btn" id="fullscreenBtn" title="ملء الشاشة"><i class="fas fa-expand"></i></button>
+            </div>
+        </div>
+
+        <!-- الجانب الأيسر: المعلومات -->
+        <div class="info-card">
+            <div class="info-header">
+                <h2>
+                    <i class="fas fa-pen-fancy"></i>
+                    شرح الصورة
+                </h2>
+                <span class="file-badge" id="filename">1.jpg</span>
+            </div>
+            <div class="notes-scroll" id="notesContent">
+                جاري التحميل...
             </div>
             
-            <!-- الجانب الأيسر: الشرح -->
-            <div class="info-box">
-                <div class="info-header">
-                    <h2>
-                        <i class="fas fa-pen"></i>
-                        شرح الصورة
-                    </h2>
-                    <span class="file-badge" id="filename">1.jpg</span>
-                </div>
-                <div class="notes-content" id="notes">
-                    جاري تحميل النص...
-                </div>
-                <div class="download-section">
-                    <button class="btn" id="downloadBtn">
-                        <i class="fas fa-download"></i> تحميل النص
-                    </button>
-                </div>
+            <!-- أزرار التحميل -->
+            <div class="action-buttons">
+                <button class="btn" id="downloadImageBtn">
+                    <i class="fas fa-download"></i>
+                    تحميل الصورة
+                </button>
+                <button class="btn" id="downloadTextBtn">
+                    <i class="fas fa-file-alt"></i>
+                    تحميل النص
+                </button>
+                <button class="btn" id="shareBtn">
+                    <i class="fas fa-share-alt"></i>
+                    مشاركة
+                </button>
             </div>
         </div>
     </div>
 
-    <!-- رسالة خطأ إذا الصور مش موجودة -->
+    <!-- رسالة الخطأ -->
     <div class="error-message" id="errorMsg">
-        <i class="fas fa-exclamation-triangle"></i>
+        <i class="fas fa-exclamation-circle"></i>
         <span id="errorText"></span>
     </div>
 </div>
 
 <script>
     (function() {
-        // -------------------- البيانات: 9 صور و 9 نصوص --------------------
-        // النصوص المستخرجة من الصور (من 1.jpg إلى 9.jpg)
+        // ---------- بيانات الموقع (9 صور كاملة) ----------
+        const imageFiles = [
+            '1.jpg', '2.jpg', '3.jpg', '4.jpg', '5.jpg', 
+            '6.jpg', '7.jpg', '8.jpg', '9.jpg'
+        ];
+
         const notesData = [
             // 1.jpg
             `# CHAPTER ONE: INTRODUCTION TO HUMAN ANATOMY AND PHYSIOLOGY | الفصل الأول: مقدمة في تشريح ووظائف الأعضاء البشري
@@ -510,115 +782,155 @@ Reduces stimulus and restores stable state.
 
 **Homeostasis restored | استعادة الاتزان الداخلي**`,
 
-            // 9.jpg (إذا كان موجود - إذا لم يكن موجود، ضع نص افتراضي)
+            // 9.jpg
             `# الصورة التاسعة | Image 9
 محتوى إضافي من الصورة التاسعة.
-Additional content from image 9.`
+Additional content from image 9.
+
+يمكنك إضافة المزيد من التفاصيل هنا حسب محتوى الصورة الفعلي.`
         ];
 
-        // مسارات الصور (9 صور)
-        const imageFiles = [
-            '1.jpg',
-            '2.jpg',
-            '3.jpg',
-            '4.jpg',
-            '5.jpg',
-            '6.jpg',
-            '7.jpg',
-            '8.jpg',
-            '9.jpg'
-        ];
-
+        // ---------- المتغيرات العامة ----------
         let currentIndex = 0;
-        let zoomLevel = 1;
-
-        // عناصر الصفحة
-        const imageButtons = document.getElementById('imageButtons');
+        let zoom = 1;
+        const sessionId = Math.random().toString(36).substring(2, 10).toUpperCase();
+        
+        // عناصر DOM
+        const iconStrip = document.getElementById('iconStrip');
         const mainImage = document.getElementById('mainImage');
         const filenameSpan = document.getElementById('filename');
-        const notesDiv = document.getElementById('notes');
+        const notesDiv = document.getElementById('notesContent');
         const errorMsg = document.getElementById('errorMsg');
         const errorText = document.getElementById('errorText');
+        const sessionSpan = document.getElementById('sessionId');
+        const imageLink = document.getElementById('imageLink');
+        
+        // عرض معرف الجلسة
+        sessionSpan.textContent = sessionId;
 
-        // بناء أزرار الصور
-        function buildButtons() {
-            imageButtons.innerHTML = '';
+        // ---------- دوال مساعدة ----------
+        function updateLink(index) {
+            const url = new URL(window.location.href);
+            url.hash = `#image-${index + 1}`;
+            imageLink.textContent = url.toString();
+            window.history.replaceState(null, '', url.toString());
+        }
+
+        function showError(msg) {
+            errorText.textContent = msg;
+            errorMsg.style.display = 'block';
+        }
+
+        function hideError() {
+            errorMsg.style.display = 'none';
+        }
+
+        // بناء الأزرار بسرعة
+        function buildIconStrip() {
+            iconStrip.innerHTML = '';
             for (let i = 0; i < imageFiles.length; i++) {
                 const btn = document.createElement('div');
-                btn.className = `image-btn ${i === 0 ? 'active' : ''}`;
+                btn.className = `icon-btn ${i === 0 ? 'active' : ''}`;
                 btn.setAttribute('data-index', i);
                 btn.innerHTML = `
                     <i class="fas fa-image"></i>
                     <span>${i + 1}</span>
                 `;
-                btn.addEventListener('click', function() {
-                    const index = parseInt(this.getAttribute('data-index'));
-                    changeImage(index);
+                btn.addEventListener('click', (e) => {
+                    const idx = parseInt(e.currentTarget.getAttribute('data-index'));
+                    changeImage(idx);
                 });
-                imageButtons.appendChild(btn);
+                btn.addEventListener('touchstart', (e) => {
+                    e.preventDefault(); // منع التمرير أثناء اللمس
+                }, { passive: false });
+                iconStrip.appendChild(btn);
             }
         }
 
-        // تغيير الصورة والشرح
+        // تغيير الصورة
         function changeImage(index) {
             currentIndex = index;
             
             // تحديث الصورة
             mainImage.src = imageFiles[index];
             
-            // تحديث اسم الملف
-            filenameSpan.innerText = imageFiles[index];
+            // تحديث اسم الملف والنص
+            filenameSpan.textContent = imageFiles[index];
+            notesDiv.textContent = notesData[index];
             
-            // تحديث النص
-            notesDiv.innerText = notesData[index];
-            
-            // إزالة active من جميع الأزرار
-            document.querySelectorAll('.image-btn').forEach(btn => {
+            // تحديث الأزرار
+            document.querySelectorAll('.icon-btn').forEach(btn => {
                 btn.classList.remove('active');
             });
+            document.querySelector(`.icon-btn[data-index="${index}"]`).classList.add('active');
             
-            // إضافة active للزر الحالي
-            document.querySelector(`.image-btn[data-index="${index}"]`).classList.add('active');
+            // تحديث الرابط
+            updateLink(index);
             
-            // إعادة التكبير إلى 1
-            zoomLevel = 1;
-            mainImage.style.transform = `scale(${zoomLevel})`;
+            // إعادة التكبير
+            zoom = 1;
+            mainImage.style.transform = `scale(${zoom})`;
             
-            // إخفاء رسالة الخطأ
-            errorMsg.style.display = 'none';
+            hideError();
         }
 
-        // التحقق من وجود الصور (يعرض رسالة إذا الصورة مش موجودة)
+        // معالجة أخطاء تحميل الصورة
         mainImage.onerror = function() {
-            errorText.innerText = `الصورة ${imageFiles[currentIndex]} غير موجودة في المجلد. تأكد من رفعها بجانب ملف index.html`;
-            errorMsg.style.display = 'block';
+            showError(`⚠️ الصورة ${imageFiles[currentIndex]} غير موجودة. تأكد من رفعها في نفس المجلد.`);
         };
 
         mainImage.onload = function() {
-            errorMsg.style.display = 'none';
+            hideError();
         };
 
-        // أحداث التكبير
-        document.getElementById('zoomIn').addEventListener('click', function() {
-            zoomLevel = Math.min(zoomLevel + 0.2, 3);
-            mainImage.style.transform = `scale(${zoomLevel})`;
+        // معالجة رابط الهاش عند تحميل الصفحة
+        function handleHash() {
+            const hash = window.location.hash;
+            if (hash && hash.startsWith('#image-')) {
+                const num = parseInt(hash.replace('#image-', ''));
+                if (num >= 1 && num <= imageFiles.length) {
+                    changeImage(num - 1);
+                }
+            }
+        }
+
+        // ---------- التحكم بالصورة ----------
+        document.getElementById('zoomInBtn').addEventListener('click', () => {
+            zoom = Math.min(zoom + 0.2, 3);
+            mainImage.style.transform = `scale(${zoom})`;
         });
 
-        document.getElementById('zoomOut').addEventListener('click', function() {
-            zoomLevel = Math.max(zoomLevel - 0.2, 0.5);
-            mainImage.style.transform = `scale(${zoomLevel})`;
+        document.getElementById('zoomOutBtn').addEventListener('click', () => {
+            zoom = Math.max(zoom - 0.2, 0.5);
+            mainImage.style.transform = `scale(${zoom})`;
         });
 
-        // ملء الشاشة
-        document.getElementById('fullscreen').addEventListener('click', function() {
-            const imageBox = document.querySelector('.image-box');
-            if (imageBox.requestFullscreen) {
-                imageBox.requestFullscreen();
+        document.getElementById('resetZoomBtn').addEventListener('click', () => {
+            zoom = 1;
+            mainImage.style.transform = `scale(${zoom})`;
+        });
+
+        document.getElementById('fullscreenBtn').addEventListener('click', () => {
+            const wrapper = document.querySelector('.image-wrapper');
+            if (wrapper.requestFullscreen) {
+                wrapper.requestFullscreen();
+            } else if (wrapper.webkitRequestFullscreen) {
+                wrapper.webkitRequestFullscreen();
+            } else if (wrapper.msRequestFullscreen) {
+                wrapper.msRequestFullscreen();
             }
         });
 
+        // تحميل الصورة
+        document.getElementById('downloadImageBtn').addEventListener('click', () => {
+            const link = document.createElement('a');
+            link.href = imageFiles[currentIndex];
+            link.download = imageFiles[currentIndex];
+            link.click();
+        });
+
         // تحميل النص
-        document.getElementById('downloadBtn').addEventListener('click', function() {
+        document.getElementById('downloadTextBtn').addEventListener('click', () => {
             const text = notesDiv.innerText;
             const blob = new Blob([text], { type: 'text/plain' });
             const link = document.createElement('a');
@@ -627,9 +939,60 @@ Additional content from image 9.`
             link.click();
         });
 
-        // بدء الموقع
-        buildButtons();
-        changeImage(0); // يبدأ بالصورة الأولى
+        // نسخ الرابط
+        document.getElementById('copyLinkBtn').addEventListener('click', () => {
+            navigator.clipboard.writeText(imageLink.textContent).then(() => {
+                alert('✅ تم نسخ الرابط!');
+            }).catch(() => {
+                alert('❌ فشل النسخ، يمكنك نسخ الرابط يدوياً');
+            });
+        });
+
+        // مشاركة
+        document.getElementById('shareBtn').addEventListener('click', () => {
+            if (navigator.share) {
+                navigator.share({
+                    title: `صورة ${imageFiles[currentIndex]}`,
+                    text: notesDiv.innerText.substring(0, 100) + '...',
+                    url: window.location.href
+                }).catch(() => {});
+            } else {
+                alert('يمكنك نسخ الرابط أو تحميل الصورة');
+            }
+        });
+
+        // دعم التمرير السريع على الجوال
+        let touchStartX = 0;
+        document.querySelector('.image-wrapper').addEventListener('touchstart', (e) => {
+            touchStartX = e.touches[0].clientX;
+        }, { passive: true });
+
+        document.querySelector('.image-wrapper').addEventListener('touchend', (e) => {
+            const touchEndX = e.changedTouches[0].clientX;
+            const diff = touchEndX - touchStartX;
+            
+            if (Math.abs(diff) > 50) {
+                if (diff > 0 && currentIndex > 0) {
+                    changeImage(currentIndex - 1);
+                } else if (diff < 0 && currentIndex < imageFiles.length - 1) {
+                    changeImage(currentIndex + 1);
+                }
+            }
+        });
+
+        // تهيئة الموقع
+        buildIconStrip();
+        handleHash();
+        
+        // إذا ما في هاش، اعرض الصورة الأولى
+        if (!window.location.hash) {
+            changeImage(0);
+        }
+
+        // دعم أزرار الجهاز الخلفية
+        window.addEventListener('popstate', () => {
+            handleHash();
+        });
     })();
 </script>
 </body>
