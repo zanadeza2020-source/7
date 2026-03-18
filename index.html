@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>أطلس التشريح • الصور الكاملة</title>
+    <title>أطلس التشريح • 9 صور كاملة</title>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
     <link href="https://fonts.googleapis.com/css2?family=Tajawal:wght@300;400;500;700;900&display=swap" rel="stylesheet">
     <style>
@@ -15,8 +15,7 @@
         }
 
         body {
-            background: linear-gradient(145deg, #edf2f7 0%, #e2e8f0 100%);
-            min-height: 100vh;
+            background: #f0f4f7;
             padding: 1.5rem;
         }
 
@@ -25,156 +24,124 @@
             margin: 0 auto;
         }
 
-        /* رأس الموقع */
+        /* رأس الصفحة */
         .header {
-            background: #1e3b4a;
+            background: #1c4c5c;
             border-radius: 40px;
             padding: 1.5rem 2.5rem;
-            margin-bottom: 2.5rem;
-            box-shadow: 0 20px 35px rgba(20, 50, 60, 0.3);
+            margin-bottom: 2rem;
             color: white;
             display: flex;
             justify-content: space-between;
             align-items: center;
             flex-wrap: wrap;
-            gap: 1.5rem;
+            box-shadow: 0 10px 25px rgba(0,0,0,0.2);
         }
 
-        .logo {
-            display: flex;
-            align-items: center;
-            gap: 1rem;
-        }
-
-        .logo i {
-            font-size: 2.8rem;
-            color: #9bc5c0;
-        }
-
-        .logo h1 {
+        .header h1 {
+            font-size: 2.2rem;
             font-weight: 700;
-            font-size: 2rem;
-            color: #fff;
-        }
-
-        .logo p {
-            color: #b8dfd8;
-            font-weight: 300;
-        }
-
-        .badge {
-            background: #2f5e67;
-            padding: 0.8rem 1.8rem;
-            border-radius: 60px;
             display: flex;
             align-items: center;
             gap: 1rem;
-            font-size: 1.1rem;
-            border: 1px solid #6b9b9b;
         }
 
-        /* شبكة الأيقونات */
-        .icon-grid {
+        .header i {
+            color: #b2e3da;
+            font-size: 2.5rem;
+        }
+
+        .image-counter {
+            background: #2f697b;
+            padding: 0.7rem 2rem;
+            border-radius: 60px;
+            font-size: 1.3rem;
+            font-weight: 600;
+            border: 2px solid #9bd3d3;
+        }
+
+        /* شبكة الأزرار */
+        .buttons-grid {
             display: flex;
             flex-wrap: wrap;
             justify-content: center;
-            gap: 1.2rem;
-            margin: 2.5rem 0;
+            gap: 0.8rem;
+            margin: 2rem 0 2.5rem;
         }
 
-        .icon-btn {
+        .image-btn {
+            width: 90px;
+            height: 90px;
             background: white;
-            width: 110px;
-            height: 120px;
-            border-radius: 35px;
+            border-radius: 30px;
             display: flex;
             flex-direction: column;
             align-items: center;
             justify-content: center;
-            gap: 0.6rem;
-            box-shadow: 0 12px 25px rgba(0, 0, 0, 0.1);
+            gap: 0.3rem;
             cursor: pointer;
-            transition: all 0.3s ease;
-            border: 2px solid transparent;
-            position: relative;
+            box-shadow: 0 10px 15px rgba(0,0,0,0.1);
+            transition: all 0.3s;
+            border: 3px solid transparent;
         }
 
-        .icon-btn:hover {
-            transform: translateY(-10px);
-            box-shadow: 0 25px 35px rgba(30, 70, 80, 0.2);
-            border-color: #468b8b;
+        .image-btn:hover {
+            transform: translateY(-8px);
+            box-shadow: 0 18px 25px rgba(27, 78, 85, 0.2);
         }
 
-        .icon-btn.active {
-            background: #e1f0ed;
-            border: 3px solid #1f7870;
-            box-shadow: 0 0 0 5px rgba(31, 120, 112, 0.15);
+        .image-btn.active {
+            border-color: #1a7b7b;
+            background: #e1f3f0;
+            box-shadow: 0 0 0 4px rgba(26, 123, 123, 0.2);
         }
 
-        .icon-number {
-            position: absolute;
-            top: -10px;
-            left: -10px;
-            background: #1f7870;
-            color: white;
-            width: 32px;
-            height: 32px;
-            border-radius: 50%;
-            display: flex;
-            align-items: center;
-            justify-content: center;
+        .image-btn i {
+            font-size: 2.2rem;
+            color: #236b6b;
+        }
+
+        .image-btn span {
             font-weight: 700;
-            font-size: 1.1rem;
-            border: 3px solid white;
-        }
-
-        .icon-btn i {
-            font-size: 2.8rem;
-            color: #2a605b;
-        }
-
-        .icon-btn span {
-            font-weight: 600;
-            color: #1b4c4c;
-            background: #f0f7f5;
+            color: #1a5151;
+            background: #e7f3f0;
             padding: 0.2rem 1rem;
-            border-radius: 50px;
+            border-radius: 30px;
+            font-size: 0.9rem;
         }
 
-        /* منطقة العرض الرئيسية */
-        .display-area {
-            background: rgba(255, 255, 255, 0.85);
-            backdrop-filter: blur(15px);
+        /* منطقة العرض */
+        .main-panel {
+            background: white;
             border-radius: 70px;
             padding: 2.5rem;
-            box-shadow: 0 30px 50px rgba(20, 50, 55, 0.2);
-            border: 1px solid rgba(255,255,255,0.7);
+            box-shadow: 0 25px 40px rgba(0, 0, 0, 0.15);
+            border: 1px solid #e0ecea;
         }
 
-        .split-view {
+        .split-layout {
             display: grid;
             grid-template-columns: 1.3fr 1fr;
             gap: 2.2rem;
         }
 
-        /* إطار الصورة */
-        .image-container {
-            background: #1a3136;
+        /* حاوية الصورة */
+        .image-box {
+            background: #1f424a;
             border-radius: 50px;
             overflow: hidden;
-            box-shadow: 0 25px 40px rgba(0, 0, 0, 0.3);
-            border: 5px solid rgba(255,255,255,0.5);
+            box-shadow: 0 20px 35px rgba(0, 0, 0, 0.3);
+            border: 6px solid #d9f0ec;
             aspect-ratio: 4/3;
             position: relative;
         }
 
-        #displayedImage {
+        #mainImage {
             width: 100%;
             height: 100%;
             object-fit: contain;
-            background: #14292e;
+            background: #1b3f45;
             display: block;
-            cursor: zoom-in;
             transition: transform 0.3s;
         }
 
@@ -184,36 +151,35 @@
             left: 50%;
             transform: translateX(-50%);
             background: rgba(0, 0, 0, 0.6);
-            backdrop-filter: blur(8px);
-            padding: 0.6rem 1.5rem;
-            border-radius: 60px;
+            padding: 0.5rem 1.5rem;
+            border-radius: 50px;
             display: flex;
-            gap: 1.2rem;
+            gap: 1rem;
+            backdrop-filter: blur(5px);
         }
 
-        .image-controls button {
+        .ctrl-btn {
             background: transparent;
             border: none;
             color: white;
             font-size: 1.3rem;
-            cursor: pointer;
-            padding: 0.3rem 0.8rem;
+            padding: 0.4rem 0.8rem;
             border-radius: 40px;
+            cursor: pointer;
             transition: 0.2s;
         }
 
-        .image-controls button:hover {
+        .ctrl-btn:hover {
             background: rgba(255,255,255,0.2);
         }
 
         /* بطاقة الشرح */
-        .info-card {
-            background: #ffffffd9;
-            backdrop-filter: blur(8px);
+        .info-box {
+            background: #f6fcfb;
             border-radius: 50px;
             padding: 2rem;
-            border: 1px solid white;
-            box-shadow: 0 15px 30px rgba(0,0,0,0.1);
+            border: 1px solid #c2e2db;
+            box-shadow: inset 0 2px 8px rgba(0,0,0,0.02);
         }
 
         .info-header {
@@ -221,44 +187,42 @@
             justify-content: space-between;
             align-items: center;
             margin-bottom: 1.5rem;
-            padding-bottom: 1rem;
-            border-bottom: 2px solid #d0e2dd;
+            padding-bottom: 0.8rem;
+            border-bottom: 3px solid #c1ddd6;
         }
 
         .info-header h2 {
             font-size: 1.8rem;
-            color: #185e5e;
-            font-weight: 700;
+            color: #165a5a;
             display: flex;
             align-items: center;
             gap: 0.8rem;
         }
 
-        .filename {
-            background: #185e5e;
+        .file-badge {
+            background: #165a5a;
             color: white;
             padding: 0.5rem 2rem;
             border-radius: 60px;
-            font-weight: 600;
+            font-weight: 700;
             font-size: 1.1rem;
         }
 
-        .notes-text {
-            background: #f3faf8;
+        .notes-content {
+            background: white;
             border-radius: 40px;
             padding: 2rem;
             max-height: 350px;
             overflow-y: auto;
             line-height: 1.8;
-            font-size: 1.05rem;
-            color: #1f4949;
+            font-size: 1rem;
+            color: #174f4f;
             white-space: pre-line;
-            border: 1px solid #cde3de;
-            box-shadow: inset 0 3px 10px rgba(0,0,0,0.02);
+            border: 1px solid #c2ddd6;
+            box-shadow: inset 0 2px 6px rgba(0,0,0,0.02);
         }
 
-        /* زر تحميل النص */
-        .download-btn {
+        .download-section {
             margin-top: 1.5rem;
             display: flex;
             justify-content: flex-end;
@@ -266,112 +230,91 @@
 
         .btn {
             background: white;
-            border: 2px solid #1f7870;
+            border: 2px solid #1a7b7b;
             padding: 0.8rem 2rem;
             border-radius: 60px;
             font-weight: 700;
-            color: #1f7870;
+            color: #1a7b7b;
             cursor: pointer;
             transition: 0.2s;
             display: inline-flex;
             align-items: center;
-            gap: 0.7rem;
+            gap: 0.8rem;
             font-size: 1.1rem;
         }
 
         .btn:hover {
-            background: #1f7870;
+            background: #1a7b7b;
             color: white;
         }
 
-        /* تعليمات للرفع على GitHub */
-        .setup-guide {
-            background: #e7eef0;
-            border-radius: 30px;
-            padding: 1.2rem 2rem;
-            margin-top: 2rem;
-            border: 1px dashed #468b8b;
-            display: flex;
-            align-items: center;
-            gap: 1rem;
-            flex-wrap: wrap;
-        }
-
-        .setup-guide i {
-            font-size: 2rem;
-            color: #2e6b6b;
-        }
-
-        .setup-guide p {
-            font-size: 1.1rem;
-            color: #124d4d;
-            font-weight: 500;
-        }
-
-        .setup-guide code {
-            background: #1f4949;
-            color: #e1fffa;
-            padding: 0.4rem 1rem;
+        /* رسالة خطأ الصور */
+        .error-message {
+            background: #fff1e0;
+            border: 2px solid #c95c5c;
+            color: #a03a3a;
+            padding: 1rem 2rem;
             border-radius: 60px;
-            font-family: monospace;
-            font-size: 1rem;
+            margin-top: 1.5rem;
+            text-align: center;
+            font-weight: 600;
+            display: none;
+        }
+
+        .error-message i {
+            margin-left: 0.7rem;
         }
 
         @media (max-width: 900px) {
-            .split-view {
+            .split-layout {
                 grid-template-columns: 1fr;
-            }
-            .header {
-                flex-direction: column;
-                text-align: center;
             }
         }
     </style>
 </head>
 <body>
 <div class="container">
-    <!-- الهيدر مع شرح طريقة الرفع -->
+    <!-- رأس الموقع -->
     <div class="header">
-        <div class="logo">
-            <i class="fas fa-x-ray"></i>
-            <div>
-                <h1>الموسوعة التشريحية</h1>
-                <p>الصور والنصوص المستخرجة - جاهز لـ GitHub Pages</p>
-            </div>
-        </div>
-        <div class="badge">
-            <i class="fas fa-check-circle"></i>
-            <span>8 صور جاهزة</span>
+        <h1>
+            <i class="fas fa-heartbeat"></i>
+            أطلس التشريح البشري
+        </h1>
+        <div class="image-counter">
+            <i class="fas fa-images"></i> 9 صور عالية الدقة
         </div>
     </div>
 
-    <!-- شبكة الأيقونات (تمثل الصور 1-8) -->
-    <div class="icon-grid" id="iconGrid"></div>
+    <!-- أزرار الصور 1-9 -->
+    <div class="buttons-grid" id="imageButtons"></div>
 
     <!-- منطقة العرض الرئيسية -->
-    <div class="display-area">
-        <div class="split-view">
+    <div class="main-panel">
+        <div class="split-layout">
             <!-- الجانب الأيمن: الصورة -->
-            <div class="image-container">
-                <img id="displayedImage" src="" alt="صورة تشريحية">
+            <div class="image-box">
+                <img id="mainImage" src="" alt="صورة تشريحية">
                 <div class="image-controls">
-                    <button id="zoomIn"><i class="fas fa-search-plus"></i></button>
-                    <button id="zoomOut"><i class="fas fa-search-minus"></i></button>
-                    <button id="fullscreen"><i class="fas fa-expand"></i></button>
+                    <button class="ctrl-btn" id="zoomIn"><i class="fas fa-search-plus"></i></button>
+                    <button class="ctrl-btn" id="zoomOut"><i class="fas fa-search-minus"></i></button>
+                    <button class="ctrl-btn" id="fullscreen"><i class="fas fa-expand"></i></button>
                 </div>
             </div>
             
             <!-- الجانب الأيسر: الشرح -->
-            <div class="info-card">
+            <div class="info-box">
                 <div class="info-header">
-                    <h2><i class="fas fa-notes-medical"></i> شرح الصورة</h2>
-                    <span class="filename" id="filenameDisplay">1.jpg</span>
+                    <h2>
+                        <i class="fas fa-pen"></i>
+                        شرح الصورة
+                    </h2>
+                    <span class="file-badge" id="filename">1.jpg</span>
                 </div>
-                <div class="notes-text" id="notesDisplay">
-                    جاري تحميل الشرح...
+                <div class="notes-content" id="notes">
+                    جاري تحميل النص...
                 </div>
-                <div class="download-btn">
-                    <button class="btn" id="downloadTextBtn">
+                <div class="download-section">
+                    <button class="btn" id="downloadBtn">
                         <i class="fas fa-download"></i> تحميل النص
                     </button>
                 </div>
@@ -379,21 +322,19 @@
         </div>
     </div>
 
-    <!-- دليل المستخدم / المطور (كيف ترفع الملفات) -->
-    <div class="setup-guide">
-        <i class="fas fa-github"></i>
-        <p>لرفع الموقع على GitHub Pages:</p>
-        <code>1- ارفع هذا الملف (index.html) في مستودع GitHub</code>
-        <code>2- ارفع الصور 1.jpg إلى 8.jpg في نفس المجلد</code>
-        <i class="fas fa-arrow-right"></i>
-        <span style="color:#124d4d;">الموقع سيعمل مباشرة بعد الرفع</span>
+    <!-- رسالة خطأ إذا الصور مش موجودة -->
+    <div class="error-message" id="errorMsg">
+        <i class="fas fa-exclamation-triangle"></i>
+        <span id="errorText"></span>
     </div>
 </div>
 
 <script>
     (function() {
-        // -------------------- النصوص المستخرجة من الصور --------------------
+        // -------------------- البيانات: 9 صور و 9 نصوص --------------------
+        // النصوص المستخرجة من الصور (من 1.jpg إلى 9.jpg)
         const notesData = [
+            // 1.jpg
             `# CHAPTER ONE: INTRODUCTION TO HUMAN ANATOMY AND PHYSIOLOGY | الفصل الأول: مقدمة في تشريح ووظائف الأعضاء البشري
 
 ## Anatomy | علم التشريح
@@ -422,6 +363,7 @@ Physiology is a corcpanyaotes the pumping blood living blood with hannisd group 
 
 ### RESPIRATORY SYSTEM | الجهاز التنفسي`,
 
+            // 2.jpg
             `# ANATOMICAL DIRECTIONAL TERMS | المصطلحات الاتجاهية التشريحية
 
 *Directional terms are words that describe the position of one body part relative to another.*
@@ -452,6 +394,7 @@ Skin is superficial to skeletal muscles. Lungs are deep to skin.
 
 **ANATOMICAL POSITION**`,
 
+            // 3.jpg
             `# BODY REGIONS | مناطق الجسم
 
 *The major body regions: head, neck, trunk, upper extremity, and lower extremity.*
@@ -471,6 +414,7 @@ Skin is superficial to skeletal muscles. Lungs are deep to skin.
 ## 5. Lower Extremity | الأطراف السفلية
 Basic description of legs and lower limbs.`,
 
+            // 4.jpg
             `# 1 Chemical level | المستوى الكيميائي
 Atoms combine to form molecules. (H₂O, C, O, N, P, S)
 
@@ -489,6 +433,7 @@ Organ systems consist of different organs. (Cardiovascular system)
 # 8 Anatomical Position | الوضعية التشريحية
 Standing erect, facing observer, palms forward.`,
 
+            // 5.jpg
             `# ABDOMEN, APPENDICULAR BODY & BODY PLANES | البطن، الجسم الزوادي ومستويات الجسم
 
 *The abdomen has been divided into nine regions or four quadrants.*
@@ -504,6 +449,7 @@ Standing erect, facing observer, palms forward.`,
 - Sagittal plane: divides into right and left halves.
 - Transverse plane: divides into upper and lower sections.`,
 
+            // 6.jpg
             `# STUDY GUIDE: BODY CAVITIES AND HOMEOSTASIS | دليل الدراسة: تجاويف الجسم والاتزان الداخلي
 
 ## 1. BODY CAVITIES | تجاويف الجسم
@@ -524,6 +470,7 @@ Stability of internal environment.
 **FEEDBACK SYSTEMS**
 Positive feedback: labor contractions, blood clotting.`,
 
+            // 7.jpg
             `# BODY CAVITIES | تجويف الجسم
 
 **Hierarchy of Body Cavities | مستوى تجاويف الجسم**
@@ -544,6 +491,7 @@ Positive feedback: labor contractions, blood clotting.`,
 
 **BODY CAVITIES**`,
 
+            // 8.jpg
             `# NEGATIVE FEEDBACK AND HOMEOSTASIS | التغذية الراجعة السلبية والاتزان الداخلي
 
 ## Negative feedback | التغذية الراجعة السلبية
@@ -560,12 +508,16 @@ Reduces stimulus and restores stable state.
 - EFFECTORS: Blood vessels, sweat glands
 - RESULT: Increased blood flow to skin, sweating → temperature drops.
 
-**Homeostasis restored | استعادة الاتزان الداخلي**`
+**Homeostasis restored | استعادة الاتزان الداخلي**`,
+
+            // 9.jpg (إذا كان موجود - إذا لم يكن موجود، ضع نص افتراضي)
+            `# الصورة التاسعة | Image 9
+محتوى إضافي من الصورة التاسعة.
+Additional content from image 9.`
         ];
 
-        // -------------------- مسارات الصور (بنفس المجلد) --------------------
-        // هنا تكتب أسماء الملفات كما سترفعها بالضبط
-        const imagePaths = [
+        // مسارات الصور (9 صور)
+        const imageFiles = [
             '1.jpg',
             '2.jpg',
             '3.jpg',
@@ -573,97 +525,111 @@ Reduces stimulus and restores stable state.
             '5.jpg',
             '6.jpg',
             '7.jpg',
-            '8.jpg'
+            '8.jpg',
+            '9.jpg'
         ];
 
         let currentIndex = 0;
-        let zoom = 1;
+        let zoomLevel = 1;
 
-        // العناصر
-        const iconGrid = document.getElementById('iconGrid');
-        const displayedImage = document.getElementById('displayedImage');
-        const filenameDisplay = document.getElementById('filenameDisplay');
-        const notesDisplay = document.getElementById('notesDisplay');
-        const zoomIn = document.getElementById('zoomIn');
-        const zoomOut = document.getElementById('zoomOut');
-        const fullscreen = document.getElementById('fullscreen');
-        const downloadBtn = document.getElementById('downloadTextBtn');
+        // عناصر الصفحة
+        const imageButtons = document.getElementById('imageButtons');
+        const mainImage = document.getElementById('mainImage');
+        const filenameSpan = document.getElementById('filename');
+        const notesDiv = document.getElementById('notes');
+        const errorMsg = document.getElementById('errorMsg');
+        const errorText = document.getElementById('errorText');
 
-        // بناء الأيقونات
-        function buildIcons() {
-            iconGrid.innerHTML = '';
-            for (let i = 0; i < imagePaths.length; i++) {
+        // بناء أزرار الصور
+        function buildButtons() {
+            imageButtons.innerHTML = '';
+            for (let i = 0; i < imageFiles.length; i++) {
                 const btn = document.createElement('div');
-                btn.className = `icon-btn ${i === currentIndex ? 'active' : ''}`;
-                btn.dataset.index = i;
+                btn.className = `image-btn ${i === 0 ? 'active' : ''}`;
+                btn.setAttribute('data-index', i);
                 btn.innerHTML = `
-                    <div class="icon-number">${i+1}</div>
                     <i class="fas fa-image"></i>
-                    <span>صورة ${i+1}</span>
+                    <span>${i + 1}</span>
                 `;
-                btn.addEventListener('click', () => setImage(i));
-                iconGrid.appendChild(btn);
+                btn.addEventListener('click', function() {
+                    const index = parseInt(this.getAttribute('data-index'));
+                    changeImage(index);
+                });
+                imageButtons.appendChild(btn);
             }
         }
 
         // تغيير الصورة والشرح
-        function setImage(index) {
+        function changeImage(index) {
             currentIndex = index;
             
-            // تعيين مصدر الصورة (المسار النسبي)
-            displayedImage.src = imagePaths[index];
+            // تحديث الصورة
+            mainImage.src = imageFiles[index];
             
             // تحديث اسم الملف
-            filenameDisplay.innerText = imagePaths[index];
+            filenameSpan.innerText = imageFiles[index];
             
             // تحديث النص
-            notesDisplay.innerText = notesData[index] || 'لا يوجد نص متاح لهذه الصورة.';
+            notesDiv.innerText = notesData[index];
             
-            // إعادة التكبير للوضع الطبيعي
-            zoom = 1;
-            displayedImage.style.transform = `scale(${zoom})`;
-            
-            // تحديث الأيقونات النشطة
-            document.querySelectorAll('.icon-btn').forEach((btn, i) => {
-                if (i === index) btn.classList.add('active');
-                else btn.classList.remove('active');
+            // إزالة active من جميع الأزرار
+            document.querySelectorAll('.image-btn').forEach(btn => {
+                btn.classList.remove('active');
             });
+            
+            // إضافة active للزر الحالي
+            document.querySelector(`.image-btn[data-index="${index}"]`).classList.add('active');
+            
+            // إعادة التكبير إلى 1
+            zoomLevel = 1;
+            mainImage.style.transform = `scale(${zoomLevel})`;
+            
+            // إخفاء رسالة الخطأ
+            errorMsg.style.display = 'none';
         }
 
+        // التحقق من وجود الصور (يعرض رسالة إذا الصورة مش موجودة)
+        mainImage.onerror = function() {
+            errorText.innerText = `الصورة ${imageFiles[currentIndex]} غير موجودة في المجلد. تأكد من رفعها بجانب ملف index.html`;
+            errorMsg.style.display = 'block';
+        };
+
+        mainImage.onload = function() {
+            errorMsg.style.display = 'none';
+        };
+
         // أحداث التكبير
-        zoomIn.addEventListener('click', () => {
-            zoom = Math.min(zoom + 0.2, 3);
-            displayedImage.style.transform = `scale(${zoom})`;
+        document.getElementById('zoomIn').addEventListener('click', function() {
+            zoomLevel = Math.min(zoomLevel + 0.2, 3);
+            mainImage.style.transform = `scale(${zoomLevel})`;
         });
 
-        zoomOut.addEventListener('click', () => {
-            zoom = Math.max(zoom - 0.2, 0.5);
-            displayedImage.style.transform = `scale(${zoom})`;
+        document.getElementById('zoomOut').addEventListener('click', function() {
+            zoomLevel = Math.max(zoomLevel - 0.2, 0.5);
+            mainImage.style.transform = `scale(${zoomLevel})`;
         });
 
-        fullscreen.addEventListener('click', () => {
-            const container = document.querySelector('.image-container');
-            if (container.requestFullscreen) container.requestFullscreen();
+        // ملء الشاشة
+        document.getElementById('fullscreen').addEventListener('click', function() {
+            const imageBox = document.querySelector('.image-box');
+            if (imageBox.requestFullscreen) {
+                imageBox.requestFullscreen();
+            }
         });
 
         // تحميل النص
-        downloadBtn.addEventListener('click', () => {
-            const text = notesDisplay.innerText;
+        document.getElementById('downloadBtn').addEventListener('click', function() {
+            const text = notesDiv.innerText;
             const blob = new Blob([text], { type: 'text/plain' });
             const link = document.createElement('a');
             link.href = URL.createObjectURL(blob);
-            link.download = `notes_${imagePaths[currentIndex].replace('.jpg','')}.txt`;
+            link.download = `notes_${imageFiles[currentIndex].replace('.jpg', '')}.txt`;
             link.click();
         });
 
-        // محاولة تحميل الصورة الأولى (إذا فشلت تظهر رسالة خطأ)
-        displayedImage.onerror = function() {
-            notesDisplay.innerText = '⚠️ الصورة غير موجودة في المجلد. تأكد من رفع ' + imagePaths[currentIndex] + ' بنفس مكان ملف index.html';
-        };
-
-        // بدء التطبيق
-        buildIcons();
-        setImage(0);
+        // بدء الموقع
+        buildButtons();
+        changeImage(0); // يبدأ بالصورة الأولى
     })();
 </script>
 </body>
